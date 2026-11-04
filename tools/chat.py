@@ -1,10 +1,10 @@
 """Talking in the pile, through the AI.
 
-You type what you want to say; Muse Spark says it for you, elevated (your
-meaning, carried a step further with something true or interesting), and
-writes two or three replies from the people around you, so a conversation
-rolls on. Spark can search the web for current facts. It follows the pile's
-rules, so whatever is typed, what appears stays kind, PG and anonymous.
+What you say appears as you wrote it: Muse Spark only checks it's kind, PG and
+anonymous first (check). The pile's host leaves room for real people to answer;
+if no one does, one of the clay companions does (companion), as a companion.
+speak() is the older style (your words carried further, three replies), still
+used to write the server-free page's recorded answers (make_offline.py).
 """
 import json
 import os
@@ -133,6 +133,82 @@ def speak(text, age="grown-up"):
     if not you:
         raise RuntimeError("the pile didn't catch that")
     return {"you": you, "youTone": tone(data.get("you_tone")), "replies": replies}
+
+
+CHECK = """You keep Rabble kind: a shared pile of strangers keeping each other
+company. Someone wants to post this, shown exactly as written to everyone here.
+
+Post it ("ok": true) if it's kind and PG. Plain, sad, silly and small are all
+welcome. Typos are fine; don't fix anything.
+
+Don't post it ("ok": false) if it has insults, slurs, hate, sexual content,
+violence, self-harm details, ads, links, partisan politics, or anything that
+identifies a person (full names, phone numbers, addresses, usernames). Then
+write "note": one gentle sentence to them alone, saying what to leave out.
+If they sound like they're in real danger or crisis, "ok": false and a caring
+note that they deserve real help tonight and should reach someone they trust or
+a local crisis line.
+
+Return ONLY JSON: {"ok": true} or {"ok": false, "note": "..."}"""
+
+COMPANION = """You are one of the people of Rabble: little clay people in a big
+group hug who keep visitors company. If you mention yourselves, say "people"
+or "us", never "companions". Everyone here was asked tonight:
+{question}
+
+{history}A real visitor said: {text}
+
+No one else has answered yet. Answer them as a "{who}", warmly and simply: meet
+them halfway, like someone glad they spoke. You're a companion, not a person
+who was there; never claim to have done or seen things. One short line (at most
+14 words), maybe a tiny question back. Plain and kind, no emoji, no hashtags,
+no advice unless asked. Never ask for their name, where they live or anything
+personal; any question back is about the moment itself. Tone: "smile", "chuckle", "aww" or "idea".
+
+Return ONLY JSON: {{"text": "...", "tone": "..."}}"""
+
+
+def _ask(instructions, text, detail, max_tokens=1500):
+    status, out = meta_api._post_json("/responses", {
+        "model": meta_api.TEACHER_MODEL,
+        "instructions": instructions,
+        "input": text,
+        "reasoning": {"effort": "low"},
+        "max_output_tokens": max_tokens,
+    }, timeout=60)
+    if status != 200 or not isinstance(out, dict):
+        raise RuntimeError(f"{detail} failed (HTTP {status})")
+    usage = out.get("usage") or {}
+    costs.log_call("responses/" + detail, meta_api.TEACHER_MODEL, "rabble " + detail,
+                   in_tokens=usage.get("input_tokens", 0), out_tokens=usage.get("output_tokens", 0))
+    match = re.search(r"\{.*\}", _final_text(out), re.S)
+    return json.loads(match.group(0)) if match else {}
+
+
+def tidy(text):
+    return " ".join(str(text).split())[:MAX_CHARS]
+
+
+def check(text):
+    """Whether these words can go up as written: (True, "") or (False, a note for them)."""
+    data = _ask(CHECK, json.dumps(tidy(text)), "check")
+    if data.get("ok") is True:
+        return True, ""
+    note = " ".join(str(data.get("note") or "").split())[:200]
+    return False, note or "That one can't go up here. Try saying it another way?"
+
+
+def companion(text, question, who="grown-up", history=()):
+    """One clay companion's answer to a real visitor no one else answered.
+    `history`: their last few lines with the companions, so it can follow on."""
+    earlier = ("Earlier tonight:\n" + "\n".join(history) + "\n\n") if history else ""
+    data = _ask(COMPANION.format(question=question, text=json.dumps(tidy(text)), who=_who(who), history=earlier),
+                "Answer them.", "companion")
+    line = " ".join(str(data.get("text") or "").split())[:200]
+    if not line:
+        raise RuntimeError("no companion line")
+    tone = data.get("tone") if data.get("tone") in TONES else "smile"
+    return {"text": line, "tone": tone, "who": _who(who)}
 
 
 OPENER = """You voice Rabble: a pile of little people in a big group hug, awake late at

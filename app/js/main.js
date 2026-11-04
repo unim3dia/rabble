@@ -13,7 +13,8 @@ import { rollOut, stepRolling, dropIn, stepSizes } from "./crowd.js";
 import { setupControls } from "./controls.js";
 import { createUi } from "./ui.js";
 import { createLighting } from "./lighting.js";
-import { setupTalk, playLines, playExchange } from "./talk.js";
+import { setupTalk, playLines } from "./talk.js";
+import { sendSqueeze } from "./squeeze.js";
 import { connectPile } from "./shared.js";
 import { connectOffline } from "./offline.js";
 import { createRoom } from "./room.js";
@@ -59,7 +60,7 @@ const app = {
   visitors: 0,
 };
 
-let world, cam, renderer, tilt, sfx, cards, ui, lighting, room;
+let world, cam, renderer, tilt, sfx, cards, ui, lighting, room, talkBox;
 
 const loadImage = (src) => new Promise((resolve, reject) => {
   const img = new Image();
@@ -107,11 +108,10 @@ function crowdCount() {
   return world.people.filter((p) => !p.isYou && !p.remote && !p.rolling).length;
 }
 
+// You and the people of the pile.
 function updateAwakeText() {
   const n = crowdCount();
-  const real = remotes.size;
-  const people = real ? ` · ${real} real ${real === 1 ? "person" : "people"} here` : "";
-  const text = (app.joined ? `you + ${n} others awake now` : `${n} awake now`) + people;
+  const text = app.joined ? `you + ${n} people` : `${n} people awake`;
   if (awakeText.textContent !== text) awakeText.textContent = text;
 }
 
@@ -307,7 +307,10 @@ function rollYouOut() {
   app.closeUpUntil = 0;
 }
 
-// ---------- tap someone; tap yourself for a close-up ----------
+// ---------- tap someone; tap your light to talk ----------
+const LIGHT_TAP_PX = 30;
+const youLightY = () => app.you.sy - app.you.size * 0.95 - 14;   // where render.js draws your light
+
 function personAt(x, y) {
   let best = null;
   for (const p of world.people) {
@@ -323,9 +326,12 @@ function personAt(x, y) {
 // smile you can hear); only your own person moves when you touch it.
 function onTap(x, y) {
   sfx.unlock();
+  // Your light (or you): say something, right there beside you.
+  if (app.you && !app.you.rolling && (Math.hypot(x - app.you.sx, y - youLightY()) < LIGHT_TAP_PX || personAt(x, y) === app.you)) {
+    return talkBox.toggleAt({ x: app.you.sx, y: youLightY() });
+  }
   const p = personAt(x, y);
   if (!p || p.rolling) return;
-  if (p.isYou) return closeUp();
   sfx.note(p.info.slug);                  // everyone holds a note: tap around to make music
   if (!p.base) p.squish = Math.max(p.squish, 0.12);
 }
@@ -437,7 +443,9 @@ async function join() {
       app.restFocus = { ...cam.focusTarget };
       sfx.thump();
       updateAwakeText();
+      talk.quietUntil = performance.now() + QUESTION_AFTER_MS + LANDING_QUIET_MS;
       setTimeout(newcomer, FLOW.followAfterMs);   // and a little later, someone lands after you
+      setTimeout(askQuestion, QUESTION_AFTER_MS);
     },
   });
 }
@@ -452,7 +460,13 @@ function reframe(ms) {
 // One conversation at a time, the same for everyone in the shared pile: the
 // pile's own chat (from the server), and whatever real people say. Someone
 // speaking cuts the pile's chat short; people's words wait their turn.
-const talk = { now: null, queue: [], hold: false, typingSince: 0 };
+const talk = { now: null, queue: [], hold: false, typingSince: 0, quietUntil: 0 };
+const SAY_MS = 24000;            // what a real person says stays up this long, for others to answer
+const QUESTION_MS = 9000;
+const LAND_STICK_MS = 4000;       // after landing, newcomers hold their spot while they settle,
+const LAND_STICK_MAX_MS = 8000;   // and a while longer if they still aren't at rest
+const QUESTION_AFTER_MS = 2500;   // after you land, the pile asks today's question
+const LANDING_QUIET_MS = 25000;   // and its own chatter waits while you think
 const TYPING_HOLD_MS = 45000;      // others' words wait this long at most while you type
 const STALE_CHAT_MS = 40000;     // the pile's chat waits for you to land, not forever
 const STALE_SAY_MS = 60000;
@@ -503,7 +517,7 @@ function stepTalk(t) {
   if (talk.typingSince && t - talk.typingSince < TYPING_HOLD_MS) return;
   while (talk.queue.length) {
     const next = talk.queue[0];
-    if (next.kind === "chat" && talk.hold) return;          // you're mid-sentence: the pile waits
+    if (next.kind === "chat" && (talk.hold || t < talk.quietUntil)) return;   // people are talking: the pile waits
     talk.queue.shift();
     if (t - next.at > (next.kind === "chat" ? STALE_CHAT_MS : STALE_SAY_MS)) continue;
     const run = next.play();
@@ -523,48 +537,42 @@ function chatLines(lines) {
   };
 }
 
-function exchange(speaker, out, mine) {
-  return {
-    kind: "say", mine,
-    play() {
-      if (!world.people.includes(speaker)) return null;      // they left before their turn
-      return playExchange({ speaker, out, speakers: castLines(out.replies || [], nearTo(speaker, speaker)), cards, sfx, mine });
-    },
-  };
+// ---------- real people talking to each other ----------
+// You said something: your own words over you, staying a while, and the
+// pile's chat goes quiet so there's room for an answer.
+function showSay(person, text) {
+  if (talk.now?.kind === "chat") { talk.now.cancel(); talk.now = null; }
+  talk.quietUntil = performance.now() + SAY_MS;
+  cards.show(person, text, { cls: "yours", ms: SAY_MS });
+  sfx.express("smile");
+  person.squish = Math.max(person.squish, 0.15);
 }
 
-// ---------- the shared pile: other real people ----------
-const remotes = new Map();       // player id -> their person in your pile
 
-async function figureFor(player) {
-  if (player.figure) {
-    try { return { open: await loadImage(`api/figure/${encodeURIComponent(player.figure)}`) }; } catch { /* fall back */ }
-  }
-  const own = app.poses.get("you");
-  return own?.open ? own : { open: await loadImage(posePath("you", "open")) };
+// No one answered in time: a clay companion near them does, marked as a companion.
+function onReply(e) {
+  const to = e.to && e.to === app.pile?.id ? app.you : null;     // only answers to you
+  if (!to) return;
+  const [who] = castLines([{ who: e.who || "grown-up" }], nearTo(to, to));
+  if (!who) return;
+  // Its answer reaches you physically too: a squeeze travels from it to you.
+  sendSqueeze(overlay, who, to, { onArrive: () => sfx.boop() });
+  cards.show(who, e.text, { cls: "companion", ms: SAY_MS / 2 });
+  sfx.express(e.tone || "smile");
 }
 
-async function addRemote(player) {
-  if (remotes.has(player.id)) return;
-  remotes.set(player.id, null);                 // claimed while the picture loads
-  let poses;
-  try { poses = await figureFor(player); } catch { remotes.delete(player.id); return; }
-  if (!remotes.has(player.id)) return;          // left while we were loading
-  const s = personSize(CROWD[app.ring] + 1);
-  const p = dropIn(world, makePerson({ slug: "you", name: "someone", place: "", ring: "you", id: `player:${player.id}`, age: 30 }, poses), s, cam);
-  p.sTarget = s;
-  p.remote = player.id;
-  p.poseT = 1;
-  remotes.set(player.id, p);
-  sfx.arrive();
-  updateAwakeText();
+// Today's question: the say card asks it, and the pile asks you once you land.
+function onQuestion(q) {
+  app.question = q;
+  talkBox?.setQuestion(q);
 }
 
-function dropRemote(id) {
-  const p = remotes.get(id);
-  remotes.delete(id);
-  if (p && world.people.includes(p) && !p.rolling) { rollOut(p); sfx.tumble(); }
-  updateAwakeText();
+function askQuestion() {
+  if (!app.question || !app.you || app.said) return;
+  if (talk.now?.kind === "chat") { talk.now.cancel(); talk.now = null; }
+  talk.quietUntil = Math.max(talk.quietUntil, performance.now() + LANDING_QUIET_MS);   // room to answer
+  app.asked = cards.show(app.you, app.question, { cls: "question", ms: QUESTION_MS }).el;
+  $("#say-btn").classList.add("asking");
 }
 
 // With no Rabble server behind the page (the GitHub page), the pile talks
@@ -581,22 +589,21 @@ async function hasServer() {
 
 async function connectShared() {
   if (!(await hasServer())) {
-    app.pile = connectOffline({ onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); } });
+    app.pile = connectOffline({
+      onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); },
+      onReply,
+      onQuestion,
+    });
     app.offline = true;
     return;
   }
+  // The pile is yours alone: other visitors don't drop in (their figures would
+  // look like another you); you get today's question and the companions' answers.
+  const ignore = () => {};
   app.pile = connectPile({
-    onSnapshot(players) {
-      const here = new Set(players.map((p) => p.id));
-      for (const id of [...remotes.keys()]) if (!here.has(id)) dropRemote(id);
-      players.forEach(addRemote);
-    },
-    onArrive: addRemote,
-    onLeave: dropRemote,
-    onSay(e) {
-      const who = remotes.get(e.id);
-      if (who) queueTalk(exchange(who, e, false));
-    },
+    onSnapshot: ignore, onArrive: ignore, onLeave: ignore, onSay: ignore, onAck: ignore,
+    onReply,
+    onQuestion,
     onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); },
   });
 }
@@ -684,18 +691,26 @@ function stepPeople(t, dt) {
     p.hop *= 0.88;
     p.squish *= SQUISH.decay;
     stepPose(p, dt);
+    // Just landed: they hold the spot where they touched down (others make room),
+    // with no sideways speed, so they never skid across the pile.
+    if (p.stickAt && !p.rolling && (t < p.stickUntil || (!p.asleep && t < p.stickUntil + LAND_STICK_MAX_MS))) {
+      p.pos.x = p.prev.x = p.stickAt.x;
+      p.pos.z = p.prev.z = p.stickAt.z;
+      p.prev.y = Math.max(p.prev.y, p.pos.y);
+    }
     if (p.isYou && !p.falling) {
       p.breath += (0 - p.breath) * BREATH.syncRate;
       // Only while you're settling in: then you rest like everyone else.
       p.towardCamera = !p.rolling && t < app.youSettleUntil ? { x: cam.sinY, z: cam.cosY } : null;
     }
-    // Newcomers pick a pose that suits where they landed.
+    // Newcomers land just as they fell: same pose, a little squish, no switch,
+    // and they stay where they touched down (no skidding across the pile).
     if (p.settleCheck && p.supported && !p.rolling) {
       p.settleCheck = false;
       p.falling = false;
+      p.stickUntil = t + LAND_STICK_MS;
+      p.stickAt = { x: p.pos.x, z: p.pos.z };
       if (!app.arriving.length || Math.random() < 0.15) sfx.arrive();   // not a hundred plops at once
-      settlePose(p, world.top);
-      p.poseT = 0;
       p.squish = 0.3;
     }
   }
@@ -766,6 +781,8 @@ function pileTopOnScreen() {
 function setupButtons() {
   setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou });
   joinBtn.addEventListener("click", join);
+  // Found it: the ring button stops calling for attention.
+  $("#ring").addEventListener("click", () => $("#ring").classList.add("tried"), { once: true });
   ui = createUi({
     onRing: nextRing,
     onRoll: rollYouOut,
@@ -782,18 +799,24 @@ function setupButtons() {
   window.addEventListener("resize", () => { renderer.resize(); reframe(1500); });
   $("#find-btn").addEventListener("click", () => { sfx.unlock(); closeUp(); });
   setupSelfie();
-  setupTalk({
+  talkBox = setupTalk({
     getYou: () => app.you,
     send: (text) => app.pile.say(text),
     // While the AI is finding your words, the pile's own chat waits.
-    onTyping(on) { talk.typingSince = on ? performance.now() : 0; },
+    onTyping(on) {
+      talk.typingSince = on ? performance.now() : 0;
+      if (on) app.asked?.classList.add("leaving");   // the box asks the question itself now
+    },
     onThinking(on) {
       talk.hold = on;
       if (on && talk.now?.kind === "chat") { talk.now.cancel(); talk.now = null; }
     },
     onSaid(out) {
       talk.hold = false;
-      if (app.you) queueTalk(exchange(app.you, out, true));
+      app.said = true;
+      $("#say-btn").classList.remove("asking");
+      app.asked?.classList.add("leaving");          // answered: the question steps aside
+      if (app.you) showSay(app.you, out.text);
     },
     cards, sfx,
   });

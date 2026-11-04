@@ -7,7 +7,8 @@ const READ_FIRST_MS = 2500;
 
 export function createCards(overlay) {
   // Show a card over someone. Returns { el, done } where done resolves once the
-  // words have all appeared. opts.cls adds a style, opts.ms how long it stays.
+  // words have all appeared. opts.cls adds a style, opts.ms how long it stays,
+  // opts.action ({ label, onClick }) a small button on it (used once, then gone).
   function show(person, text, opts = {}) {
     const el = document.createElement("div");
     el.className = `card ${opts.cls || ""}`;
@@ -22,6 +23,20 @@ export function createCards(overlay) {
       w.style.animationDelay = `${180 + i * (opts.wordMs ?? 130)}ms`;
       inner.append(w, " ");
     });
+    if (opts.action) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "card-action";
+      btn.textContent = opts.action.label;
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        btn.disabled = true;
+        btn.classList.add("sent");
+        opts.action.onClick();
+      }, { once: true });
+      el.classList.add("has-action");
+      el.append(btn);
+    }
     el._person = person;
     // Its own little place in the air: a slight offset and a slow float.
     el._drift = { x: (Math.random() - 0.5) * 36, y: Math.random() * 22, phase: Math.random() * Math.PI * 2 };

@@ -3,8 +3,14 @@
 Every phone runs its own physics; what they share is a stream of events:
   arrive  {player}                 a real person dropped into the pile
   leave   {id}                     they left (or their phone went quiet)
-  say     {id, you, youTone, replies}   a real person said something (via the AI)
+  say     {id, sid, text}          a real person said something, as they wrote it
+  ack     {from, to, kind}         one real person reached another: a squeeze, or
+                                   "that's lovely" (kind "lovely") on what they said
+  reply   {to, sid, text, tone, who}   no one answered them in time: a clay companion did
   chat    {lines}                  the pile's own conversation, the same for everyone
+
+Everyone gets the same question each day (app/questions.json); the host gives
+real people the first chance to answer each other.
 
 Phones long-poll GET /api/events?since=N and get every event after N (or a
 snapshot of who's here when they first connect). The pile's conversation is
@@ -13,6 +19,8 @@ driven here, once for everyone, so the AI cost doesn't grow with the crowd.
 Players get a secret token when they join; only its holder can speak or leave
 as them. Selfie figures are kept in memory only, and dropped when they leave.
 """
+import json
+import os
 import secrets
 import sys
 import threading
@@ -24,7 +32,9 @@ MAX_PLAYERS = 60           # beyond this, people can still watch the pile
 KEEP_EVENTS = 300
 POLL_WAIT_S = 25           # how long a long-poll waits for something to happen
 QUIET_AFTER_S = 45         # no poll for this long: the phone is gone
-CHAT_GAP_S = (5, 10)       # quiet between the pile's conversations
+CHAT_GAP_S = (35, 70)      # quiet between the pile's conversations: room for people
+ALONE_S = 5                # a companion answers after this
+SAYS_KEPT = 50
 LINE_S, READ_S = 3.6, 7    # how long a conversation takes to play (matches the app)
 SAY_LIMIT = threading.BoundedSemaphore(6)   # AI calls for players at once
 
@@ -36,6 +46,17 @@ _figures = {}              # figure id -> png bytes (selfies)
 _claimed = set()           # figure ids someone has joined as (each can be used once)
 _viewers = {}              # viewer key -> last poll time (people watching, joined or not)
 _busy_until = 0.0          # the pile is mid-conversation (or someone's speaking) until then
+_says = {}                 # sid -> {"id", "text", "answered"}: recent things people said
+_talks = {}                # player id -> their last few lines with the companions, for continuity
+TALK_KEPT = 6
+
+QUESTIONS = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                        "app", "questions.json"), encoding="utf-8"))
+
+
+def question():
+    """Today's question, the same for everyone (and for the server-free page)."""
+    return QUESTIONS[int(time.time() // 86400) % len(QUESTIONS)]
 
 
 def _emit(kind, **data):
@@ -104,6 +125,7 @@ def leave(token):
 
 def _drop(p):
     _players.pop(p["id"], None)
+    _talks.pop(p["id"], None)
     if p["figure"]:
         _figures.pop(p["figure"], None)
         _claimed.discard(p["figure"])
@@ -111,8 +133,11 @@ def _drop(p):
 
 
 def say(token, text):
-    """A real person speaks: the AI says it for them, everyone sees it."""
+    """A real person speaks: once it's checked, everyone sees their own words."""
     global _busy_until
+    text = chat.tidy(text)
+    if not text:
+        raise ValueError("say something first")
     with _lock:
         p = _by_token(token)
         if not p:
@@ -122,13 +147,63 @@ def say(token, text):
     if not SAY_LIMIT.acquire(timeout=30):
         raise TimeoutError("the pile is busy, try again in a moment")
     try:
-        out = chat.speak(text)
+        ok, note = chat.check(text)
     finally:
         SAY_LIMIT.release()
+    if not ok:
+        raise ValueError(note)
     with _lock:
-        _busy_until = max(_busy_until, time.time()) + (len(out["replies"]) + 1) * LINE_S + READ_S
-        _emit("say", id=p["id"], **out)
-    return out
+        sid = secrets.token_urlsafe(6)
+        _says[sid] = {"id": p["id"], "text": text, "answered": False}
+        while len(_says) > SAYS_KEPT:
+            _says.pop(next(iter(_says)))
+        _busy_until = max(_busy_until, time.time()) + ALONE_S + READ_S
+        _emit("say", id=p["id"], sid=sid, text=text)
+    # Each visitor's pile is their own: start the answer now, and let it land after a breath.
+    threading.Thread(target=_companion_answers, args=(sid, time.time() + ALONE_S), daemon=True).start()
+    return {"sid": sid, "text": text}
+
+
+def ack(token, to, kind):
+    """One real person reaches another: everyone sees it travel."""
+    kind = "lovely" if kind == "lovely" else "squeeze"
+    with _lock:
+        p = _by_token(token)
+        if not p:
+            raise PermissionError("join the pile first")
+        if not isinstance(to, str) or to not in _players or to == p["id"]:
+            raise ValueError("they're not here")
+        if kind == "lovely":           # someone met them halfway: the companion can stay quiet
+            for said in _says.values():
+                if said["id"] == to:
+                    said["answered"] = True
+        _emit("ack", **{"from": p["id"], "to": to, "kind": kind})
+
+
+def _companion_answers(sid, not_before=0):
+    """No one answered in time: one clay companion does, as a companion
+    (not before `not_before`, so it never feels instant)."""
+    import random
+    with _lock:
+        said = _says.get(sid)
+        if not said or said["answered"] or said["id"] not in _players:
+            return
+        said["answered"] = True
+        history = list(_talks.get(said["id"], []))
+    if not SAY_LIMIT.acquire(timeout=30):
+        return
+    try:
+        line = chat.companion(said["text"], question(), random.choice(["kid", "teen", "grown-up", "elder"]), history)
+    except Exception as e:  # API failure; no key material in the message
+        sys.stderr.write(f"rabble: companion failed: {type(e).__name__}\n")
+        return
+    finally:
+        SAY_LIMIT.release()
+    time.sleep(max(0, not_before - time.time()))
+    with _lock:
+        if said["id"] in _players:
+            _talks[said["id"]] = (history + [f"Visitor: {said['text']}", f"Companion: {line['text']}"])[-TALK_KEPT:]
+            _emit("reply", to=said["id"], sid=sid, **line)
 
 
 def events(since, viewer, token=None):
@@ -144,7 +219,8 @@ def events(since, viewer, token=None):
         if since < 0 or since > _seq or (_events and since < _events[0]["seq"] - 1):
             # New here, too far behind, or from before a server restart:
             # who's in the pile, from now on.
-            return {"seq": _seq, "players": [_public(q) for q in _players.values()], "events": []}
+            return {"seq": _seq, "players": [_public(q) for q in _players.values()], "events": [],
+                    "question": question()}
         while _seq <= since and time.time() < deadline:
             _lock.wait(timeout=max(0.1, deadline - time.time()))
         return {"seq": _seq, "events": [e for e in _events if e["seq"] > since]}

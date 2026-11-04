@@ -4,7 +4,8 @@ One shared pile for everyone who opens it (see room.py):
 GET  /api/events?since=N&v=VIEWER  what happened in the pile since N (long-poll)
 POST /api/join     {"figure": id or null} -> {"id", "token"}
 POST /api/leave    {"token"}
-POST /api/say      {"text", "token"} -> {"you", "replies": [...]} and everyone sees it
+POST /api/say      {"text", "token"} -> {"sid", "text"}: checked, then everyone sees it as written
+POST /api/ack      {"to", "kind", "token"}  a squeeze (or "that's lovely") to another person
 GET  /api/figure/ID  a selfie figure, so others in the pile can see you
 POST /api/selfie  body: {"image": "data:image/jpeg;base64,..."}
   1. SAM 3.1 cuts the person out of the photo (concept "person").
@@ -152,6 +153,20 @@ class Handler(SimpleHTTPRequestHandler):
             sys.stderr.write(f"rabble: chat failed: {type(e).__name__}\n")
             return self._json(502, {"error": "the pile didn't catch that"})
 
+    def _ack(self):
+        try:
+            data = self._body()
+            if room.is_player(data.get("token")) and not limits.allow("ack", self._visitor()):
+                return self._json(429, {"error": SLOW_DOWN})
+            room.ack(data.get("token"), data.get("to"), data.get("kind"))
+            return self._json(200, {})
+        except OverflowError as e:
+            return self._json(413, {"error": str(e)})
+        except PermissionError as e:
+            return self._json(403, {"error": str(e)})
+        except ValueError as e:
+            return self._json(422, {"error": str(e)})
+
     def _join(self):
         try:
             data = self._body()
@@ -205,6 +220,8 @@ class Handler(SimpleHTTPRequestHandler):
             return self._say()
         if self.path == "/api/join":
             return self._join()
+        if self.path == "/api/ack":
+            return self._ack()
         if self.path == "/api/leave":
             return self._leave()
         if self.path != "/api/selfie":

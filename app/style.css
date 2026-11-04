@@ -116,14 +116,17 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* The ring button: a framed square beside the wordmark, a translucent white
    card inside, and the word's letters heaped in a little pile. */
 .title-row {
-  display: flex;
-  flex-direction: column;     /* the title, with the ring button right below it */
-  align-items: center;
+  display: grid;              /* the title with the ring button to its right; who's awake below */
+  grid-template-columns: auto auto;
   justify-content: center;
-  gap: 8px;
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 8px;
   margin: 4px 0 6px;
 }
-.title-row .wordmark { margin: 0; }
+.title-row .wordmark { margin: 0; grid-column: 1; grid-row: 1; }
+.title-row .ring-pile { grid-column: 2; grid-row: 1; }
+.title-row .awake { grid-column: 1 / -1; grid-row: 2; }
 .ring-pile {
   --size: 76px;
   width: var(--size);
@@ -138,6 +141,29 @@ button { font: inherit; color: inherit; cursor: pointer; }
   transition: transform var(--dur-fast) var(--ease-squish), border-color var(--dur);
 }
 .ring-pile:hover { border-color: rgba(255, 244, 230, 0.85); }
+/* Every so often the button wakes: a warm glow, and its letter pile gives a
+   little hop, so it reads as something to press. Once pressed, only a faint glow. */
+/* Starting part-way through the cycle, so the first glow comes about a second in. */
+.ring-pile { animation: ring-wake 5s ease-in-out -3.2s infinite; }
+.ring-pile .ring-card { animation: ring-hop 5s var(--ease-squish) -3.2s infinite; }
+.ring-pile.tried { animation-duration: 12s; animation-name: ring-glow; }
+.ring-pile.tried .ring-card { animation: none; }
+@keyframes ring-wake {
+  0%, 82%, 100% { border-color: rgba(255, 244, 230, 0.55); box-shadow: 0 0 0 0 transparent; }
+  88% { border-color: rgba(255, 226, 170, 0.95); box-shadow: 0 0 22px 4px rgba(255, 210, 150, 0.45); }
+}
+@keyframes ring-glow {
+  0%, 85%, 100% { box-shadow: 0 0 0 0 transparent; }
+  92% { box-shadow: 0 0 14px 2px rgba(255, 210, 150, 0.25); }
+}
+@keyframes ring-hop {
+  0%, 84%, 94%, 100% { transform: none; }
+  87% { transform: translateY(-4px) scale(1.04, 0.97); }
+  90% { transform: translateY(0) scale(0.97, 1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring-pile .ring-card { animation: none; }
+}
 .ring-pile:active { transform: scale(0.92) rotate(-2deg); }
 .ring-card {
   display: flex;
@@ -513,6 +539,58 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 .card.no-tail::after { display: none; }
 .card.yours .card-inner { background: color-mix(in srgb, var(--lamp) 85%, white); }
 .card.theirs .card-inner { background: color-mix(in srgb, #b4e6ff 55%, white); }   /* another real person */
+/* A clay companion (AI): quieter, see-through, a dashed edge, so it never passes for a person. */
+.card.companion { border-style: dashed; border-color: rgba(255, 244, 230, 0.5); box-shadow: none; }
+.card.companion .card-inner { background: rgba(255, 250, 242, 0.5); color: color-mix(in srgb, var(--cocoa) 85%, transparent); font-style: italic; }
+/* Today's question, asked over you when you land. */
+.card.question .card-inner { background: var(--cream); font-size: 0.9rem; }
+.card.question { border-color: var(--coral); box-shadow: 0 0 0 3px var(--coral-glow), 0 8px 24px rgba(20, 10, 5, 0.18); }
+.card.note .card-inner { background: var(--cream); font-family: var(--font-ui); font-weight: 600; }
+.card.small .card-inner { font-size: 0.72rem; padding: 4px 9px 5px; }
+/* Answering someone: the one thing on a card you can press. */
+.card.has-action { pointer-events: auto; }
+.card-action {
+  display: block;
+  margin: 0 auto;
+  translate: 0 50%;
+  margin-top: -6px;
+  padding: 5px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--coral);
+  color: #fff;
+  font: 700 var(--text-small) var(--font-ui);
+  box-shadow: 0 4px 12px rgba(20, 10, 5, 0.25);
+  cursor: pointer;
+  animation: card-in 700ms var(--ease-out) 900ms backwards;
+  transition: transform var(--dur-fast) var(--ease-squish), opacity var(--dur);
+}
+.card-action:hover { transform: scale(1.05); }
+.card-action:active { transform: scale(0.92); }
+.card-action:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+.card-action.sent { opacity: 0; transform: scale(1.2); }
+
+/* A squeeze on its way from one person to another. */
+.squeeze {
+  position: absolute;
+  left: -9px; top: -9px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 18%, var(--coral) 45%, transparent 72%);
+  box-shadow: 0 0 18px 6px var(--coral-glow);
+  pointer-events: none;
+  will-change: transform;
+}
+.squeeze.lovely { background: radial-gradient(circle, #fff 0 22%, #ffb3a1 50%, transparent 74%); }
+.squeeze.landed { opacity: 0; transition: opacity 500ms var(--ease-out); }
+
+/* The say button breathes while the pile's question waits for you. */
+.say-btn.asking { animation: asking 2.4s ease-in-out infinite; }
+@keyframes asking { 50% { box-shadow: 0 0 0 8px var(--coral-glow); } }
+@media (prefers-reduced-motion: reduce) {
+  .say-btn.asking { animation: none; box-shadow: 0 0 0 4px var(--coral-glow); }
+}
+
 .card-word { opacity: 0; animation: word-in 500ms var(--ease-out) forwards; }
 .card.thinking .card-word { animation: word-in 500ms var(--ease-out) forwards, think 1.4s ease-in-out 600ms infinite; }
 @keyframes card-in { from { opacity: 0; scale: 0.85; } }

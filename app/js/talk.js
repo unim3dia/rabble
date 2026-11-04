@@ -1,11 +1,12 @@
-// Saying something to the pile. You type; the AI says it for you (your meaning,
-// carried a step further) and the people nearest you answer, one by one, a
-// few moments apart, so the conversation has room to breathe.
+// Saying something to the pile. The card asks today's question; what you type
+// goes up over you exactly as you wrote it, and stays a while so others in the
+// pile can answer it. (The pile's own conversations play here too.)
 import { pileLetters } from "./ui.js";
 
 const $ = (s) => document.querySelector(s);
-// The empty card's hint, in a little heap like the ring button's letters.
-const HINT_ROWS = ["say", "something", "to the pile"];
+// The empty card's hint (today's question once it's known), in a little heap
+// like the ring button's letters.
+let hintRows = ["say", "something", "to the pile"];
 
 // What you type, broken into rows that widen toward the bottom, like a heap.
 function heapRows(text) {
@@ -26,7 +27,6 @@ function heapRows(text) {
   rows.push(row);
   return rows;
 }
-const FIRST_REPLY_MS = 2600;     // after your line has finished appearing
 const BETWEEN_REPLIES_MS = 3600;
 const READ_MS = 6500;            // how long the last line stays once it's in
 
@@ -43,7 +43,7 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
     const text = input.value.replace(/\s+/g, " ");
     const typed = text.trim().length > 0;
     hint.classList.toggle("typed", typed);
-    const rows = typed ? heapRows(text) : HINT_ROWS;
+    const rows = typed ? heapRows(text) : hintRows;
     const count = rows.join("").length;
     pileLetters(hint, rows, { animateFrom: typed && count > shown ? shown : typed ? count : 0 });
     shown = typed ? count : 0;
@@ -59,15 +59,28 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
     if (keyboard > 80) {
       form.style.top = `${vv.offsetTop + vv.height - form.offsetHeight - 10}px`;
       form.style.bottom = "auto";
-    } else {
+    } else if (!form.style.left) {          // beside you: it stays where it opened
       form.style.top = form.style.bottom = "";
     }
   };
   vv?.addEventListener("resize", fit);
   vv?.addEventListener("scroll", fit);
 
-  const open = () => {
+  // Opened from your light: the card sits beside you in the pile (on the side
+  // with more room), not down in the corner.
+  const BESIDE_PX = 26;
+  const placeBeside = (at) => {
+    const side = form.offsetWidth, room = window.innerWidth;
+    const left = at.x + BESIDE_PX + side < room - 12 ? at.x + BESIDE_PX : at.x - BESIDE_PX - side;
+    const top = Math.min(window.innerHeight - side - 90, Math.max(70, at.y - side / 2));
+    form.style.left = `${Math.max(12, left)}px`;
+    form.style.top = `${top}px`;
+    form.style.right = form.style.bottom = "auto";
+  };
+
+  const open = (at) => {
     form.hidden = false;
+    if (at) placeBeside(at);
     showLetters();
     $("#say-btn").setAttribute("aria-expanded", "true");
     onTyping?.(true);        // others' words wait until you've said yours, so you see them
@@ -76,7 +89,7 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
   };
   const close = () => {
     form.hidden = true;
-    form.style.top = form.style.bottom = "";
+    form.style.top = form.style.bottom = form.style.left = form.style.right = "";
     $("#say-btn").setAttribute("aria-expanded", "false");
     onTyping?.(false);
     input.blur();
@@ -106,7 +119,8 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
       out = await send(text);
     } catch (err) {
       thinking.el.dismiss();
-      cards.show(you, err.message, { cls: "yours thinking", ms: 3500 });
+      // Only you see why it didn't go up (unkind, identifying, or a worry): time to read it.
+      cards.show(you, err.message, { cls: "yours note", ms: 9000 });
       onThinking?.(false);
       busy = false;
       return;
@@ -115,28 +129,16 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
     onSaid(out);
     busy = false;
   });
-}
 
-// Someone (you, or another real person in the pile) said something through the
-// AI: their line over them, then the people nearest them answer, a few moments
-// apart. Every line stays until it's all done, so it reads together.
-// Returns { ms, cancel }.
-export function playExchange({ speaker, out, speakers, cards, sfx, mine }) {
-  const replies = (out.replies || [])
-    .map((r) => (typeof r === "string" ? { text: r, tone: "smile" } : r))
-    .filter((r) => r && r.text);
-  const replyAt = (i) => FIRST_REPLY_MS + i * BETWEEN_REPLIES_MS;
-  const total = replyAt(replies.length) + READ_MS;
-  const shown = [cards.show(speaker, out.you, { cls: mine ? "yours" : "theirs", ms: total }).el];
-  sfx.express(out.youTone);
-  const timers = replies.map((line, i) => setTimeout(() => {
-    const who = speakers[i];
-    if (!who) return;
-    shown.push(cards.show(who, line.text, { ms: total - replyAt(i) }).el);
-    sfx.express(line.tone);
-    who.squish = Math.max(who.squish, 0.12);
-  }, replyAt(i)));
-  return { ms: total, cancel: () => stop(timers, shown) };
+  return {
+    // Open (or close) the card beside a spot on screen: your light.
+    toggleAt(at) { if (form.hidden) open(at); else close(); },
+    setQuestion(q) {
+      hintRows = heapRows(q);
+      $("#say-input").setAttribute("aria-label", q);
+      if (!form.hidden) showLetters();
+    },
+  };
 }
 
 function stop(timers, shown) {

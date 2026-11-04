@@ -93,6 +93,12 @@ export const LOOK = {
   keyLight: "rgba(255, 214, 160, 0.20)",
   underShadow: "rgba(34, 18, 12, 0.32)",
   contactShadow: 0.32,
+  // Each person's soft shadow on the people behind them, falling away from the
+  // lamp (upper left), so you can feel the space between bodies.
+  dropShadow: 0.26,         // how dark: a soft hint, not a silhouette
+  dropShadowDx: 0.035,      // offset right, × person size: hugging the body
+  dropShadowDy: 0.025,      // offset down, × person size
+  dropShadowGrow: 1.05,     // a touch bigger than the figure: a soft edge all round
   floorFrac: 0.3,           // floor band below the pile, × stage width
   floorMaxFrac: 0.2,        // …but at most this much of the stage height
   swayPx: 8,
@@ -109,7 +115,7 @@ export const BREATH = {
 export const POSE = {
   shiftEveryMs: [25000, 45000], // now and then someone in the pile shifts, quietly
   fadeMs: 900,
-  sleepyShare: 0.42,          // share of the pile dozing with eyes closed
+  sleepyShare: 0.55,          // share of the pile dozing with eyes closed
   nodDeg: 1.5,                // how far heads lean and nuzzle
 };
 

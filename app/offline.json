@@ -309,298 +309,163 @@
  ],
  "sayings": {
   "hello everyone": {
-   "you": "Late night check-in, glad this sleepy pile showed up.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Some of us are in totally different time zones.",
-     "tone": "idea",
-     "who": "teen"
-    },
-    {
-     "text": "I saved you a crumbly corner spot.",
-     "tone": "chuckle",
+     "text": "Hi hi! So glad you're here, got a tiny happy thing?",
+     "tone": "smile",
      "who": "kid"
-    },
-    {
-     "text": "Hello back, you nearly caught me snoring.",
-     "tone": "hmm",
-     "who": "elder"
     }
    ]
   },
   "i can't sleep": {
-   "you": "Wide awake again, my brain missed the off switch.",
-   "youTone": "sigh",
    "replies": [
     {
-     "text": "Cooler room actually helps, warm bedrooms keep you wired.",
-     "tone": "idea",
-     "who": "elder"
-    },
-    {
-     "text": "My teddy snores, want to borrow him?",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Same, but morning me is gonna be wrecked.",
-     "tone": "hmm",
-     "who": "teen"
+     "text": "Aww, those nights are rough, want some quiet company for a bit?",
+     "tone": "aww",
+     "who": "grown-up"
     }
    ]
   },
   "what is everyone doing": {
-   "you": "Late night check, what is everybody tinkering with?",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "I'm mapping constellations from my bedroom window still.",
-     "tone": "idea",
+     "text": "hey, we're sharing tiny things that rescued our day, want in?",
+     "tone": "smile",
      "who": "teen"
-    },
-    {
-     "text": "Hugging this pile and losing feeling in my elbow.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Shouldn't we all be asleep by now, honestly?",
-     "tone": "hmm",
-     "who": "elder"
     }
    ]
   },
   "i love you all": {
-   "you": "Really glad we ended up all piled here together.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Close contact actually lowers stress hormones, you know.",
-     "tone": "idea",
+     "text": "We love you too, dear — what tiny joy found you today?",
+     "tone": "smile",
      "who": "elder"
-    },
-    {
-     "text": "Don't get mushy, you're crushing my leg.",
-     "tone": "chuckle",
-     "who": "teen"
-    },
-    {
-     "text": "Wait, even the kid who stole my blanket?",
-     "tone": "hmm",
-     "who": "kid"
     }
    ]
   },
   "good night": {
-   "you": "Lights out, everyone. We made it through today.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Deep sleep files away everything you learned today.",
-     "tone": "idea",
-     "who": "elder"
-    },
-    {
-     "text": "Does this hug come with breakfast tomorrow?",
-     "tone": "chuckle",
+     "text": "Good night! So glad you stopped by, sleep cozy?",
+     "tone": "smile",
      "who": "kid"
-    },
-    {
-     "text": "But I'm still wide awake, now what?",
-     "tone": "hmm",
-     "who": "teen"
     }
    ]
   },
   "is anyone awake": {
-   "you": "Still up? The night feels softer with company.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Lots of us fade after midnight, circadian dip.",
-     "tone": "idea",
-     "who": "teen"
-    },
-    {
-     "text": "Me! My blanket fort has extra snacks.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Here, though morning will scold us.",
-     "tone": "hmm",
+     "text": "I'm awake, dear, and glad you're here. Restless night?",
+     "tone": "smile",
      "who": "elder"
     }
    ]
   },
   "how is everyone": {
-   "you": "Midnight roll call, how's everyone feeling out there?",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Hanging in, though late nights fry my focus.",
-     "tone": "idea",
-     "who": "teen"
-    },
-    {
-     "text": "Good, but my blanket fort keeps collapsing sideways.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Well enough, though I worry we sleep too late.",
-     "tone": "hmm",
-     "who": "elder"
-    }
-   ]
-  },
-  "i'm so tired": {
-   "you": "Running on empty tonight, barely keeping my eyelids up.",
-   "youTone": "sigh",
-   "replies": [
-    {
-     "text": "Adults need seven to nine hours, no shortcuts.",
-     "tone": "idea",
-     "who": "elder"
-    },
-    {
-     "text": "Bed is calling, and it's being super clingy.",
-     "tone": "chuckle",
-     "who": "teen"
-    },
-    {
-     "text": "But what if dreams get tired too?",
-     "tone": "hmm",
-     "who": "kid"
+     "text": "Doing well and glad you're here. How are you doing?",
+     "tone": "smile",
+     "who": "grown-up"
     }
    ]
   },
   "tell me something good": {
-   "you": "Okay, everyone share one small good thing from today.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Noticing good moments actually rewires your mood a bit.",
-     "tone": "idea",
-     "who": "elder"
-    },
-    {
-     "text": "My sandwich didn't fall apart at lunch. Huge win.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "But what if my good thing feels too tiny?",
-     "tone": "hmm",
+     "text": "hey, glad you're here, that's something good right?",
+     "tone": "smile",
      "who": "teen"
     }
    ]
   },
   "what's new": {
-   "you": "So tell me, what's buzzing in your corner tonight?",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Days keep shrinking till December 21st, scientifically speaking.",
-     "tone": "idea",
+     "text": "hey, not much just hanging out — any tiny win today?",
+     "tone": "smile",
      "who": "teen"
-    },
-    {
-     "text": "My socks are new. Wore them backwards, though.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Everything changes so fast I miss yesterday.",
-     "tone": "hmm",
-     "who": "elder"
     }
    ]
   },
   "i'm happy tonight": {
-   "you": "Tonight I'm buzzing just being squished with you all.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Good moods are contagious, brains literally sync up together.",
-     "tone": "idea",
-     "who": "teen"
-    },
-    {
-     "text": "Careful, your happy is squishing my elbow.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Lovely, but someone's knee is on my blanket.",
-     "tone": "hmm",
-     "who": "elder"
+     "text": "So glad to hear that, what made tonight happy?",
+     "tone": "smile",
+     "who": "grown-up"
     }
    ]
   },
   "i miss my friends": {
-   "you": "Missing my people tonight. The group chat feels quiet.",
-   "youTone": "sigh",
    "replies": [
     {
-     "text": "Old friendships need a nudge. Call one tomorrow morning.",
-     "tone": "idea",
-     "who": "elder"
-    },
-    {
-     "text": "You can borrow my friends. They're loud and sticky.",
-     "tone": "chuckle",
+     "text": "aww, missing friends is hard, want to tell me more?",
+     "tone": "aww",
      "who": "kid"
-    },
-    {
-     "text": "Wait, are we not close enough or something?",
-     "tone": "hmm",
-     "who": "teen"
     }
    ]
   },
   "this is nice": {
-   "you": "This pile is cozy, nobody wants to leave yet.",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "Warm bodies share heat, like penguins huddling close.",
-     "tone": "idea",
-     "who": "elder"
-    },
-    {
-     "text": "Someone's foot is poking my ear, though.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Yeah, but my arm's falling asleep back here.",
-     "tone": "hmm",
-     "who": "teen"
+     "text": "Glad you stopped by. What feels nicest about it?",
+     "tone": "smile",
+     "who": "grown-up"
     }
    ]
   },
   "who are you": {
-   "you": "Okay, midnight roll call, who is squished in here?",
-   "youTone": "smile",
    "replies": [
     {
-     "text": "We did intros last week, I still remember six names.",
-     "tone": "idea",
+     "text": "I'm one of the little people here, just glad you stopped by",
+     "tone": "smile",
      "who": "teen"
-    },
-    {
-     "text": "I'm the crumb-covered one, don't sit on me.",
-     "tone": "chuckle",
-     "who": "kid"
-    },
-    {
-     "text": "Wait, did someone new sneak in after lights out?",
-     "tone": "hmm",
-     "who": "grown-up"
     }
    ]
   }
- }
+ },
+ "anything": [
+  {
+   "text": "Aww, glad a little bright spot found you. What was it like?",
+   "tone": "aww",
+   "who": "elder"
+  },
+  {
+   "text": "Aw, love that little rescue — what made it feel special?",
+   "tone": "aww",
+   "who": "teen"
+  },
+  {
+   "text": "Oh, those small rescues count for so much, don't they?",
+   "tone": "smile",
+   "who": "grown-up"
+  },
+  {
+   "text": "Aww yay, I'm so glad that tiny thing found you!",
+   "tone": "aww",
+   "who": "kid"
+  },
+  {
+   "text": "Love that little rescue, what part made you smile most?",
+   "tone": "smile",
+   "who": "teen"
+  },
+  {
+   "text": "Aww, how lovely — thanks for sharing that little rescue?",
+   "tone": "aww",
+   "who": "grown-up"
+  },
+  {
+   "text": "Well now, isn't that lovely? Did it make you smile?",
+   "tone": "smile",
+   "who": "elder"
+  },
+  {
+   "text": "Aww that sounds like such a sweet little save, right?",
+   "tone": "aww",
+   "who": "teen"
+  }
+ ]
 }

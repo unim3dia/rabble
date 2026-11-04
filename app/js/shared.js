@@ -1,6 +1,8 @@
 // The shared pile: everyone who opens Rabble is in the same pile. This keeps
 // a long-poll open to the server and passes along what happens: real people
-// arriving and leaving, what they say, and the pile's own conversation.
+// arriving and leaving, what they say (in their own words), the squeezes they
+// send each other, a companion's answer when no one else answered, today's
+// question, and the pile's own conversation.
 
 const RETRY_MS = 3000;
 
@@ -14,12 +16,13 @@ function viewerId() {
   }
 }
 
-export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onChat }) {
+export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onAck, onReply, onChat, onQuestion }) {
   const viewer = viewerId();
   let seq = -1;
   let me = null;          // { id, token } once you've joined
   let figure = null;      // your selfie figure, if you made one
   let wantIn = false;
+  let joining = null;     // while a join is on its way, news waits, so you're never "someone else"
 
   const post = (path, body) => fetch(path, {
     method: "POST",
@@ -30,12 +33,15 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onChat }) {
   async function join(fig) {
     figure = fig || null;
     wantIn = true;
-    const res = await post("api/join", { figure });
-    const out = await res.json().catch(() => ({}));
-    if (res.status === 404) throw new Error("the server is out of date: restart it");
-    if (!res.ok) throw new Error(out.error || "couldn't join the pile");
-    me = out;
-    return me;
+    joining = (async () => {
+      const res = await post("api/join", { figure });
+      const out = await res.json().catch(() => ({}));
+      if (res.status === 404) throw new Error("the server is out of date: restart it");
+      if (!res.ok) throw new Error(out.error || "couldn't join the pile");
+      me = out;
+      return me;
+    })();
+    try { return await joining; } finally { joining = null; }
   }
 
   function leave() {
@@ -65,6 +71,13 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onChat }) {
     throw new Error("couldn't find you in the pile, try again");
   }
 
+  // Reach another real person: a squeeze, or "that's lovely" on what they said.
+  async function ack(to, kind) {
+    if (!me) return;
+    const res = await post("api/ack", { to, kind, token: me.token }).catch(() => null);
+    if (res && !res.ok) throw new Error((await res.json().catch(() => ({}))).error || "couldn't reach them");
+  }
+
   function handle(e) {
     const mine = me && e.id === me.id;
     if (e.type === "arrive" && e.player.id !== me?.id) onArrive(e.player);
@@ -72,6 +85,8 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onChat }) {
       // Your phone went quiet for a while and the pile let you go: hop back in.
       if (mine && wantIn) { me = null; join(figure).catch(() => {}); } else if (!mine) onLeave(e.id);
     } else if (e.type === "say" && !mine) onSay(e);
+    else if (e.type === "ack" && e.from !== me?.id) onAck(e);   // your own you've already seen go
+    else if (e.type === "reply") onReply(e);
     else if (e.type === "chat") onChat(e);
   }
 
@@ -82,7 +97,9 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onChat }) {
         const res = await fetch(`api/events?since=${seq}&v=${viewer}`, { headers });
         if (!res.ok) throw new Error(`events ${res.status}`);
         const data = await res.json();
+        if (joining) await joining.catch(() => {});
         if (data.players) onSnapshot(data.players.filter((p) => p.id !== me?.id));
+        if (data.question) onQuestion(data.question);
         for (const e of data.events || []) handle(e);
         seq = data.seq;
       } catch {
@@ -93,5 +110,5 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onChat }) {
   loop();
   window.addEventListener("pagehide", leave);
 
-  return { join, leave, say, get id() { return me?.id; } };
+  return { join, leave, say, ack, get id() { return me?.id; } };
 }

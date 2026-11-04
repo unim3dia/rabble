@@ -76,17 +76,49 @@ function figureMass(img) {
   return img._mass;
 }
 
+// A pose's shadow: its silhouette, dark and soft. Drawn tiny and scaled up, so
+// it blurs without canvas filters (which not every phone has). Made once per picture.
+const SHADOW_PX = 28;
+function shadowOf(img) {
+  if (img._shadow) return img._shadow;
+  const s = SHADOW_PX / Math.max(img.naturalWidth, img.naturalHeight);
+  const pad = 4;
+  const c = Object.assign(document.createElement("canvas"), {
+    width: Math.ceil(img.naturalWidth * s) + pad * 2, height: Math.ceil(img.naturalHeight * s) + pad * 2 });
+  const g = c.getContext("2d");
+  g.drawImage(img, pad, pad, img.naturalWidth * s, img.naturalHeight * s);
+  g.globalCompositeOperation = "source-in";
+  g.fillStyle = "rgb(58, 30, 22)";   // warm brown, like shade on clay, not black
+  g.fillRect(0, 0, c.width, c.height);
+  img._shadow = { canvas: c, pad: pad / s };
+  return img._shadow;
+}
+
 // Fit a pose image into the person's box, feet at the origin. Every picture is
 // scaled so the figure in it covers the same area, whatever the pose, so
 // everyone in the pile reads as the same size.
+function poseScale(img, size) {
+  return Math.min((size * LOOK.figureMass) / figureMass(img),
+    (size * 1.5) / img.naturalWidth, (size * 1.35) / img.naturalHeight);
+}
+
 function drawPose(ctx, img, size, alpha) {
   if (!img || alpha <= 0.01) return;
-  const k = Math.min((size * LOOK.figureMass) / figureMass(img),
-    (size * 1.5) / img.naturalWidth, (size * 1.35) / img.naturalHeight);
+  const k = poseScale(img, size);
   const w = img.naturalWidth * k, h = img.naturalHeight * k;
   ctx.globalAlpha *= alpha;
   ctx.drawImage(img, -w / 2, -h, w, h);
   ctx.globalAlpha /= alpha;
+}
+
+// The person's shadow on whoever is already drawn behind them (and only on
+// them: never on the empty room), offset away from the lamp.
+function drawPoseShadow(ctx, img, size, flip) {
+  if (!img) return;
+  const { canvas, pad } = shadowOf(img);
+  const k = poseScale(img, size) * LOOK.dropShadowGrow;
+  const w = (img.naturalWidth + pad * 2) * k, h = (img.naturalHeight + pad * 2) * k;
+  ctx.drawImage(canvas, -w / 2 + size * LOOK.dropShadowDx * Math.sign(flip || 1), -h + pad * k + size * LOOK.dropShadowDy, w, h);
 }
 
 function placeOnScreen(p, cam, tilt, top) {
@@ -126,6 +158,13 @@ function drawPerson(ctx, p, cam, shadow, t) {
   ctx.translate(p.sx, feet);
   ctx.rotate(p.lean + (p.sway || 0) + (p.spin || 0) + p.nod * POSE.nodDeg * DEG);
   ctx.scale(sx, sy);
+  if (p.alpha > 0.5 && !p.falling) {
+    ctx.save();
+    ctx.globalCompositeOperation = "source-atop";
+    ctx.globalAlpha = LOOK.dropShadow * p.alpha;
+    drawPoseShadow(ctx, p.poses[p.pose] || p.poses.open, size, p.flip);   // mirrored people: still away from the lamp
+    ctx.restore();
+  }
   // Crossfade that never goes see-through: the old pose stays solid until the
   // new one is half in, then fades out underneath it.
   const k = p.poseT;

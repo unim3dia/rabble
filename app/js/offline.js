@@ -1,12 +1,14 @@
 // The pile without a server (the GitHub page): the same shape as the shared
 // pile, but its talk is a night of conversations Muse Spark wrote ahead of
-// time (app/offline.json), and what you say gets an answer from the ones it
-// recorded for things people often say.
+// time (app/offline.json). What you say stays as you wrote it, and a clay
+// companion answers with one of the lines it recorded for things people often
+// say. No one else is here, so there's no one to squeeze back.
 
 const LINE_MS = 3600, READ_MS = 7000;      // how long a conversation plays (matches the server)
-const GAP_MS = [5000, 10000];
+const GAP_MS = [35000, 70000];             // room between conversations, as on the server
 const FIRST_MS = 2500;
-const THINK_MS = 1600;
+const THINK_MS = 900;
+const ANSWER_MS = 5000;                     // a companion answers after this (no one else is here)
 
 const between = ([a, b]) => a + Math.random() * (b - a);
 const words = (s) => new Set(s.toLowerCase().match(/[a-z']+/g) || []);
@@ -22,11 +24,12 @@ function closest(sayings, text) {
   return score >= 0.5 ? best : null;
 }
 
-export function connectOffline({ onChat }) {
-  let talks = [], sayings = {}, next = 0, busyUntil = 0;
+export function connectOffline({ onChat, onReply, onQuestion }) {
+  let talks = [], sayings = {}, anything = [], next = 0, busyUntil = 0;
   const ready = fetch("offline.json").then((r) => r.json()).then((d) => {
     talks = d.conversations || [];
     sayings = d.sayings || {};
+    anything = d.anything || [];
     talks.sort(() => Math.random() - 0.5);
   }).catch(() => {});
 
@@ -40,17 +43,20 @@ export function connectOffline({ onChat }) {
     setTimeout(play, busyUntil - Date.now() + between(GAP_MS));
   }
   setTimeout(play, FIRST_MS);
+  fetch("questions.json").then((r) => r.json())
+    .then((qs) => onQuestion(qs[Math.floor(Date.now() / 86400000) % qs.length])).catch(() => {});
 
-  // Your words stay yours here (there's no AI to reword them); someone answers
-  // from what the pile said to something like it, or to "hello" if nothing fits.
+  // Your words go up as you wrote them; a companion answers from what it said
+  // to something like it, or with one of its warm answers for anything.
   async function say(text) {
     await ready;
     await new Promise((r) => setTimeout(r, THINK_MS));
-    const out = closest(sayings, text);
-    const fallback = sayings["hello everyone"] || { replies: [] };
-    const replies = (out || fallback).replies;
-    busyUntil = Date.now() + (replies.length + 1) * LINE_MS + READ_MS;
-    return out || { you: text, youTone: "smile", replies };
+    const sid = Math.random().toString(36).slice(2, 10);
+    const known = closest(sayings, text)?.replies?.[0];
+    const reply = known || anything[Math.floor(Math.random() * anything.length)];
+    busyUntil = Date.now() + ANSWER_MS + LINE_MS + READ_MS;
+    if (reply) setTimeout(() => onReply({ to: "you", sid, ...reply }), ANSWER_MS);
+    return { sid, text };
   }
 
   return {
@@ -58,6 +64,7 @@ export function connectOffline({ onChat }) {
     join: async () => ({ id: "you", token: "offline" }),
     leave() {},
     say,
+    async ack() {},
     get id() { return "you"; },
   };
 }
