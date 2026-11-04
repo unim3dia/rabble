@@ -103,7 +103,10 @@ class Handler(SimpleHTTPRequestHandler):
         sys.stderr.write("rabble: " + (fmt % args) + "\n")
 
     def end_headers(self):
-        self.send_header("Cache-Control", "no-store")
+        # The people pictures never change, so browsers keep them (less bandwidth);
+        # everything else is always fresh.
+        cached = self.path.startswith("/people-web/")
+        self.send_header("Cache-Control", "public, max-age=604800" if cached else "no-store")
         super().end_headers()
 
     def _visitor(self):
