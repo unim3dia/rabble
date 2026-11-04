@@ -12,7 +12,6 @@ RULES = {
     "selfie": (4, 3600, 150),       # each is a few Muse Image + SAM calls
     "say": (12, 300, 1500),         # Muse Spark replies
     "join": (20, 600, 5000),        # no AI cost, but each join is a fresh name to speak as
-    "ack": (40, 300, 50000),        # squeezes: no AI cost, just keep them from flooding
 }
 DAY_S = 24 * 3600
 

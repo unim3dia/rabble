@@ -1,8 +1,6 @@
-// The shared pile: everyone who opens Rabble is in the same pile. This keeps
-// a long-poll open to the server and passes along what happens: real people
-// arriving and leaving, what they say (in their own words), the squeezes they
-// send each other, a companion's answer when no one else answered, today's
-// question, and the pile's own conversation.
+// The pile on the server. Each visitor's pile is their own: this keeps a
+// long-poll open and passes along what's for you (a clay person's answer, or
+// word that it didn't come), today's question, and the pile's own conversation.
 
 const RETRY_MS = 3000;
 
@@ -16,7 +14,7 @@ function viewerId() {
   }
 }
 
-export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onAck, onReply, onChat, onQuestion }) {
+export function connectPile({ onReply, onMissed, onChat, onQuestion }) {
   const viewer = viewerId();
   let seq = -1;
   let me = null;          // { id, token } once you've joined
@@ -71,22 +69,13 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onAck, onRep
     throw new Error("couldn't find you in the pile, try again");
   }
 
-  // Reach another real person: a squeeze, or "that's lovely" on what they said.
-  async function ack(to, kind) {
-    if (!me) return;
-    const res = await post("api/ack", { to, kind, token: me.token }).catch(() => null);
-    if (res && !res.ok) throw new Error((await res.json().catch(() => ({}))).error || "couldn't reach them");
-  }
-
   function handle(e) {
     const mine = me && e.id === me.id;
-    if (e.type === "arrive" && e.player.id !== me?.id) onArrive(e.player);
-    else if (e.type === "leave") {
+    if (e.type === "leave") {
       // Your phone went quiet for a while and the pile let you go: hop back in.
-      if (mine && wantIn) { me = null; join(figure).catch(() => {}); } else if (!mine) onLeave(e.id);
-    } else if (e.type === "say" && !mine) onSay(e);
-    else if (e.type === "ack" && e.from !== me?.id) onAck(e);   // your own you've already seen go
-    else if (e.type === "reply") onReply(e);
+      if (mine && wantIn) { me = null; join(figure).catch(() => {}); }
+    } else if (e.type === "reply") onReply(e);
+    else if (e.type === "missed") onMissed(e);
     else if (e.type === "chat") onChat(e);
   }
 
@@ -98,7 +87,6 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onAck, onRep
         if (!res.ok) throw new Error(`events ${res.status}`);
         const data = await res.json();
         if (joining) await joining.catch(() => {});
-        if (data.players) onSnapshot(data.players.filter((p) => p.id !== me?.id));
         if (data.question) onQuestion(data.question);
         for (const e of data.events || []) handle(e);
         seq = data.seq;
@@ -110,5 +98,5 @@ export function connectPile({ onSnapshot, onArrive, onLeave, onSay, onAck, onRep
   loop();
   window.addEventListener("pagehide", leave);
 
-  return { join, leave, say, ack, get id() { return me?.id; } };
+  return { join, leave, say, get id() { return me?.id; } };
 }

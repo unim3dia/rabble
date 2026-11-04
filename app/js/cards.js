@@ -8,7 +8,7 @@ const READ_FIRST_MS = 2500;
 export function createCards(overlay) {
   // Show a card over someone. Returns { el, done } where done resolves once the
   // words have all appeared. opts.cls adds a style, opts.ms how long it stays,
-  // opts.action ({ label, onClick }) a small button on it (used once, then gone).
+  // opts.actions ([{ label, onClick }]) small buttons on it (one press, then gone).
   function show(person, text, opts = {}) {
     const el = document.createElement("div");
     el.className = `card ${opts.cls || ""}`;
@@ -23,19 +23,24 @@ export function createCards(overlay) {
       w.style.animationDelay = `${180 + i * (opts.wordMs ?? 130)}ms`;
       inner.append(w, " ");
     });
-    if (opts.action) {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "card-action";
-      btn.textContent = opts.action.label;
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        btn.disabled = true;
-        btn.classList.add("sent");
-        opts.action.onClick();
-      }, { once: true });
+    if (opts.actions?.length) {
+      const row = document.createElement("div");
+      row.className = "card-actions";
+      for (const action of opts.actions) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `card-action ${action.quiet ? "quiet" : ""}`;
+        btn.textContent = action.label;
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          row.querySelectorAll("button").forEach((b) => { b.disabled = true; });
+          btn.classList.add("sent");
+          action.onClick();
+        });
+        row.append(btn);
+      }
       el.classList.add("has-action");
-      el.append(btn);
+      el.append(row);
     }
     el._person = person;
     // Its own little place in the air: a slight offset and a slow float.

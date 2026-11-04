@@ -21,6 +21,7 @@ MAX_CHARS = 200
 TONES = {"smile", "chuckle", "idea", "hmm", "aww", "sigh"}
 MIN_GAP_S = 4.0            # per person, between messages
 AGES = {"kid", "teen", "grown-up", "elder"}
+GESTURES = {"cheer", "lean", "chuckle", "doze"}   # how the pile reacts with its bodies
 
 # How everyone in the pile talks.
 VOICE = """Everyone talks in short phrases: plain, normal, sensible, easy to read
@@ -163,9 +164,18 @@ them halfway, like someone glad they spoke. You're a companion, not a person
 who was there; never claim to have done or seen things. One short line (at most
 14 words), maybe a tiny question back. Plain and kind, no emoji, no hashtags,
 no advice unless asked. Never ask for their name, where they live or anything
-personal; any question back is about the moment itself. Tone: "smile", "chuckle", "aww" or "idea".
+personal; any question back is about the moment itself.
 
-Return ONLY JSON: {{"text": "...", "tone": "..."}}"""
+Also pick how the little people around them react with their bodies, from
+what they actually said:
+  "cheer"    a small win or good news (a few nearby people bounce)
+  "lean"     tired, sad or a hard day (people lean in close, the pile hushes)
+  "chuckle"  playful or funny (a ripple of little laughs)
+  "doze"     winding down, sleepy, calm (people nearby settle and doze)
+
+Tone: "smile", "chuckle", "aww" or "idea".
+
+Return ONLY JSON: {{"text": "...", "tone": "...", "gesture": "cheer|lean|chuckle|doze"}}"""
 
 
 def _ask(instructions, text, detail, max_tokens=1500):
@@ -208,7 +218,8 @@ def companion(text, question, who="grown-up", history=()):
     if not line:
         raise RuntimeError("no companion line")
     tone = data.get("tone") if data.get("tone") in TONES else "smile"
-    return {"text": line, "tone": tone, "who": _who(who)}
+    gesture = data.get("gesture") if data.get("gesture") in GESTURES else "cheer"
+    return {"text": line, "tone": tone, "who": _who(who), "gesture": gesture}
 
 
 OPENER = """You voice Rabble: a pile of little people in a big group hug, awake late at

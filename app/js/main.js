@@ -15,6 +15,8 @@ import { createUi } from "./ui.js";
 import { createLighting } from "./lighting.js";
 import { setupTalk, playLines } from "./talk.js";
 import { sendSqueeze } from "./squeeze.js";
+import { createWelcome } from "./welcome.js";
+import { react } from "./gestures.js";
 import { connectPile } from "./shared.js";
 import { connectOffline } from "./offline.js";
 import { createRoom } from "./room.js";
@@ -60,7 +62,7 @@ const app = {
   visitors: 0,
 };
 
-let world, cam, renderer, tilt, sfx, cards, ui, lighting, room, talkBox;
+let world, cam, renderer, tilt, sfx, cards, ui, lighting, room, talkBox, welcome;
 
 const loadImage = (src) => new Promise((resolve, reject) => {
   const img = new Image();
@@ -443,9 +445,8 @@ async function join() {
       app.restFocus = { ...cam.focusTarget };
       sfx.thump();
       updateAwakeText();
-      talk.quietUntil = performance.now() + QUESTION_AFTER_MS + LANDING_QUIET_MS;
       setTimeout(newcomer, FLOW.followAfterMs);   // and a little later, someone lands after you
-      setTimeout(askQuestion, QUESTION_AFTER_MS);
+      welcome.begin();                            // "There you are", then today's question
     },
   });
 }
@@ -462,11 +463,8 @@ function reframe(ms) {
 // speaking cuts the pile's chat short; people's words wait their turn.
 const talk = { now: null, queue: [], hold: false, typingSince: 0, quietUntil: 0 };
 const SAY_MS = 24000;            // what a real person says stays up this long, for others to answer
-const QUESTION_MS = 9000;
 const LAND_STICK_MS = 4000;       // after landing, newcomers hold their spot while they settle,
 const LAND_STICK_MAX_MS = 8000;   // and a while longer if they still aren't at rest
-const QUESTION_AFTER_MS = 2500;   // after you land, the pile asks today's question
-const LANDING_QUIET_MS = 25000;   // and its own chatter waits while you think
 const TYPING_HOLD_MS = 45000;      // others' words wait this long at most while you type
 const STALE_CHAT_MS = 40000;     // the pile's chat waits for you to land, not forever
 const STALE_SAY_MS = 60000;
@@ -549,30 +547,39 @@ function showSay(person, text) {
 }
 
 
-// No one answered in time: a clay companion near them does, marked as a companion.
+// A clay person near you answers: its words, a squeeze that travels to you,
+// and the people around you react with their bodies to what you said.
 function onReply(e) {
   const to = e.to && e.to === app.pile?.id ? app.you : null;     // only answers to you
   if (!to) return;
-  const [who] = castLines([{ who: e.who || "grown-up" }], nearTo(to, to));
+  const near = nearTo(to, to);
+  const [who] = castLines([{ who: e.who || "grown-up" }], near);
   if (!who) return;
-  // Its answer reaches you physically too: a squeeze travels from it to you.
   sendSqueeze(overlay, who, to, { onArrive: () => sfx.boop() });
   cards.show(who, e.text, { cls: "companion", ms: SAY_MS / 2 });
   sfx.express(e.tone || "smile");
+  setTimeout(() => react(e.gesture, to, near.filter((p) => p !== who), { sfx, hush }), 900);
 }
 
-// Today's question: the say card asks it, and the pile asks you once you land.
+// The answer didn't come: say so gently, with a way to ask again.
+function onMissed() {
+  if (!app.you || !app.lastSaid) return;
+  cards.show(app.you, "The pile didn't catch that.", {
+    cls: "yours note", ms: 15000,
+    actions: [{ label: "Try again", onClick: () => app.pile.say(app.lastSaid).catch(() => {}) }],
+  });
+}
+
+// Quiet the pile's own chatter for a while (someone is talking, or resting).
+function hush(ms) {
+  if (talk.now?.kind === "chat") { talk.now.cancel(); talk.now = null; }
+  talk.quietUntil = Math.max(talk.quietUntil, performance.now() + ms);
+}
+
+// Today's question: the say card asks it, and a person beside you asks it once you land.
 function onQuestion(q) {
   app.question = q;
   talkBox?.setQuestion(q);
-}
-
-function askQuestion() {
-  if (!app.question || !app.you || app.said) return;
-  if (talk.now?.kind === "chat") { talk.now.cancel(); talk.now = null; }
-  talk.quietUntil = Math.max(talk.quietUntil, performance.now() + LANDING_QUIET_MS);   // room to answer
-  app.asked = cards.show(app.you, app.question, { cls: "question", ms: QUESTION_MS }).el;
-  $("#say-btn").classList.add("asking");
 }
 
 // With no Rabble server behind the page (the GitHub page), the pile talks
@@ -597,12 +604,10 @@ async function connectShared() {
     app.offline = true;
     return;
   }
-  // The pile is yours alone: other visitors don't drop in (their figures would
-  // look like another you); you get today's question and the companions' answers.
-  const ignore = () => {};
+  // The pile is yours alone: today's question, and the clay people's answers to you.
   app.pile = connectPile({
-    onSnapshot: ignore, onArrive: ignore, onLeave: ignore, onSay: ignore, onAck: ignore,
     onReply,
+    onMissed,
     onQuestion,
     onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); },
   });
@@ -801,11 +806,11 @@ function setupButtons() {
   setupSelfie();
   talkBox = setupTalk({
     getYou: () => app.you,
-    send: (text) => app.pile.say(text),
+    send: (text) => { app.lastSaid = text; return app.pile.say(text); },
     // While the AI is finding your words, the pile's own chat waits.
     onTyping(on) {
       talk.typingSince = on ? performance.now() : 0;
-      if (on) app.asked?.classList.add("leaving");   // the box asks the question itself now
+      if (on) welcome.done();                        // the box asks the question itself now
     },
     onThinking(on) {
       talk.hold = on;
@@ -814,11 +819,15 @@ function setupButtons() {
     onSaid(out) {
       talk.hold = false;
       app.said = true;
-      $("#say-btn").classList.remove("asking");
-      app.asked?.classList.add("leaving");          // answered: the question steps aside
+      welcome.done();                                // answered: the question steps aside
       if (app.you) showSay(app.you, out.text);
     },
     cards, sfx,
+  });
+  welcome = createWelcome({
+    app, cards, sfx, hush,
+    neighbours: () => (app.you ? nearTo(app.you, app.you) : []),
+    openAnswer: () => app.you && talkBox.openAt({ x: app.you.sx, y: youLightY() }),
   });
 }
 

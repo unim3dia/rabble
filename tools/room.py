@@ -1,16 +1,15 @@
 """One shared pile: who is in it, and everything that happens in it.
 
-Every phone runs its own physics; what they share is a stream of events:
-  arrive  {player}                 a real person dropped into the pile
-  leave   {id}                     they left (or their phone went quiet)
-  say     {id, sid, text}          a real person said something, as they wrote it
-  ack     {from, to, kind}         one real person reached another: a squeeze, or
-                                   "that's lovely" (kind "lovely") on what they said
-  reply   {to, sid, text, tone, who}   no one answered them in time: a clay companion did
+Each visitor's pile is their own. Phones long-poll a stream of events; only
+the pile's own conversation is shared, everything else reaches one visitor:
+  arrive  {player}                 you dropped into the pile          (yours only)
+  leave   {id}                     the pile let you go (phone quiet)   (yours only)
+  reply   {to, sid, text, tone, who, gesture}   a clay person answered you (yours only)
+  missed  {to, sid}                the answer didn't come; try again   (yours only)
   chat    {lines}                  the pile's own conversation, the same for everyone
 
-Everyone gets the same question each day (app/questions.json); the host gives
-real people the first chance to answer each other.
+What you say comes back to you in the reply to POST /api/say; no one else sees
+it. Everyone gets the same question each day (app/questions.json).
 
 Phones long-poll GET /api/events?since=N and get every event after N (or a
 snapshot of who's here when they first connect). The pile's conversation is
@@ -59,10 +58,11 @@ def question():
     return QUESTIONS[int(time.time() // 86400) % len(QUESTIONS)]
 
 
-def _emit(kind, **data):
+def _emit(kind, only=None, **data):
+    """Add an event; `only` (a player id) keeps it to that one visitor."""
     global _seq
     _seq += 1
-    _events.append({"seq": _seq, "type": kind, **data})
+    _events.append({"seq": _seq, "type": kind, "only": only, **data})
     del _events[:-KEEP_EVENTS]
     _lock.notify_all()
 
@@ -100,7 +100,7 @@ def join(figure_id):
         p = {"id": pid, "token": secrets.token_urlsafe(18), "figure": figure_id,
              "seen": time.time(), "joined": time.time()}
         _players[pid] = p
-        _emit("arrive", player=_public(p))
+        _emit("arrive", only=pid, player=_public(p))
         return {"id": pid, "token": p["token"]}
 
 
@@ -129,7 +129,7 @@ def _drop(p):
     if p["figure"]:
         _figures.pop(p["figure"], None)
         _claimed.discard(p["figure"])
-    _emit("leave", id=p["id"])
+    _emit("leave", only=p["id"], id=p["id"])
 
 
 def say(token, text):
@@ -158,26 +158,9 @@ def say(token, text):
         while len(_says) > SAYS_KEPT:
             _says.pop(next(iter(_says)))
         _busy_until = max(_busy_until, time.time()) + ALONE_S + READ_S
-        _emit("say", id=p["id"], sid=sid, text=text)
     # Each visitor's pile is their own: start the answer now, and let it land after a breath.
     threading.Thread(target=_companion_answers, args=(sid, time.time() + ALONE_S), daemon=True).start()
     return {"sid": sid, "text": text}
-
-
-def ack(token, to, kind):
-    """One real person reaches another: everyone sees it travel."""
-    kind = "lovely" if kind == "lovely" else "squeeze"
-    with _lock:
-        p = _by_token(token)
-        if not p:
-            raise PermissionError("join the pile first")
-        if not isinstance(to, str) or to not in _players or to == p["id"]:
-            raise ValueError("they're not here")
-        if kind == "lovely":           # someone met them halfway: the companion can stay quiet
-            for said in _says.values():
-                if said["id"] == to:
-                    said["answered"] = True
-        _emit("ack", **{"from": p["id"], "to": to, "kind": kind})
 
 
 def _companion_answers(sid, not_before=0):
@@ -191,11 +174,15 @@ def _companion_answers(sid, not_before=0):
         said["answered"] = True
         history = list(_talks.get(said["id"], []))
     if not SAY_LIMIT.acquire(timeout=30):
+        with _lock:
+            _emit("missed", only=said["id"], to=said["id"], sid=sid)
         return
     try:
         line = chat.companion(said["text"], question(), random.choice(["kid", "teen", "grown-up", "elder"]), history)
     except Exception as e:  # API failure; no key material in the message
         sys.stderr.write(f"rabble: companion failed: {type(e).__name__}\n")
+        with _lock:
+            _emit("missed", only=said["id"], to=said["id"], sid=sid)
         return
     finally:
         SAY_LIMIT.release()
@@ -203,7 +190,7 @@ def _companion_answers(sid, not_before=0):
     with _lock:
         if said["id"] in _players:
             _talks[said["id"]] = (history + [f"Visitor: {said['text']}", f"Companion: {line['text']}"])[-TALK_KEPT:]
-            _emit("reply", to=said["id"], sid=sid, **line)
+            _emit("reply", only=said["id"], to=said["id"], sid=sid, **line)
 
 
 def events(since, viewer, token=None):
@@ -219,11 +206,12 @@ def events(since, viewer, token=None):
         if since < 0 or since > _seq or (_events and since < _events[0]["seq"] - 1):
             # New here, too far behind, or from before a server restart:
             # who's in the pile, from now on.
-            return {"seq": _seq, "players": [_public(q) for q in _players.values()], "events": [],
-                    "question": question()}
+            return {"seq": _seq, "players": [], "events": [], "question": question()}
         while _seq <= since and time.time() < deadline:
             _lock.wait(timeout=max(0.1, deadline - time.time()))
-        return {"seq": _seq, "events": [e for e in _events if e["seq"] > since]}
+        me = p["id"] if p else None
+        return {"seq": _seq, "events": [{k: v for k, v in e.items() if k != "only"}
+                                        for e in _events if e["seq"] > since and e["only"] in (None, me)]}
 
 
 def counts():

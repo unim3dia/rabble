@@ -7,7 +7,7 @@
 <meta name="description" content="Rabble: a living pile of little clay people, awake together. Made with Meta Muse Image, SAM 3.1 and Muse Spark.">
 <meta name="theme-color" content="#0d1426">
 <meta property="og:title" content="Rabble">
-<meta property="og:description" content="A living pile of little clay people, awake together. Drop in, look around, say something.">
+<meta property="og:description" content="A little company at the end of the day. Drop into a soft, living pile of AI clay characters. Share something small, or just settle in.">
 <meta property="og:image" content="play/icon-512.png">
 <link rel="icon" href="play/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +55,7 @@
   .lede { font: 600 clamp(1.35rem, 1.1rem + 1.1vw, 1.75rem)/1.3 var(--font-ui); margin: 22px 0 10px; text-wrap: balance; }
   .sub { color: var(--ink-soft); margin: 0 0 28px; max-width: 36em; }
   .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .fine { color: var(--ink-soft); font-size: 0.85rem; margin: 12px 0 0; }
   .join {
     display: inline-block; text-decoration: none; color: var(--cream);
     font: 900 1.35rem/1 var(--font-display); font-variation-settings: "SOFT" 100;
@@ -124,14 +125,13 @@
   <section class="hero" aria-labelledby="title">
     <div>
       <h1 id="title" style="margin:0"><img class="wordmark" src="play/rabble-title.webp" width="1200" height="573" alt="Rabble"></h1>
-      <p class="lede">A living pile of little clay people, awake together.</p>
-      <p class="sub">Drop into the pile, look around, zoom right in, tap someone and they bop. The pile talks about real things happening today, and when you say something, the people next to you answer.</p>
+      <p class="lede">A little company at the end of the day.</p>
+      <p class="sub">Drop into a soft, living pile of AI clay characters. Share something small, hear a reply, or just settle in.</p>
       <div class="actions">
         <a class="join" href="https://rabble-pile.onrender.com/">Join the pile</a>
-        <a class="chip" href="play/">Try it without a photo</a>
-        <a class="chip" href="https://github.com/unim3dia/rabble">Code on GitHub</a>
-        <a class="chip" href="rabble-walkthrough.mp4">2-minute walkthrough</a>
+        <a class="chip" href="play/">Explore the demo</a>
       </div>
+      <p class="fine">No account. Your photo is optional.</p>
     </div>
     <div class="phone">
       <video src="rabble-promo.mp4" poster="rabble-promo.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Rabble promo video"></video>
@@ -155,21 +155,20 @@
       <article class="model">
         <h3>Muse Spark</h3>
         <p class="what">All the talk</p>
-        <p>Searches the web for today's real news and writes tiny conversations: one smart line, one funny, one a little perturbed. It rewords what you say, kindly, and answers you.</p>
+        <p>Checks that what you share is kind, then answers it as a clay person beside you, remembering what you said earlier, and picks how the pile reacts with its bodies: a cheer, a lean, a laugh, a doze.</p>
       </article>
     </div>
   </section>
 
   <section aria-labelledby="how">
     <h2 id="how">How it plays</h2>
-    <p class="section-sub">On a phone, in about a minute.</p>
+    <p class="section-sub">A living pile of little clay people, on a phone, in about a minute.</p>
     <ol class="steps">
-      <li><div><strong>The pile.</strong> <span>A leaning tower of people with a wide, steady base. Drag to turn it, pinch to zoom anywhere. Newcomers fall from the sky and land on top.</span></div></li>
-      <li><div><strong>Become one of them.</strong> <span>Use your photo and you get your own clay person. The photo is never saved.</span></div></li>
-      <li><div><strong>Drop in.</strong> <span>You fall into the pile and it catches you. A marker shows where you are; press and drag yourself to a new spot.</span></div></li>
-      <li><div><strong>Widen the ring.</strong> <span>Neighborhood, city, state, world: more people pile on and the light of the room changes.</span></div></li>
-      <li><div><strong>Say something.</strong> <span>Your words heap up as you type; the people beside you answer.</span></div></li>
-      <li><div><strong>One shared pile.</strong> <span>Everyone who opens the link is in the same pile and sees what everyone says.</span></div></li>
+      <li><div><strong>Become one of them.</strong> <span>Optionally, use your photo and you get your own clay self. The photo is never saved.</span></div></li>
+      <li><div><strong>Get caught.</strong> <span>You fall into the pile and it catches you. "There you are. We made room."</span></div></li>
+      <li><div><strong>Today's question.</strong> <span>Someone beside you asks something small, like "What tiny thing rescued your day?" Answer, or just sit.</span></div></li>
+      <li><div><strong>Your words stay yours.</strong> <span>What you share goes up as you wrote it. A clay person answers, a squeeze reaches you, and the people around you react: a cheer for a small win, a lean on a hard day.</span></div></li>
+      <li><div><strong>Or just be there.</strong> <span>Choose quiet and the pile settles and dozes around you. Drag to look around, pinch to zoom, widen the ring from neighborhood to world.</span></div></li>
     </ol>
   </section>
 
@@ -184,10 +183,19 @@
 
   <section class="next" aria-labelledby="next">
     <h2 id="next">What's next</h2>
-    <p>AI conversation for the sake of connection and play: the pile introducing strangers to each other, talking about real places and real news near them, and asking playful questions that get people talking to one another, not just to the AI.</p>
+    <p>Answers you can choose to leave for tomorrow's visitors, a new question each day, and more ways for the pile to answer with its bodies. Rabble turns a small conversation into a place you can feel part of.</p>
   </section>
 
-  <p class="note">"Join the pile" opens the live pile: your photo, live AI replies, and everyone in one shared pile. It runs on a free server that naps when no one has visited for a while, so the first visit can take a minute to wake it. "Try it without a photo" runs right here, with a night of conversations Muse Spark wrote ahead of time.</p>
+  <section aria-labelledby="build">
+    <h2 id="build">Under the hood</h2>
+    <p class="section-sub">The code, and a longer look at an earlier version.</p>
+    <div class="actions">
+      <a class="chip" href="https://github.com/unim3dia/rabble">Code on GitHub</a>
+      <a class="chip" href="rabble-walkthrough.mp4">Walkthrough (earlier version)</a>
+    </div>
+  </section>
+
+  <p class="note">"Join the pile" opens the live pile: your photo and live AI replies. Each visit is private to you. It runs on a free server that naps when no one has visited for a while, so the first visit can take a minute to wake it. "Explore the demo" runs right here, with answers Muse Spark recorded ahead of time.</p>
 
   <footer>
     <span>Rabble · Meta Global AI Developer Hackathon · 2026</span>

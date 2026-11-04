@@ -55,7 +55,9 @@ export function connectOffline({ onChat, onReply, onQuestion }) {
     const known = closest(sayings, text)?.replies?.[0];
     const reply = known || anything[Math.floor(Math.random() * anything.length)];
     busyUntil = Date.now() + ANSWER_MS + LINE_MS + READ_MS;
-    if (reply) setTimeout(() => onReply({ to: "you", sid, ...reply }), ANSWER_MS);
+    // Recorded answers have no gesture: their tone stands in for one.
+    const gesture = { chuckle: "chuckle", aww: "lean", sigh: "lean", hmm: "lean" }[reply?.tone] || "cheer";
+    if (reply) setTimeout(() => onReply({ to: "you", sid, gesture, ...reply }), ANSWER_MS);
     return { sid, text };
   }
 
@@ -64,7 +66,6 @@ export function connectOffline({ onChat, onReply, onQuestion }) {
     join: async () => ({ id: "you", token: "offline" }),
     leave() {},
     say,
-    async ack() {},
     get id() { return "you"; },
   };
 }

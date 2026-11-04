@@ -133,6 +133,7 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
   return {
     // Open (or close) the card beside a spot on screen: your light.
     toggleAt(at) { if (form.hidden) open(at); else close(); },
+    openAt(at) { if (form.hidden) open(at); },
     setQuestion(q) {
       hintRows = heapRows(q);
       $("#say-input").setAttribute("aria-label", q);

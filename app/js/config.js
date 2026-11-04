@@ -115,7 +115,7 @@ export const BREATH = {
 export const POSE = {
   shiftEveryMs: [25000, 45000], // now and then someone in the pile shifts, quietly
   fadeMs: 900,
-  sleepyShare: 0.55,          // share of the pile dozing with eyes closed
+  sleepyShare: 0.7,           // share of the pile dozing with eyes closed
   nodDeg: 1.5,                // how far heads lean and nuzzle
 };
 
