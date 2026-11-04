@@ -5,13 +5,14 @@
 import { SIZE, LOOK, BREATH, POSE } from "./config.js";
 import { project } from "./camera.js";
 import { createDust, drawDust } from "./dust.js";
+import { createSky, drawSky } from "./sky.js";
 
 const DEG = Math.PI / 180;
 const TAU = Math.PI * 2;
 
 export function createRenderer(canvas) {
   const ctx = canvas.getContext("2d");
-  const r = { canvas, ctx, w: 0, h: 0, dpr: 1, shadow: makeShadow(), dust: createDust() };
+  const r = { canvas, ctx, w: 0, h: 0, dpr: 1, shadow: makeShadow(), dust: createDust(), sky: createSky() };
   r.resize = () => {
     const rect = canvas.getBoundingClientRect();
     r.dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -258,6 +259,7 @@ export function draw(r, world, cam, scene, t) {
   drawFloor(ctx, r, cam, world);
 
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  drawSky(ctx, r.sky, w, h, t, cam.view.zoom, still);
   drawDust(ctx, r.dust, "back", w, h, t, cam.yaw, still);
 
   for (const p of world.people) placeOnScreen(p, cam, scene.tilt, world.top);
