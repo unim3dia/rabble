@@ -1,12 +1,14 @@
 """Cut the vertical Rabble promo (1080×1920, about a minute): gameplay clips
 from the recorded take, with the cutaway cards in between.
-Writes demo/promo/out/rabble-promo.mp4 and a poster frame.
+Writes demo/promo/out/rabble-promo.mp4 (with music.py's score) and a poster frame.
 
   python demo/promo/compose.py   (after record.mjs and record_cards.mjs)
 """
 import json
 import os
 import subprocess
+
+import music
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(DIR, "out")
@@ -79,11 +81,18 @@ def main():
     listing = os.path.join(OUT, "parts.txt")
     open(listing, "w").write("".join(f"file '{p}'\n" for p in parts))
     final = os.path.join(OUT, "rabble-promo.mp4")
-    # A silent track too: some players won't autoplay or post a video without one.
+    # The music: a chime where each card appears (not the title), fading out under the end.
+    starts, at = [], 0.0
+    for seg in SEGMENTS:
+        if seg[0] not in ("take", "title"):
+            starts.append(at)
+        at += seg[3] / seg[4]
+    song = os.path.join(OUT, "music.wav")
+    music.write(song, music.make(total, starts))
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", listing,
-                    "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+                    "-i", song,
                     "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-crf", "19",
-                    "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-shortest",
+                    "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest",
                     "-movflags", "+faststart", final], check=True)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "4", "-i", final, "-frames:v", "1",
                     "-q:v", "3", os.path.join(OUT, "rabble-promo.jpg")], check=True)
