@@ -35,6 +35,7 @@ from make_person import STYLE, cut_out  # noqa: E402
 import whispers  # noqa: E402
 import chat  # noqa: E402
 import room  # noqa: E402
+import limits  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "app")
@@ -42,6 +43,8 @@ PORT = int(os.environ.get("RABBLE_PORT", "8130"))
 HOST = os.environ.get("RABBLE_HOST", "127.0.0.1")
 MAX_BODY = 8 * 1024 * 1024
 CREAM = (246, 238, 222)
+SELFIES_AT_ONCE = threading.BoundedSemaphore(2)   # photo jobs running at the same time
+SLOW_DOWN = "slow down a little, try again soon"
 
 SELFIE_PROMPT = (
     "Redraw this person as a Rabble person. Keep what makes them recognizable: "
@@ -87,6 +90,11 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         super().end_headers()
 
+    def _visitor(self):
+        # Behind a host's proxy, the last forwarded address is the one the proxy saw.
+        forwarded = self.headers.get("X-Forwarded-For", "")
+        return forwarded.split(",")[-1].strip() or self.client_address[0]
+
     def _json(self, code, obj):
         body = json.dumps(obj).encode()
         self.send_response(code)
@@ -107,6 +115,8 @@ class Handler(SimpleHTTPRequestHandler):
     def _say(self):
         try:
             data = self._body()
+            if not limits.allow("say", self._visitor()):
+                return self._json(429, {"error": SLOW_DOWN})
             return self._json(200, room.say(data.get("token"), str(data.get("text", ""))))
         except OverflowError as e:
             return self._json(413, {"error": str(e)})
@@ -123,6 +133,8 @@ class Handler(SimpleHTTPRequestHandler):
     def _join(self):
         try:
             data = self._body()
+            if not limits.allow("join", self._visitor()):
+                return self._json(429, {"error": SLOW_DOWN})
             return self._json(200, room.join(data.get("figure")))
         except OverflowError as e:
             return self._json(409, {"error": str(e)})
@@ -184,8 +196,13 @@ class Handler(SimpleHTTPRequestHandler):
         length = int(self.headers.get("Content-Length") or 0)
         if not 0 < length <= MAX_BODY:
             return self._json(413, {"error": "photo too large"})
+        body = self.rfile.read(length)
+        if not limits.allow("selfie", self._visitor()):
+            return self._json(429, {"error": "that's a lot of photos, try again later"})
+        if not SELFIES_AT_ONCE.acquire(timeout=60):
+            return self._json(503, {"error": "lots of people are making theirs, try again in a moment"})
         try:
-            data_url = json.loads(self.rfile.read(length))["image"]
+            data_url = json.loads(body)["image"]
             if not data_url.startswith("data:image/"):
                 raise ValueError("expected an image")
             photo = base64.b64decode(data_url.split(",", 1)[1])
@@ -195,6 +212,8 @@ class Handler(SimpleHTTPRequestHandler):
         except Exception as e:  # API or decode failure; message has no key material
             sys.stderr.write(f"rabble: selfie failed: {type(e).__name__}\n")
             return self._json(502, {"error": "couldn't make your Rabble person right now"})
+        finally:
+            SELFIES_AT_ONCE.release()
         self._json(200, {"image": "data:image/png;base64," + base64.b64encode(out).decode(),
                          "figure": room.add_figure(out)})
 

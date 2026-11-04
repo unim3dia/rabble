@@ -568,7 +568,9 @@ function dropRemote(id) {
 }
 
 // With no Rabble server behind the page (the GitHub page), the pile talks
-// from its recorded night instead, and making your own person is left out.
+// from its recorded night instead, and "Use my photo" goes to the live pile.
+const LIVE_URL = "https://lonefty-rabble.hf.space/";
+
 async function hasServer() {
   try {
     return (await fetch("api/events?since=-1&v=probe")).ok;
@@ -580,7 +582,7 @@ async function hasServer() {
 async function connectShared() {
   if (!(await hasServer())) {
     app.pile = connectOffline({ onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); } });
-    $("#selfie").hidden = true;
+    app.offline = true;
     return;
   }
   app.pile = connectPile({
@@ -604,6 +606,7 @@ function setupSelfie() {
   const dialog = $("#consent");
   $("#selfie").addEventListener("click", () => {
     if (app.joined || app.dropping) return;
+    if (app.offline) { location.href = LIVE_URL; return; }
     dialog.showModal();
   });
   $("#consent-no").addEventListener("click", () => dialog.close());

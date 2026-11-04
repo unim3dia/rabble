@@ -33,6 +33,7 @@ _events = []               # [{"seq": n, "type": ..., ...}]
 _seq = 0
 _players = {}              # id -> {"id", "token", "figure", "seen", "joined"}
 _figures = {}              # figure id -> png bytes (selfies)
+_claimed = set()           # figure ids someone has joined as (each can be used once)
 _viewers = {}              # viewer key -> last poll time (people watching, joined or not)
 _busy_until = 0.0          # the pile is mid-conversation (or someone's speaking) until then
 
@@ -55,7 +56,9 @@ def add_figure(png):
     with _lock:
         _figures[fid] = png
         while len(_figures) > MAX_PLAYERS * 3:
-            _figures.pop(next(iter(_figures)))
+            oldest = next(iter(_figures))
+            _figures.pop(oldest)
+            _claimed.discard(oldest)
     return fid
 
 
@@ -68,8 +71,10 @@ def join(figure_id):
     with _lock:
         if len(_players) >= MAX_PLAYERS:
             raise OverflowError("the pile is full right now, but you can watch")
-        if figure_id and figure_id not in _figures:
-            figure_id = None
+        if not isinstance(figure_id, str) or figure_id not in _figures or figure_id in _claimed:
+            figure_id = None       # unknown, or already someone else's: join without it
+        if figure_id:
+            _claimed.add(figure_id)
         pid = secrets.token_urlsafe(6)
         p = {"id": pid, "token": secrets.token_urlsafe(18), "figure": figure_id,
              "seen": time.time(), "joined": time.time()}
@@ -96,6 +101,7 @@ def _drop(p):
     _players.pop(p["id"], None)
     if p["figure"]:
         _figures.pop(p["figure"], None)
+        _claimed.discard(p["figure"])
     _emit("leave", id=p["id"])
 
 
