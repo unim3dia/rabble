@@ -23,7 +23,7 @@
   .title-img { width: 330px; height: auto; filter: drop-shadow(0 14px 30px rgba(0,0,0,.45));
     animation: heap-in 900ms var(--ease-squish) both; }
   .lines { display: grid; gap: 8px; max-width: 360px; }
-  .lines p { margin: 0; font: 600 20px/1.3 var(--font-ui); text-wrap: balance; color: var(--cream);
+  .lines p { margin: 0; font: 600 22px/1.3 var(--font-ui); text-wrap: balance; color: var(--cream);
     text-shadow: 0 2px 14px rgba(0,0,0,.45); animation: line-in 700ms var(--ease-out) both; }
   .lines p.small { font-size: 16px; color: var(--ink-soft); font-weight: 500; }
   @keyframes line-in { from { opacity: 0; transform: translateY(10px); } }
@@ -45,16 +45,16 @@
 import { pileLetters } from "../../app/js/ui.js";
 
 const CARDS = {
-  title: { title: true, lines: ["a living pile of people,", "awake together"] },
-  meta: { heap: ["made", "by", "meta"], lines: ["Every person and every pose: Muse Image.", "Every cutout: SAM 3.1."], tag: "Meta · Muse Image · SAM 3.1" },
-  you: { heap: ["be", "one", "of us"], lines: ["SAM 3.1 cuts you out of your photo.", "Muse Image makes you a little clay person."], tag: "Meta · SAM 3.1 · Muse Image", small: "your photo is never saved" },
-  dive: { heap: ["dive", "in"], lines: ["Drop into the pile.", "Turn it, zoom all the way in, tap anyone and they bop."] },
-  ring: { heap: ["widen", "the", "ring"], lines: ["Neighborhood → city → state → world.", "More people fall in. The tower grows."] },
-  talk: { heap: ["the", "pile", "talks"], lines: ["Muse Spark searches today's real news and writes tiny conversations.", "One smart, one funny, one a little perturbed."], tag: "Meta · Muse Spark + web search" },
-  say: { heap: ["say", "some", "thing"], lines: ["Muse Spark rewords you, kindly.", "The people next to you answer."], tag: "Meta · Muse Spark" },
-  together: { heap: ["one", "pile"], lines: ["Everyone who opens the link lands in the same pile and sees what everyone says."] },
-  next: { heap: ["what's", "next"], lines: ["AI conversation that connects strangers: real places, real news, playful questions for each other."], small: "information for the sake of connection" },
-  end: { title: true, lines: ["Made with Meta Muse Image, SAM 3.1 and Muse Spark."], small: "Meta Global AI Developer Hackathon · 2026" },
+  title: { title: true, lines: ["a living pile of people"] },
+  meta: { heap: ["made", "by", "meta"], lines: ["Muse Image draws everyone. SAM 3.1 cuts them out."] },
+  you: { heap: ["be", "one", "of us"], lines: ["Your photo becomes a little clay you."] },
+  dive: { heap: ["dive", "in"], lines: ["Look closer. Tap someone."] },
+  ring: { heap: ["widen", "the", "ring"], lines: ["From your neighborhood to the world."] },
+  talk: { heap: ["the", "pile", "talks"], lines: ["Muse Spark brings today's real news."] },
+  say: { heap: ["say", "some", "thing"], lines: ["The people beside you answer."] },
+  together: { heap: ["one", "pile"], lines: ["Everyone on the link, together."] },
+  next: { heap: ["what's", "next"], lines: ["AI that helps strangers connect."] },
+  end: { title: true, lines: ["Made with Meta Muse Image, SAM 3.1 and Muse Spark."] },
 };
 
 const card = CARDS[new URLSearchParams(location.search).get("c")] || CARDS.title;

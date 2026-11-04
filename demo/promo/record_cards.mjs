@@ -11,7 +11,7 @@ const URL_ = process.env.CARDS_URL || "http://127.0.0.1:8151/demo/promo/card.htm
 const PHONE = { width: 414, height: 736 };
 const SCALE = 1080 / PHONE.width;
 const CARDS = ["title", "meta", "you", "dive", "ring", "talk", "say", "together", "next", "end"];
-const HOLD_MS = 4200;
+const HOLD_MS = 5600;
 
 const browser = await chromium.launch({ executablePath: process.env.CHROME });
 const ctx = await browser.newContext({ viewport: PHONE, deviceScaleFactor: SCALE, isMobile: true });

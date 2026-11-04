@@ -104,6 +104,11 @@
   .steps strong { font-weight: 700; }
   .steps span { color: var(--ink-soft); }
 
+  .spots { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); max-width: 640px; }
+  .spots figure { margin: 0; }
+  .spots .phone { width: 100%; rotate: 0deg; padding: 8px; border-radius: 36px; }
+  .spots .phone video { border-radius: 28px; }
+  .spots figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 0.95rem; text-align: center; }
   .next { margin-top: 88px; padding: 30px 26px; border-radius: 28px; background: linear-gradient(135deg, rgba(255,122,92,.18), rgba(92,123,184,.18)); border: 1px solid var(--line); }
   .next h2 { margin-top: 0; }
   .next p { margin: 0; max-width: 40em; }
@@ -165,6 +170,15 @@
       <li><div><strong>Say something.</strong> <span>Your words heap up as you type; the people beside you answer.</span></div></li>
       <li><div><strong>One shared pile.</strong> <span>Everyone who opens the link is in the same pile and sees what everyone says.</span></div></li>
     </ol>
+  </section>
+
+  <section aria-labelledby="spots">
+    <h2 id="spots">Two short spots</h2>
+    <p class="section-sub">Thirty seconds each, sound on.</p>
+    <div class="spots">
+      <figure><div class="phone"><video src="rabble-everyone.mp4" controls playsinline preload="metadata" aria-label="Everyone: a 30-second Rabble spot"></video></div><figcaption>Everyone.</figcaption></figure>
+      <figure><div class="phone"><video src="rabble-there-you-are.mp4" controls playsinline preload="metadata" aria-label="There you are: a 30-second Rabble spot"></video></div><figcaption>There you are.</figcaption></figure>
+    </div>
   </section>
 
   <section class="next" aria-labelledby="next">

@@ -3,6 +3,7 @@
 // (demo/promo/frames/frames.json). compose.py cuts the clips from it.
 //   node demo/promo/record.mjs   (with the Rabble server on RABBLE_URL)
 import { createRequire } from "node:module";
+import fs from "node:fs";
 import path from "node:path";
 import { startCapture } from "./capture.mjs";
 
@@ -14,7 +15,7 @@ const PHONE = { width: 414, height: 736 };
 const SCALE = 1080 / PHONE.width;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const browser = await chromium.launch({ executablePath: process.env.CHROME });
+const browser = await chromium.launch({ executablePath: process.env.CHROME, args: ["--autoplay-policy=no-user-gesture-required"] });
 const ctx = await browser.newContext({ viewport: PHONE, deviceScaleFactor: SCALE, isMobile: true });
 
 // A soft fingertip so you can see where the screen is touched.
@@ -33,7 +34,47 @@ await ctx.addInitScript(() => {
   });
 });
 
+// Record what the app plays: everything sent to the speakers also goes to a
+// MediaRecorder, started (and timestamped) when the app makes its AudioContext.
+await ctx.addInitScript(() => {
+  const connect = AudioNode.prototype.connect;
+  AudioNode.prototype.connect = function (dest, ...rest) {
+    const out = connect.call(this, dest, ...rest);
+    const ctx = this.context;
+    if (dest === ctx.destination) {
+      if (!ctx.__tap) {
+        ctx.__tap = ctx.createMediaStreamDestination();
+        const rec = new MediaRecorder(ctx.__tap.stream, { mimeType: "audio/webm;codecs=opus", audioBitsPerSecond: 192000 });
+        const chunks = [];
+        rec.ondataavailable = (e) => chunks.push(e.data);
+        rec.onstart = () => { window.__audioStart = Date.now() / 1000; };
+        rec.start(1000);
+        window.__audioStop = () => new Promise((resolve) => {
+          rec.onstop = async () => {
+            const buf = await new Blob(chunks, { type: "audio/webm" }).arrayBuffer();
+            let s = ""; const b = new Uint8Array(buf);
+            for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode(...b.subarray(i, i + 0x8000));
+            resolve({ start: window.__audioStart, data: btoa(s) });
+          };
+          rec.stop();
+        });
+      }
+      connect.call(this, ctx.__tap);
+    }
+    return out;
+  };
+});
+
 const page = await ctx.newPage();
+// The pile's own conversations stay quiet until the shot that's about them, so
+// no speech bubbles sit over faces while we look around and zoom in.
+let pileTalks = false;
+await page.route("**/api/events*", async (route) => {
+  const res = await route.fetch();
+  const body = await res.json().catch(() => null);
+  if (body && body.events && !pileTalks) body.events = body.events.filter((e) => e.type !== "chat");
+  await route.fulfill({ response: res, json: body ?? undefined });
+});
 const tap = async (sel) => {
   const box = await page.locator(sel).boundingBox();
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
@@ -59,8 +100,9 @@ const tappable = (n) => page.evaluate((n) => window.rabble.world.people
   .filter((p) => !p.isYou && p.sx > 60 && p.sx < 354 && p.sy > 200 && p.sy < 600 && p.size > 40)
   .sort(() => Math.random() - 0.5).slice(0, n).map((p) => [p.sx, p.sy - p.size * 0.25]), n);
 
-await page.goto(URL_ + "?mute&debug");
+await page.goto(URL_ + "?debug");
 await page.waitForFunction(() => window.rabble && document.querySelectorAll("#ring-letters .ring-letter").length > 0);
+await page.evaluate(() => { window.rabble.sfx.unlock(); window.rabble.sfx.click(); });   // sound on from the start
 await sleep(1200);
 const cap = await startCapture(page, path.join(DIR, "frames"), { ...PHONE, scale: SCALE });
 
@@ -124,7 +166,27 @@ await tap("#corner-btn"); await sleep(700);
 await tap("#m-ring"); await sleep(5200);       // (the menu stays open between rings)
 await tap("#m-ring"); await sleep(5600);
 cap.mark("ring-end");
-await tap("#corner-btn"); await sleep(500);
+await tap("#m-ring"); await sleep(600);        // world: the biggest pile
+await tap("#corner-btn"); await sleep(8000);   // let it settle
+// The tower, large and steady, seen from far off: a slow turn around it.
+cap.mark("tower");
+await zoom([207, 420], 3, 60, 120);            // a touch further out
+await sleep(1500);
+await drag([330, 640], [90, 650], 6000, 120);
+await sleep(2500);
+cap.mark("tower-end");
+
+// The pile talks: one news conversation, seen from far enough out that the
+// bubbles float above the pile.
+pileTalks = true;
+cap.mark("talk-wait");
+await page.waitForFunction(() => document.querySelectorAll(".card:not(.yours):not(.theirs)").length >= 1, null, { timeout: 90000 });
+cap.mark("talk");
+await sleep(12000);
+pileTalks = false;
+cap.mark("talk-end");
+await page.waitForFunction(() => document.querySelectorAll(".card").length === 0, null, { timeout: 30000 }).catch(() => {});
+await sleep(800);
 
 // 7–8. Say something; the pile answers.
 cap.mark("say");
@@ -141,7 +203,7 @@ cap.mark("say-end");
 // 9. A friend opens the link on another phone and lands in the same pile.
 cap.mark("friend");
 const friend = await (await browser.newContext({ viewport: PHONE })).newPage();
-await friend.goto(URL_ + "?mute");
+await friend.goto(URL_ + "?mute");   // (only the main phone is heard)
 await friend.waitForFunction(() => document.querySelectorAll("#ring-letters .ring-letter").length > 0);
 await friend.$eval("#join", (el) => el.click());
 await sleep(7000);
@@ -154,5 +216,9 @@ await sleep(6000);
 cap.mark("friend-end");
 
 await cap.stop();
+await page.unrouteAll({ behavior: "ignoreErrors" });
+const audio = await page.evaluate(() => window.__audioStop());
+fs.writeFileSync(path.join(DIR, "frames", "sfx.webm"), Buffer.from(audio.data, "base64"));
+fs.writeFileSync(path.join(DIR, "frames", "sfx.json"), JSON.stringify({ start: audio.start }));
 await browser.close();
 console.log("done");

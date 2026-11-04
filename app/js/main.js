@@ -823,7 +823,7 @@ async function boot() {
   buildPile();
   reframe(2500);
   updateAwakeText();
-  if (location.search.includes("debug")) window.rabble = { app, world, cam, renderer, draw, tick, cards, queueTalk, chatLines };
+  if (location.search.includes("debug")) window.rabble = { app, world, cam, renderer, draw, tick, cards, queueTalk, chatLines, sfx };
   requestAnimationFrame(frame);
   // Once the sleepy pictures are in, about a third of the pile dozes off
   // (the base too: one soft fade into sleep, nothing more).
