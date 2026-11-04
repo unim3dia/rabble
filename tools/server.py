@@ -38,10 +38,11 @@ import limits  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "app")
-PORT = int(os.environ.get("RABBLE_PORT", "8130"))
+PORT = int(os.environ.get("RABBLE_PORT") or os.environ.get("PORT") or "8130")
 HOST = os.environ.get("RABBLE_HOST", "127.0.0.1")
-# Set only where a host's proxy sits in front and adds X-Forwarded-For itself.
-TRUST_PROXY = os.environ.get("RABBLE_TRUST_PROXY") == "1"
+# Behind a host's proxy, the header that proxy sets to the visitor's address
+# (e.g. CF-Connecting-IP on Render). Unset anywhere else: headers could be made up.
+CLIENT_IP_HEADER = os.environ.get("RABBLE_CLIENT_IP_HEADER", "")
 MAX_BODY = 8 * 1024 * 1024
 MAX_PIXELS = 4096 * 4096
 CREAM = (246, 238, 222)
@@ -106,12 +107,10 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
     def _visitor(self):
-        # Behind a trusted proxy, the last forwarded address is the one the proxy saw;
-        # anywhere else the header could be made up, so it's ignored.
-        if TRUST_PROXY:
-            forwarded = self.headers.get("X-Forwarded-For", "").split(",")[-1].strip()
-            if forwarded:
-                return forwarded
+        if CLIENT_IP_HEADER:
+            address = self.headers.get(CLIENT_IP_HEADER, "").strip()
+            if address:
+                return address[:64]
         return self.client_address[0]
 
     def _json(self, code, obj):

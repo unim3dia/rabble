@@ -1,0 +1,14 @@
+# Render Blueprint: the live Rabble server, free plan.
+# On first deploy Render asks for META_API_KEY; paste it there (it stays secret).
+services:
+  - type: web
+    name: rabble-pile
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: META_API_KEY
+        sync: false
+      - key: RABBLE_CLIENT_IP_HEADER
+        value: CF-Connecting-IP

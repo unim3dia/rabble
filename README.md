@@ -23,8 +23,8 @@ Built for the Meta Global AI Developer Hackathon, 2026.
 
 **The page** (GitHub Pages, no server): the pile, the rings, zooming and
 bopping all work. Its talk is a night of conversations Muse Spark wrote ahead of
-time (`app/offline.json`, made by `tools/make_offline.py`), and making your own
-clay person is turned off.
+time (`app/offline.json`, made by `tools/make_offline.py`). "Use my photo"
+sends you to the live server.
 
 **The full version** (your photo, live AI replies, one shared pile for
 everyone on the link) runs on the small Python server:
@@ -34,6 +34,12 @@ pip install -r requirements.txt
 echo "META_API_KEY=..." > .rabble-env      # gitignored; the key stays on the server
 python tools/server.py                       # http://127.0.0.1:8130
 ```
+
+It's live at https://rabble-pile.onrender.com, built from this repo by Render
+(`render.yaml`, `Dockerfile`; the key is a Render environment secret). The free
+plan sleeps when no one has visited for 15 minutes, so the first visit can take
+a minute. Photos, chat and joins are limited per visitor and per day
+(`tools/limits.py`) so a public server can't run up the Meta bill.
 
 ## Layout
 

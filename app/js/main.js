@@ -569,7 +569,7 @@ function dropRemote(id) {
 
 // With no Rabble server behind the page (the GitHub page), the pile talks
 // from its recorded night instead, and "Use my photo" goes to the live pile.
-const LIVE_URL = "https://lonefty-rabble.hf.space/";
+const LIVE_URL = "https://rabble-pile.onrender.com/";
 
 async function hasServer() {
   try {
