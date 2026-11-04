@@ -90,6 +90,11 @@ def _by_token(token):
     return None
 
 
+def is_player(token):
+    with _lock:
+        return _by_token(token) is not None
+
+
 def leave(token):
     with _lock:
         p = _by_token(token)

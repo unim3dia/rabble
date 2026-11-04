@@ -12,6 +12,6 @@ COPY --chown=rabble app/ app/
 RUN mkdir -p work && chown rabble work
 
 USER rabble
-ENV RABBLE_HOST=0.0.0.0 RABBLE_PORT=7860 PYTHONUNBUFFERED=1
+ENV RABBLE_HOST=0.0.0.0 RABBLE_PORT=7860 RABBLE_TRUST_PROXY=1 PYTHONUNBUFFERED=1
 EXPOSE 7860
 CMD ["python", "tools/server.py"]

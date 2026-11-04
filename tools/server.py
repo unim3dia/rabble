@@ -6,7 +6,6 @@ POST /api/join     {"figure": id or null} -> {"id", "token"}
 POST /api/leave    {"token"}
 POST /api/say      {"text", "token"} -> {"you", "replies": [...]} and everyone sees it
 GET  /api/figure/ID  a selfie figure, so others in the pile can see you
-GET  /api/opener   a short conversation (the pile's own talk now comes via events)
 POST /api/selfie  body: {"image": "data:image/jpeg;base64,..."}
   1. SAM 3.1 cuts the person out of the photo (concept "person").
   2. Muse Image redraws that cutout as a Rabble person.
@@ -41,6 +40,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "app")
 PORT = int(os.environ.get("RABBLE_PORT", "8130"))
 HOST = os.environ.get("RABBLE_HOST", "127.0.0.1")
+# Set only where a host's proxy sits in front and adds X-Forwarded-For itself.
+TRUST_PROXY = os.environ.get("RABBLE_TRUST_PROXY") == "1"
 MAX_BODY = 8 * 1024 * 1024
 CREAM = (246, 238, 222)
 SELFIES_AT_ONCE = threading.BoundedSemaphore(2)   # photo jobs running at the same time
@@ -59,8 +60,17 @@ def png_bytes(img):
     return buf.getvalue()
 
 
-def selfie_to_rabble(photo_bytes):
-    photo = Image.open(io.BytesIO(photo_bytes)).convert("RGB")
+def read_photo(body):
+    """The request's data URL as a checked RGB image; raises if it isn't one."""
+    data_url = json.loads(body)["image"]
+    if not data_url.startswith("data:image/"):
+        raise ValueError("expected an image")
+    photo = Image.open(io.BytesIO(base64.b64decode(data_url.split(",", 1)[1])))
+    return photo.convert("RGB")
+
+
+def selfie_to_rabble(photo):
+    photo = photo.copy()
     photo.thumbnail((1024, 1024))
     raw = png_bytes(photo)
     person = cut_out(raw)
@@ -91,9 +101,13 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
     def _visitor(self):
-        # Behind a host's proxy, the last forwarded address is the one the proxy saw.
-        forwarded = self.headers.get("X-Forwarded-For", "")
-        return forwarded.split(",")[-1].strip() or self.client_address[0]
+        # Behind a trusted proxy, the last forwarded address is the one the proxy saw;
+        # anywhere else the header could be made up, so it's ignored.
+        if TRUST_PROXY:
+            forwarded = self.headers.get("X-Forwarded-For", "").split(",")[-1].strip()
+            if forwarded:
+                return forwarded
+        return self.client_address[0]
 
     def _json(self, code, obj):
         body = json.dumps(obj).encode()
@@ -115,7 +129,8 @@ class Handler(SimpleHTTPRequestHandler):
     def _say(self):
         try:
             data = self._body()
-            if not limits.allow("say", self._visitor()):
+            # Only people in the pile count against the budget.
+            if room.is_player(data.get("token")) and not limits.allow("say", self._visitor()):
                 return self._json(429, {"error": SLOW_DOWN})
             return self._json(200, room.say(data.get("token"), str(data.get("text", ""))))
         except OverflowError as e:
@@ -176,12 +191,6 @@ class Handler(SimpleHTTPRequestHandler):
             return self._figure(url.path.rsplit("/", 1)[1])
         if url.path == "/api/whispers":
             return self._json(200, whispers.current())
-        if self.path.split("?")[0] == "/api/opener":
-            try:
-                return self._json(200, chat.ready_opener())
-            except Exception as e:  # API failure; no key material in the message
-                sys.stderr.write(f"rabble: opener failed: {type(e).__name__}\n")
-                return self._json(502, {"error": "no opener right now"})
         return super().do_GET()
 
     def do_POST(self):
@@ -196,16 +205,16 @@ class Handler(SimpleHTTPRequestHandler):
         length = int(self.headers.get("Content-Length") or 0)
         if not 0 < length <= MAX_BODY:
             return self._json(413, {"error": "photo too large"})
-        body = self.rfile.read(length)
+        try:
+            photo = read_photo(self.rfile.read(length))
+        except Exception:
+            return self._json(422, {"error": "that doesn't look like a photo"})
+        # Only real photos count against the budget.
         if not limits.allow("selfie", self._visitor()):
             return self._json(429, {"error": "that's a lot of photos, try again later"})
         if not SELFIES_AT_ONCE.acquire(timeout=60):
             return self._json(503, {"error": "lots of people are making theirs, try again in a moment"})
         try:
-            data_url = json.loads(body)["image"]
-            if not data_url.startswith("data:image/"):
-                raise ValueError("expected an image")
-            photo = base64.b64decode(data_url.split(",", 1)[1])
             out = selfie_to_rabble(photo)
         except ValueError as e:
             return self._json(422, {"error": str(e)})
