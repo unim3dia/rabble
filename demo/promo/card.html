@@ -55,6 +55,15 @@ const CARDS = {
   together: { heap: ["one", "pile"], lines: ["Everyone on the link, together."] },
   next: { heap: ["what's", "next"], lines: ["AI that helps strangers connect."] },
   end: { title: true, lines: ["Made with Meta Muse Image, SAM 3.1 and Muse Spark."] },
+  // The welcome promo (compose_welcome.py).
+  "w-title": { title: true, lines: ["A little company at the end of the day."] },
+  "w-you": { heap: ["be", "one", "of us"], lines: ["Your photo becomes a little clay you."] },
+  "w-caught": { heap: ["there", "you", "are"], lines: ["Drop in. The pile catches you."] },
+  "w-mind": { heap: ["what's", "on your", "mind?"], lines: ["Someone beside you asks. Answer, or just sit."] },
+  "w-bodies": { heap: ["it", "hears", "you"], lines: ["Your words stay yours. The pile answers, even with its bodies."] },
+  "w-rest": { heap: ["rest", "a", "while"], lines: ["No profile. No feed. Just company."] },
+  "w-meta": { heap: ["made", "with", "meta"], lines: ["Muse Image draws you. SAM 3.1 cuts you out. Muse Spark listens."] },
+  "w-end": { title: true, lines: ["Come find your spot."], small: "unim3dia.github.io/rabble" },
 };
 
 const card = CARDS[new URLSearchParams(location.search).get("c")] || CARDS.title;

@@ -24,6 +24,8 @@ MIN_SHOT_S = 3.0
 SFX_MAX_SPEED = 1.6        # faster than this, the app's sounds are left out of that stretch
 SFX_GAIN = 2.6             # the app plays its sounds quietly; bring them up over the music
 MUSIC_GAIN = 0.32
+TAKE = "frames"            # the recording to cut from (compose_welcome.py uses another)
+NAME = "rabble-promo"      # the output's name
 
 # (source, mark, seconds after the mark, pieces). Each piece is (length, speed),
 # one after another; a length can be the name of a mark ("until then").
@@ -48,7 +50,7 @@ SHOTS = [
 
 
 def load(source):
-    folder = os.path.join(DIR, "frames" if source == "take" else os.path.join("cards", source))
+    folder = os.path.join(DIR, TAKE if source == "take" else os.path.join("cards", source))
     data = json.load(open(os.path.join(folder, "frames.json")))
     return folder, data["frames"], {m["name"]: m["t"] for m in data["marks"]}
 
@@ -101,9 +103,9 @@ def sfx_piece(sfx_wav, sfx_start, start, end, speed):
 def main():
     os.makedirs(OUT, exist_ok=True)
     sfx_wav = os.path.join(OUT, "sfx.wav")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(DIR, "frames", "sfx.webm"),
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(DIR, TAKE, "sfx.webm"),
                     "-ar", str(SR), "-ac", "2", sfx_wav], check=True)
-    sfx_start = json.load(open(os.path.join(DIR, "frames", "sfx.json")))["start"]
+    sfx_start = json.load(open(os.path.join(DIR, TAKE, "sfx.json")))["start"]
 
     paths, sounds, card_times, at = [], [], [], 0.0
     for i, (source, mark, after, pieces) in enumerate(SHOTS):
@@ -135,13 +137,13 @@ def main():
 
     listing = os.path.join(OUT, "parts.txt")
     open(listing, "w").write("".join(f"file '{p}'\n" for p in paths))
-    final = os.path.join(OUT, "rabble-promo.mp4")
+    final = os.path.join(OUT, f"{NAME}.mp4")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", listing, "-i", song,
                     "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "slow", "-crf", "21",
                     "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-af", "loudnorm=I=-15:TP=-1.5",
                     "-shortest", "-movflags", "+faststart", final], check=True)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "5", "-i", final, "-frames:v", "1",
-                    "-q:v", "3", os.path.join(OUT, "rabble-promo.jpg")], check=True)
+                    "-q:v", "3", os.path.join(OUT, f"{NAME}.jpg")], check=True)
     print(f"{final}  {at:.1f}s")
 
 
