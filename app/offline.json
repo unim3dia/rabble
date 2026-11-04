@@ -1,0 +1,606 @@
+{
+ "conversations": [
+  [
+   {
+    "text": "Brewers just won their first World Series, 4-1 over Rays.",
+    "tone": "idea",
+    "who": "grown-up"
+   },
+   {
+    "text": "Do they get extra brats with cheese now?",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but fifty-seven years is a long thirst.",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "LeVar Burton's memoir drops November tenth, 352 pages.",
+    "tone": "idea",
+    "who": "grown-up"
+   },
+   {
+    "text": "Cool, can he beam me past my homework?",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but will my tired eyes last all that?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Bryan Adams dropped a 12-track love letter to Canada this week.",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Should we blast it while eating maple pancakes?",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but twelve songs? Will I snooze halfway?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "A teen tossed a rock at Tel Gezer, found 3,300-year-old scarab!",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Talk about skipping stones and hitting jackpot history!",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but was he just chucking rocks around ruins?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Found today in Assam, a new white star flower, six feet tall!",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "My dandelions just quit, feeling short now!",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but only a few left near roads, right?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Brewers just won their first World Series, beat Rays in five!",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Milwaukee must need a bigger cheese trophy shelf now!",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but what do longtime losing fans do now?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Kawaguchi lights its maple tunnel nightly till nine, starting Saturday.",
+    "tone": "idea",
+    "who": "grown-up"
+   },
+   {
+    "text": "So trees get nightlights and I still need permission?",
+    "tone": "chuckle",
+    "who": "teen"
+   },
+   {
+    "text": "wait, but will crowds squish those old roots?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "South Africa's chasing one million kind acts before Christmas",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "I already shared my fries, that's one down!",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "wait, but who's counting all those smiles?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Wild Horse Nine opened today, America gets it Friday!",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Finally horses outshine wizards on posters!",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but will it startle my old pony?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Puerto Rico kicked off a billion kindness acts Sunday.",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "I'm counting recess cookie shares as number four.",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but who keeps track of a billion?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Diwali's main day is Sunday, November eighth, lights everywhere.",
+    "tone": "idea",
+    "who": "grown-up"
+   },
+   {
+    "text": "Sweet, I'm stockpiling snacks for total lamp-lit munchies.",
+    "tone": "chuckle",
+    "who": "teen"
+   },
+   {
+    "text": "Wait, but do all those little flames get sleepy?",
+    "tone": "hmm",
+    "who": "kid"
+   }
+  ],
+  [
+   {
+    "text": "Valkyries beat Dream 68-63 in Game 7, year two!",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "They need a bigger trophy shelf already, huh?",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but do second-year wonders get sleepy legs?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Noguchi Museum opened Akari at 75 today, paper bamboo lights from 1951!",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Can we live inside a lamp? Snacks taste glowier there.",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but paper near bulbs makes my stomach flutter.",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "India beat New Zealand by five wickets in rainy Auckland.",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Did the clouds try to field too, all drippy?",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but was that soggy chase really fair?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Godzilla Minus Zero opens wide November sixth, filmed for IMAX.",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Cool, giant lizard finally gets the extra-big popcorn screen.",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but will my ears survive all that stompy rumble?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "Dilwali Diwali hits Netflix tomorrow, about grandparents and home.",
+    "tone": "idea",
+    "who": "grown-up"
+   },
+   {
+    "text": "So we cry, hug Mom, steal the popcorn?",
+    "tone": "chuckle",
+    "who": "teen"
+   },
+   {
+    "text": "Wait, but do I have to share blanket?",
+    "tone": "hmm",
+    "who": "kid"
+   }
+  ],
+  [
+   {
+    "text": "Choros Island petrels grew from 12,000 to 90,000 pairs",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Rabbits moved out, so birds took the whole couch",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but will tiny burrows fit that crowd?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ],
+  [
+   {
+    "text": "New Cat in the Hat lands Friday, Bill Hader voices Cat.",
+    "tone": "idea",
+    "who": "teen"
+   },
+   {
+    "text": "Finally, a hat that cleans its own mess?",
+    "tone": "chuckle",
+    "who": "kid"
+   },
+   {
+    "text": "Wait, but will it still feel Seussian and cozy?",
+    "tone": "hmm",
+    "who": "elder"
+   }
+  ]
+ ],
+ "sayings": {
+  "hello everyone": {
+   "you": "Late night check-in, glad this sleepy pile showed up.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Some of us are in totally different time zones.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "I saved you a crumbly corner spot.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Hello back, you nearly caught me snoring.",
+     "tone": "hmm",
+     "who": "elder"
+    }
+   ]
+  },
+  "i can't sleep": {
+   "you": "Wide awake again, my brain missed the off switch.",
+   "youTone": "sigh",
+   "replies": [
+    {
+     "text": "Cooler room actually helps, warm bedrooms keep you wired.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "My teddy snores, want to borrow him?",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Same, but morning me is gonna be wrecked.",
+     "tone": "hmm",
+     "who": "teen"
+    }
+   ]
+  },
+  "what is everyone doing": {
+   "you": "Late night check, what is everybody tinkering with?",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "I'm mapping constellations from my bedroom window still.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "Hugging this pile and losing feeling in my elbow.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Shouldn't we all be asleep by now, honestly?",
+     "tone": "hmm",
+     "who": "elder"
+    }
+   ]
+  },
+  "i love you all": {
+   "you": "Really glad we ended up all piled here together.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Close contact actually lowers stress hormones, you know.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "Don't get mushy, you're crushing my leg.",
+     "tone": "chuckle",
+     "who": "teen"
+    },
+    {
+     "text": "Wait, even the kid who stole my blanket?",
+     "tone": "hmm",
+     "who": "kid"
+    }
+   ]
+  },
+  "good night": {
+   "you": "Lights out, everyone. We made it through today.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Deep sleep files away everything you learned today.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "Does this hug come with breakfast tomorrow?",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "But I'm still wide awake, now what?",
+     "tone": "hmm",
+     "who": "teen"
+    }
+   ]
+  },
+  "is anyone awake": {
+   "you": "Still up? The night feels softer with company.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Lots of us fade after midnight, circadian dip.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "Me! My blanket fort has extra snacks.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Here, though morning will scold us.",
+     "tone": "hmm",
+     "who": "elder"
+    }
+   ]
+  },
+  "how is everyone": {
+   "you": "Midnight roll call, how's everyone feeling out there?",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Hanging in, though late nights fry my focus.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "Good, but my blanket fort keeps collapsing sideways.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Well enough, though I worry we sleep too late.",
+     "tone": "hmm",
+     "who": "elder"
+    }
+   ]
+  },
+  "i'm so tired": {
+   "you": "Running on empty tonight, barely keeping my eyelids up.",
+   "youTone": "sigh",
+   "replies": [
+    {
+     "text": "Adults need seven to nine hours, no shortcuts.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "Bed is calling, and it's being super clingy.",
+     "tone": "chuckle",
+     "who": "teen"
+    },
+    {
+     "text": "But what if dreams get tired too?",
+     "tone": "hmm",
+     "who": "kid"
+    }
+   ]
+  },
+  "tell me something good": {
+   "you": "Okay, everyone share one small good thing from today.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Noticing good moments actually rewires your mood a bit.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "My sandwich didn't fall apart at lunch. Huge win.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "But what if my good thing feels too tiny?",
+     "tone": "hmm",
+     "who": "teen"
+    }
+   ]
+  },
+  "what's new": {
+   "you": "So tell me, what's buzzing in your corner tonight?",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Days keep shrinking till December 21st, scientifically speaking.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "My socks are new. Wore them backwards, though.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Everything changes so fast I miss yesterday.",
+     "tone": "hmm",
+     "who": "elder"
+    }
+   ]
+  },
+  "i'm happy tonight": {
+   "you": "Tonight I'm buzzing just being squished with you all.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Good moods are contagious, brains literally sync up together.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "Careful, your happy is squishing my elbow.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Lovely, but someone's knee is on my blanket.",
+     "tone": "hmm",
+     "who": "elder"
+    }
+   ]
+  },
+  "i miss my friends": {
+   "you": "Missing my people tonight. The group chat feels quiet.",
+   "youTone": "sigh",
+   "replies": [
+    {
+     "text": "Old friendships need a nudge. Call one tomorrow morning.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "You can borrow my friends. They're loud and sticky.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Wait, are we not close enough or something?",
+     "tone": "hmm",
+     "who": "teen"
+    }
+   ]
+  },
+  "this is nice": {
+   "you": "This pile is cozy, nobody wants to leave yet.",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "Warm bodies share heat, like penguins huddling close.",
+     "tone": "idea",
+     "who": "elder"
+    },
+    {
+     "text": "Someone's foot is poking my ear, though.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Yeah, but my arm's falling asleep back here.",
+     "tone": "hmm",
+     "who": "teen"
+    }
+   ]
+  },
+  "who are you": {
+   "you": "Okay, midnight roll call, who is squished in here?",
+   "youTone": "smile",
+   "replies": [
+    {
+     "text": "We did intros last week, I still remember six names.",
+     "tone": "idea",
+     "who": "teen"
+    },
+    {
+     "text": "I'm the crumb-covered one, don't sit on me.",
+     "tone": "chuckle",
+     "who": "kid"
+    },
+    {
+     "text": "Wait, did someone new sneak in after lights out?",
+     "tone": "hmm",
+     "who": "grown-up"
+    }
+   ]
+  }
+ }
+}

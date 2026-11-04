@@ -1,0 +1,728 @@
+[
+ {
+  "slug": "amara",
+  "name": "Amara",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 27,
+  "bio": "Bakes midnight banana bread for neighbors and hums while it cools."
+ },
+ {
+  "slug": "theo",
+  "name": "Theo",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 12,
+  "bio": "Names constellations from his fire escape and tucks notes under his pillow."
+ },
+ {
+  "slug": "luz",
+  "name": "Luz",
+  "place": "Red Hook",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 34,
+  "bio": "Fixes old bikes in Red Hook and rings the bell twice when done."
+ },
+ {
+  "slug": "hiro",
+  "name": "Hiro",
+  "place": "Brooklyn Heights",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 45,
+  "bio": "Catalogs library books by smell and doodles tiny owls in margins."
+ },
+ {
+  "slug": "nana-rose",
+  "name": "Rose",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 81,
+  "bio": "Knits pink scarves for newborns and remembers every baby's birthday."
+ },
+ {
+  "slug": "kwame",
+  "name": "Kwame",
+  "place": "Carroll Gardens",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "chin",
+   "snuggle"
+  ],
+  "age": 38,
+  "bio": "Roasts plantains on Sundays and tells stories that make everyone linger."
+ },
+ {
+  "slug": "maya",
+  "name": "Maya",
+  "place": "DUMBO",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 23,
+  "bio": "Sketches pigeons in DUMBO and names each one after a flower."
+ },
+ {
+  "slug": "sol",
+  "name": "Sol",
+  "place": "Gowanus",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 19,
+  "bio": "Dyes hair purple, screen-prints posters, and always shares extra fries."
+ },
+ {
+  "slug": "fatima",
+  "name": "Fatima",
+  "place": "Astoria",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 41,
+  "bio": "Brews cardamom tea for guests and keeps a garden journal daily."
+ },
+ {
+  "slug": "jun",
+  "name": "Jun",
+  "place": "Flushing",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 29,
+  "bio": "Photographs sleepy pigeons at dawn and naps with camera strap on."
+ },
+ {
+  "slug": "dolores",
+  "name": "Dolores",
+  "place": "Bronx",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "lean",
+   "chin",
+   "snuggle"
+  ],
+  "age": 74,
+  "bio": "Embroidered every blouse herself and sings lullabies softly in Spanish."
+ },
+ {
+  "slug": "marcus",
+  "name": "Marcus",
+  "place": "Harlem",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 16,
+  "bio": "Practices free throws at sunrise and tutors little kids after school."
+ },
+ {
+  "slug": "ivy",
+  "name": "Ivy",
+  "place": "Williamsburg",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 31,
+  "bio": "Splashes in her yellow boots and rescues worms after rain."
+ },
+ {
+  "slug": "arjun",
+  "name": "Arjun",
+  "place": "Bed-Stuy",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 52,
+  "bio": "Grades papers with gold stars and grows tomatoes on his fire escape."
+ },
+ {
+  "slug": "bea",
+  "name": "Bea",
+  "place": "Bushwick",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 10,
+  "bio": "Reads comics under blankets with a flashlight and giggles at sound effects."
+ },
+ {
+  "slug": "tomas",
+  "name": "Tomas",
+  "place": "Lower East Side",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 26,
+  "bio": "Drums on subway railings and saves seats for tired strangers."
+ },
+ {
+  "slug": "grace",
+  "name": "Grace",
+  "place": "Buffalo",
+  "ring": "state",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 88,
+  "bio": "Crochets shawls for church friends and remembers hymns by heart."
+ },
+ {
+  "slug": "leo",
+  "name": "Leo",
+  "place": "Ithaca",
+  "ring": "state",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 22,
+  "bio": "Teaches lake swimming in summer and collects smooth stones for friends."
+ },
+ {
+  "slug": "mei",
+  "name": "Mei",
+  "place": "Albany",
+  "ring": "state",
+  "poses": [
+   "drape",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 63,
+  "bio": "Folds origami cranes while tea steeps and mails them to grandchildren."
+ },
+ {
+  "slug": "sam",
+  "name": "Sam",
+  "place": "Rochester",
+  "ring": "state",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 57,
+  "bio": "Wakes early to feed chickens and whistles old folk songs happily."
+ },
+ {
+  "slug": "noor",
+  "name": "Noor",
+  "place": "Hudson",
+  "ring": "state",
+  "poses": [
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 35,
+  "bio": "Paints Hudson sunsets in watercolor and leaves kind notes in libraries."
+ },
+ {
+  "slug": "ezra",
+  "name": "Ezra",
+  "place": "Saratoga",
+  "ring": "state",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 44,
+  "bio": "Strums guitar by the lake and teaches chords to shy beginners."
+ },
+ {
+  "slug": "yuki",
+  "name": "Yuki",
+  "place": "Sapporo",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 68,
+  "bio": "Knits red scarves for newcomers and makes perfect snow rabbits."
+ },
+ {
+  "slug": "kofi",
+  "name": "Kofi",
+  "place": "Accra",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 49,
+  "bio": "Drums festival rhythms joyfully and teaches kids the clap pattern."
+ },
+ {
+  "slug": "ingrid",
+  "name": "Ingrid",
+  "place": "Oslo",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 15,
+  "bio": "Bakes cardamom buns for classmates and braids friendship bracelets at lunch."
+ },
+ {
+  "slug": "rafael",
+  "name": "Rafael",
+  "place": "São Paulo",
+  "ring": "world",
+  "poses": [
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 33,
+  "bio": "Coaches street soccer on Sundays and cheers loudest for beginners."
+ },
+ {
+  "slug": "priya",
+  "name": "Priya",
+  "place": "Bengaluru",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 28,
+  "bio": "Codes apps for farmers and dances while cooking to old songs."
+ },
+ {
+  "slug": "aziz",
+  "name": "Aziz",
+  "place": "Marrakesh",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 61,
+  "bio": "Brews mint tea slowly and tells desert-star stories to grandchildren."
+ },
+ {
+  "slug": "lena",
+  "name": "Lena",
+  "place": "Berlin",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "snuggle"
+  ],
+  "age": 24,
+  "bio": "Mends jackets with star patches and bikes through quiet midnight streets."
+ },
+ {
+  "slug": "tama",
+  "name": "Tama",
+  "place": "Auckland",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 40,
+  "bio": "Cooks big rugby-day stews and sings harmonies a little off-key."
+ },
+ {
+  "slug": "olu",
+  "name": "Olu",
+  "place": "Lagos",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 13,
+  "bio": "Charts moon phases in yellow pajamas and wishes on each crescent."
+ },
+ {
+  "slug": "ana",
+  "name": "Ana",
+  "place": "Mexico City",
+  "ring": "world",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "chin",
+   "snuggle"
+  ],
+  "age": 55,
+  "bio": "Grows marigolds on her balcony and clips a fresh flower daily."
+ },
+ {
+  "slug": "ada",
+  "name": "Ada",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 21,
+  "bio": "Hums sleepy songs curled tight, dreaming of morning hot chocolate."
+ },
+ {
+  "slug": "benji",
+  "name": "Benji",
+  "place": "Prospect Heights",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 11,
+  "bio": "Collects shiny pebbles in his hat and trades them for stories."
+ },
+ {
+  "slug": "zola",
+  "name": "Zola",
+  "place": "Red Hook",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 17,
+  "bio": "Beads bracelets for each friend and squeezes hugs extra tight."
+ },
+ {
+  "slug": "omar",
+  "name": "Omar",
+  "place": "Bay Ridge",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "prop",
+   "snuggle"
+  ],
+  "age": 46,
+  "bio": "Waves at every ferry captain and keeps chocolates for late-night chats."
+ },
+ {
+  "slug": "kiki",
+  "name": "Kiki",
+  "place": "Fort Greene",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 30,
+  "bio": "Bakes lemon muffins for neighbors and asks for hugs before hello."
+ },
+ {
+  "slug": "dev",
+  "name": "Dev",
+  "place": "Sunset Park",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 25,
+  "bio": "Dreams hood-up and cozy, clutching library books about stars."
+ },
+ {
+  "slug": "ruth",
+  "name": "Ruth",
+  "place": "Brooklyn Heights",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "prop",
+   "chin"
+  ],
+  "age": 79,
+  "bio": "Hugs her pillow tight and recites poems memorized decades ago."
+ },
+ {
+  "slug": "jojo",
+  "name": "Jojo",
+  "place": "Crown Heights",
+  "ring": "neighborhood",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 14,
+  "bio": "Tumbles laughing through pile-ons and invents new secret handshakes daily."
+ },
+ {
+  "slug": "pia",
+  "name": "Pia",
+  "place": "Queens",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 36,
+  "bio": "Brings extra blankets to movie nights and remembers everyone's favorite snack."
+ },
+ {
+  "slug": "eli",
+  "name": "Eli",
+  "place": "Inwood",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 58,
+  "bio": "Naps with podcasts half-playing and wakes to share fun facts."
+ },
+ {
+  "slug": "nia",
+  "name": "Nia",
+  "place": "Bronx",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 43,
+  "bio": "Braids hair while humming gospel and keeps cocoa warm for all."
+ },
+ {
+  "slug": "felix",
+  "name": "Felix",
+  "place": "Staten Island",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 66,
+  "bio": "Laughs with whole belly and collects jokes to tell ferry riders."
+ },
+ {
+  "slug": "hana",
+  "name": "Hana",
+  "place": "Long Island City",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "prop",
+   "chin",
+   "snuggle"
+  ],
+  "age": 20,
+  "bio": "Sleeps curled like a cat, dreaming of bakery shifts and sunrise buns."
+ },
+ {
+  "slug": "drew",
+  "name": "Drew",
+  "place": "Harlem",
+  "ring": "city",
+  "poses": [
+   "curl",
+   "drape",
+   "lean",
+   "chin",
+   "snuggle"
+  ],
+  "age": 71,
+  "bio": "Opens arms wide for stories and remembers every kid's name."
+ },
+ {
+  "slug": "you",
+  "name": "you",
+  "place": "",
+  "ring": "you",
+  "poses": [],
+  "age": 30,
+  "bio": "Floating joyful in the middle, holding space for everyone's late-night laughter."
+ }
+]

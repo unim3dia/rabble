@@ -1,0 +1,132 @@
+[
+ {
+  "id": "intro",
+  "title": "Rabble",
+  "lines": [
+   "A cozy, living pile of little clay people,",
+   "awake late at night, together.",
+   "",
+   "Built today for the Meta hackathon."
+  ],
+  "meta": "",
+  "say": "This is Rabble. A cozy, living pile of little clay people, awake late at night, together. It was built today for the Meta hackathon.",
+  "audio_s": 7.99
+ },
+ {
+  "id": "people",
+  "title": "Every person: Meta Muse Image",
+  "lines": [
+   "47 characters, ages 10 to 90.",
+   "Up to 7 poses each: awake, reaching, dozing.",
+   "SAM 3.1 cut every figure out of its background.",
+   "Muse Spark checked all 322 pictures for extra arms."
+  ],
+  "meta": "Muse Image  \u00b7  SAM 3.1  \u00b7  Muse Spark",
+  "say": "Every person here was made with Meta's Muse Image. Forty seven characters, ages ten to ninety, each in up to seven poses. SAM 3 point 1 cut every figure out, and Muse Spark checked all three hundred pictures for extra arms.",
+  "audio_s": 13.73
+ },
+ {
+  "id": "ring",
+  "title": "Widen the ring",
+  "lines": [
+   "Neighborhood \u2192 city \u2192 state \u2192 world.",
+   "New people fall from the sky and land on the tower.",
+   "Each tower leans its own way, on a wide, still base.",
+   "The light shifts with every ring."
+  ],
+  "meta": "",
+  "say": "Tap the ring to widen who's here. Neighborhood, city, state, world. New people fall from the sky, and the tower grows, leaning its own way on a wide, steady base.",
+  "audio_s": 10.45
+ },
+ {
+  "id": "selfie",
+  "title": "Become a Rabble person",
+  "lines": [
+   "1. SAM 3.1 cuts you out of your photo.",
+   "2. Muse Image redraws you as a clay figurine.",
+   "3. SAM 3.1 cuts the new you out again.",
+   "Your photo is never saved."
+  ],
+  "meta": "SAM 3.1  \u00b7  Muse Image",
+  "say": "Use my photo turns you into a Rabble person. SAM cuts you out of your photo, Muse Image redraws you in clay, and SAM cuts the new you out again. The photo is never saved.",
+  "audio_s": 10.15
+ },
+ {
+  "id": "join",
+  "title": "Drop into the pile",
+  "lines": [
+   "You fall in; the pile catches you.",
+   "A marker always shows where you are.",
+   "Tap yourself for a close-up.",
+   "Someone else lands right after you."
+  ],
+  "meta": "",
+  "say": "Join, and you drop into the pile. A little marker always shows where you are, and a few seconds later someone else lands right after you.",
+  "audio_s": 7.75
+ },
+ {
+  "id": "chat",
+  "title": "The pile talks: Muse Spark",
+  "lines": [
+   "Muse Spark searches the web for real, good news.",
+   "Then writes a tiny conversation:",
+   "smart \u2192 funny \u2192 a little perturbed.",
+   "Each line goes to someone the right age."
+  ],
+  "meta": "Muse Spark  \u00b7  web search",
+  "say": "The pile talks on its own. Muse Spark searches the web for real, uplifting news, and writes a tiny conversation. One smart line, one funny, one a little perturbed, each said by someone the right age.",
+  "audio_s": 12.56
+ },
+ {
+  "id": "say",
+  "title": "You talk, the AI reshapes it",
+  "lines": [
+   "Your words pile up like the ring letters.",
+   "Muse Spark never repeats you exactly:",
+   "it rewords what you meant, kind and PG,",
+   "and the people nearest you answer."
+  ],
+  "meta": "Muse Spark",
+  "say": "You can talk too. Your words heap up as you type. Muse Spark never repeats you exactly. It rewords what you meant, keeps it kind, and the people next to you answer.",
+  "audio_s": 9.77
+ },
+ {
+  "id": "shared",
+  "title": "One shared pile",
+  "lines": [
+   "Open the link on another phone:",
+   "your friend drops into your pile,",
+   "marked with a blue dot,",
+   "and you see everything they say."
+  ],
+  "meta": "",
+  "say": "It's one shared pile. When a friend opens the link on another phone, they drop into your pile, marked with a blue dot, and you both see what each other says.",
+  "audio_s": 8.8
+ },
+ {
+  "id": "zoom",
+  "title": "Look closer",
+  "lines": [
+   "Pinch or scroll to zoom anywhere.",
+   "The words grow with the people.",
+   "Dust drifts through the light;",
+   "the mood of the room slowly changes."
+  ],
+  "meta": "",
+  "say": "Pinch to zoom in anywhere. The words grow with the people, dust drifts through the light, and the color of the room slowly changes.",
+  "audio_s": 6.85
+ },
+ {
+  "id": "outro",
+  "title": "Made with Meta AI",
+  "lines": [
+   "Muse Image: every person, every pose, your clay self.",
+   "SAM 3.1: every cutout.",
+   "Muse Spark: the talk, the news, the characters, the checks.",
+   "App code written today with Claude Code."
+  ],
+  "meta": "",
+  "say": "So: Muse Image made every person. SAM 3 point 1 made every cutout. Muse Spark does all the talking. The app's code was written today with Claude Code. This is Rabble.",
+  "audio_s": 10.18
+ }
+]

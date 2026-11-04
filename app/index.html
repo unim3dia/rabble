@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0d1426">
+<!-- Added to the home screen, Rabble opens full screen with no browser bars. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rabble">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Rabble</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..900,0..100&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="room" aria-hidden="true">
+  <!-- Glowing lights around the pile. Wider rings zoom out: they shrink
+       toward the middle and more come into view (filled in by room.js). -->
+  <div class="layer layer-far"><div class="room-zoom" id="zoom-far"></div></div>
+  <div class="layer layer-near"><div class="room-zoom" id="zoom-near"></div></div>
+</div>
+
+<main class="app">
+  <header class="top">
+    <div class="title-row">
+      <h1 class="wordmark"><img src="rabble-title.webp" alt="Rabble" width="1200" height="573" fetchpriority="high"></h1>
+      <p class="awake"><span class="dot" aria-hidden="true"></span><span id="awake-text">awake now in Park Slope, Brooklyn</span></p>
+      <!-- Who's in the pile. The word's letters sit in a little pile, like the Rabble. -->
+      <button id="ring" class="ring-pile" aria-label="Neighborhood. Tap to widen who's in the pile.">
+        <span class="ring-card" id="ring-letters" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="pile" aria-label="The pile">
+    <canvas id="pile"></canvas>
+    <div id="overlay" class="overlay"></div>
+  </section>
+
+  <footer class="dock">
+    <button id="join" class="join"><span class="join-label">Join the pile</span></button>
+    <div class="dock-row">
+      <button id="selfie" class="chip">Use my photo</button>
+      <button id="mine-open" class="chip" hidden>My Rabble</button>
+      <button id="sound" class="chip" aria-pressed="true">Sound on</button>
+    </div>
+    <p class="hint" id="hint">tilt your phone to sway the pile</p>
+  </footer>
+</main>
+
+<!-- Once you're in the pile, everything else fades away; this is all that stays. -->
+<div class="corner" id="corner">
+  <div class="corner-menu" id="corner-menu" hidden>
+    <button id="m-mine" class="chip">My Rabble</button>
+    <button id="m-ring" class="chip">Neighborhood ›</button>
+    <button id="m-sound" class="chip" aria-pressed="true">Sound on</button>
+    <button id="m-roll" class="chip roll">Roll out</button>
+    <button id="m-leave" class="chip">Leave</button>
+  </div>
+  <div class="corner-row">
+    <button id="find-btn" class="corner-btn find-btn" aria-label="Find me in the pile">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 3.5a1 1 0 0 1 1 1v1.6a6 6 0 0 1 4.9 4.9h1.6a1 1 0 1 1 0 2h-1.6a6 6 0 0 1-4.9 4.9v1.6a1 1 0 1 1-2 0v-1.6A6 6 0 0 1 6.1 13H4.5a1 1 0 1 1 0-2h1.6A6 6 0 0 1 11 6.1V4.5a1 1 0 0 1 1-1zm0 4.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+    </button>
+    <button id="say-btn" class="corner-btn say-btn" aria-label="Say something to the pile">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 4h13A1.5 1.5 0 0 1 20 5.5v11a1.5 1.5 0 0 1-1.5 1.5H11l-4.5 3.5V18h-1A1.5 1.5 0 0 1 4 16.5v-11A1.5 1.5 0 0 1 5.5 4z"/></svg>
+    </button>
+    <button id="corner-btn" class="corner-btn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</div>
+
+<!-- Say something: the AI says it for you, kindly, and the pile answers. -->
+<form class="say-card" id="say" hidden>
+  <div class="say-inner">
+    <textarea id="say-input" maxlength="200" enterkeyhint="send" aria-label="Say something to the pile"></textarea>
+    <div class="say-hint ring-card" id="say-hint" aria-hidden="true"></div>
+    <button class="say-send" type="submit">Say</button>
+  </div>
+</form>
+
+<div class="making-scrim" aria-hidden="true"></div>
+<div class="making" id="making" role="status" aria-live="polite" hidden>
+  <!-- While it works: the letters of Rabble tumble slowly around inside the circle. -->
+  <div class="blob-stage" id="making-stage" aria-hidden="true">
+    <div class="blob">
+      <span class="drift-letter" style="--i:0">R</span><span class="drift-letter" style="--i:1">a</span><span class="drift-letter" style="--i:2">b</span><span class="drift-letter" style="--i:3">b</span><span class="drift-letter" style="--i:4">l</span><span class="drift-letter" style="--i:5">e</span>
+    </div>
+  </div>
+  <img id="making-img" alt="Your Rabble person" hidden>
+  <strong id="making-title">Making you…</strong>
+  <p id="making-text">SAM is cutting you out, Muse is making you squishy. About half a minute.</p>
+  <div class="making-row">
+    <button id="making-again" class="chip" hidden>Try another photo</button>
+    <button id="making-join" class="join small" hidden>Join the pile</button>
+    <button id="making-close" class="chip" hidden>OK</button>
+  </div>
+</div>
+
+<dialog id="mine" class="sheet mine">
+  <img id="mine-img" alt="Your Rabble person">
+  <div class="sheet-row">
+    <button id="mine-close" class="chip">Close</button>
+  </div>
+</dialog>
+
+<dialog id="consent" class="sheet">
+  <h2>Become your Rabble person</h2>
+  <p>Take one now or pick one you have. Your photo goes to Meta's AI. SAM&nbsp;3.1 cuts you out, and Muse&nbsp;Image makes you squishy. Your photo isn't saved; your Rabble person is shown to others in the pile while you're in it.</p>
+  <div class="sheet-row">
+    <button value="cancel" id="consent-no" class="chip">Not now</button>
+    <label class="join small">Choose a photo<input id="photo" type="file" accept="image/*" hidden></label>
+  </div>
+</dialog>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

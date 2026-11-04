@@ -1,0 +1,207 @@
+"""Rabble local server: serves app/ and turns a selfie into a Rabble person.
+
+One shared pile for everyone who opens it (see room.py):
+GET  /api/events?since=N&v=VIEWER  what happened in the pile since N (long-poll)
+POST /api/join     {"figure": id or null} -> {"id", "token"}
+POST /api/leave    {"token"}
+POST /api/say      {"text", "token"} -> {"you", "replies": [...]} and everyone sees it
+GET  /api/figure/ID  a selfie figure, so others in the pile can see you
+GET  /api/opener   a short conversation (the pile's own talk now comes via events)
+POST /api/selfie  body: {"image": "data:image/jpeg;base64,..."}
+  1. SAM 3.1 cuts the person out of the photo (concept "person").
+  2. Muse Image redraws that cutout as a Rabble person.
+  3. SAM 3.1 cuts the new Rabble person out onto transparency.
+  -> {"image": "data:image/png;base64,...", "figure": id}
+Photos stay in memory only; nothing is written to disk or logged. The made
+figure is kept in memory while you're in the pile, so others can see you.
+The Meta key stays server-side (see config.py).
+
+Run: python tools/server.py  (http://127.0.0.1:8130)
+"""
+import base64
+import io
+import json
+import os
+import sys
+import threading
+from urllib.parse import parse_qs, urlparse
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+from PIL import Image
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import meta_api  # noqa: E402
+from make_person import STYLE, cut_out  # noqa: E402
+import whispers  # noqa: E402
+import chat  # noqa: E402
+import room  # noqa: E402
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP = os.path.join(ROOT, "app")
+PORT = int(os.environ.get("RABBLE_PORT", "8130"))
+HOST = os.environ.get("RABBLE_HOST", "127.0.0.1")
+MAX_BODY = 8 * 1024 * 1024
+CREAM = (246, 238, 222)
+
+SELFIE_PROMPT = (
+    "Redraw this person as a Rabble person. Keep what makes them recognizable: "
+    "their skin tone, hair color and style, facial hair, glasses, head covering "
+    "and clothing colors. " + STYLE
+)
+
+
+def png_bytes(img):
+    buf = io.BytesIO()
+    img.save(buf, "PNG")
+    return buf.getvalue()
+
+
+def selfie_to_rabble(photo_bytes):
+    photo = Image.open(io.BytesIO(photo_bytes)).convert("RGB")
+    photo.thumbnail((1024, 1024))
+    raw = png_bytes(photo)
+    person = cut_out(raw)
+    if person is None:
+        raise ValueError("no person found in the photo")
+    # Put the cutout on plain cream so Muse Image sees only the person.
+    pad = max(person.size) // 6
+    canvas = Image.new("RGB", (person.width + 2 * pad, person.height + 2 * pad), CREAM)
+    canvas.paste(person, (pad, pad), person)
+    made = meta_api.images_edit(png_bytes(canvas), "image/png", SELFIE_PROMPT, "rabble selfie")
+    rabble = cut_out(made)
+    if rabble is None:
+        raise ValueError("could not cut out the Rabble person")
+    rabble.thumbnail((420, 420))
+    return png_bytes(rabble)
+
+
+class Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *a, **kw):
+        super().__init__(*a, directory=APP, **kw)
+
+    def log_message(self, fmt, *args):
+        # Paths only; request bodies (photos) are never logged.
+        sys.stderr.write("rabble: " + (fmt % args) + "\n")
+
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
+    def _json(self, code, obj):
+        body = json.dumps(obj).encode()
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _body(self, limit=4096):
+        length = int(self.headers.get("Content-Length") or 0)
+        if not 0 < length <= limit:
+            raise OverflowError("that's a lot to send")
+        data = json.loads(self.rfile.read(length) or b"{}")
+        if not isinstance(data, dict):
+            raise ValueError("expected an object")
+        return data
+
+    def _say(self):
+        try:
+            data = self._body()
+            return self._json(200, room.say(data.get("token"), str(data.get("text", ""))))
+        except OverflowError as e:
+            return self._json(413, {"error": str(e)})
+        except PermissionError as e:
+            return self._json(403, {"error": str(e)})
+        except TimeoutError as e:
+            return self._json(503, {"error": str(e)})
+        except ValueError as e:
+            return self._json(422, {"error": str(e)})
+        except Exception as e:  # API failure; no key material in the message
+            sys.stderr.write(f"rabble: chat failed: {type(e).__name__}\n")
+            return self._json(502, {"error": "the pile didn't catch that"})
+
+    def _join(self):
+        try:
+            data = self._body()
+            return self._json(200, room.join(data.get("figure")))
+        except OverflowError as e:
+            return self._json(409, {"error": str(e)})
+        except ValueError as e:
+            return self._json(422, {"error": str(e)})
+
+    def _leave(self):
+        try:
+            room.leave(self._body().get("token"))
+        except (OverflowError, ValueError):
+            pass
+        return self._json(200, {})
+
+    def _events(self, query):
+        q = parse_qs(query)
+        try:
+            since = int(q.get("since", ["-1"])[0])
+        except ValueError:
+            since = -1
+        viewer = q.get("v", [""])[0][:40] or self.client_address[0]
+        token = self.headers.get("X-Rabble-Token")
+        return self._json(200, room.events(since, viewer, token))
+
+    def _figure(self, fid):
+        png = room.figure(fid)
+        if not png:
+            return self._json(404, {"error": "not here"})
+        self.send_response(200)
+        self.send_header("Content-Type", "image/png")
+        self.send_header("Content-Length", str(len(png)))
+        self.end_headers()
+        self.wfile.write(png)
+
+    def do_GET(self):
+        url = urlparse(self.path)
+        if url.path == "/api/events":
+            return self._events(url.query)
+        if url.path.startswith("/api/figure/"):
+            return self._figure(url.path.rsplit("/", 1)[1])
+        if url.path == "/api/whispers":
+            return self._json(200, whispers.current())
+        if self.path.split("?")[0] == "/api/opener":
+            try:
+                return self._json(200, chat.ready_opener())
+            except Exception as e:  # API failure; no key material in the message
+                sys.stderr.write(f"rabble: opener failed: {type(e).__name__}\n")
+                return self._json(502, {"error": "no opener right now"})
+        return super().do_GET()
+
+    def do_POST(self):
+        if self.path == "/api/say":
+            return self._say()
+        if self.path == "/api/join":
+            return self._join()
+        if self.path == "/api/leave":
+            return self._leave()
+        if self.path != "/api/selfie":
+            return self._json(404, {"error": "not found"})
+        length = int(self.headers.get("Content-Length") or 0)
+        if not 0 < length <= MAX_BODY:
+            return self._json(413, {"error": "photo too large"})
+        try:
+            data_url = json.loads(self.rfile.read(length))["image"]
+            if not data_url.startswith("data:image/"):
+                raise ValueError("expected an image")
+            photo = base64.b64decode(data_url.split(",", 1)[1])
+            out = selfie_to_rabble(photo)
+        except ValueError as e:
+            return self._json(422, {"error": str(e)})
+        except Exception as e:  # API or decode failure; message has no key material
+            sys.stderr.write(f"rabble: selfie failed: {type(e).__name__}\n")
+            return self._json(502, {"error": "couldn't make your Rabble person right now"})
+        self._json(200, {"image": "data:image/png;base64," + base64.b64encode(out).decode(),
+                         "figure": room.add_figure(out)})
+
+
+if __name__ == "__main__":
+    threading.Thread(target=chat._fill, daemon=True).start()  # have conversations ready
+    chat._filling = True
+    room.start()                                             # the shared pile's own talk
+    print(f"Rabble on http://{HOST}:{PORT}", flush=True)
+    ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()

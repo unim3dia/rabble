@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rabble card</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..900,0..100&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../app/style.css">
+<style>
+  /* A cutaway between clips: the ring button's heaped letters, big, in the
+     middle of the room, with a line or two under it. */
+  :root { --room-deep: #120f2a; --room-mid: #2c1f4d; --room-glow: #8a5cb8; --lamp: #ffd9c2; }
+  body { margin: 0; height: 100vh; overflow: hidden; }
+  .stage {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 26px; padding: 0 30px; text-align: center;
+  }
+  .heap.ring-pile { --size: 250px; padding: 9px; border-width: 3px; border-radius: 34px; cursor: default;
+    animation: heap-in 620ms var(--ease-squish) both; }
+  .heap .ring-card { border-radius: 25px; padding: 6px 8px 8px; }
+  @keyframes heap-in { from { opacity: 0; transform: scale(0.7) rotate(-4deg); } }
+  .title-img { width: 330px; height: auto; filter: drop-shadow(0 14px 30px rgba(0,0,0,.45));
+    animation: heap-in 900ms var(--ease-squish) both; }
+  .lines { display: grid; gap: 8px; max-width: 360px; }
+  .lines p { margin: 0; font: 600 20px/1.3 var(--font-ui); text-wrap: balance; color: var(--cream);
+    text-shadow: 0 2px 14px rgba(0,0,0,.45); animation: line-in 700ms var(--ease-out) both; }
+  .lines p.small { font-size: 16px; color: var(--ink-soft); font-weight: 500; }
+  @keyframes line-in { from { opacity: 0; transform: translateY(10px); } }
+  .tag { font: 700 15px var(--font-ui); letter-spacing: .02em; color: #2a120b; background: var(--coral);
+    padding: 8px 16px; border-radius: 999px; animation: line-in 700ms var(--ease-out) both; }
+</style>
+</head>
+<body>
+<div class="room"><div class="room-zoom">
+  <div class="layer">
+    <span class="lamp" style="left:22%;top:30%;width:320px;height:320px;opacity:.35"></span>
+    <span class="lamp" style="left:80%;top:62%;width:380px;height:380px;opacity:.28"></span>
+    <span class="mote" style="left:30%;top:70%;width:40px;height:40px;opacity:.5"></span>
+    <span class="mote" style="left:70%;top:24%;width:26px;height:26px;opacity:.5"></span>
+  </div>
+</div></div>
+<main class="stage" id="stage"></main>
+<script type="module">
+import { pileLetters } from "../../app/js/ui.js";
+
+const CARDS = {
+  title: { title: true, lines: ["a living pile of people,", "awake together"] },
+  meta: { heap: ["made", "by", "meta"], lines: ["Every person and every pose: Muse Image.", "Every cutout: SAM 3.1."], tag: "Meta · Muse Image · SAM 3.1" },
+  you: { heap: ["be", "one", "of us"], lines: ["SAM 3.1 cuts you out of your photo.", "Muse Image makes you a little clay person."], tag: "Meta · SAM 3.1 · Muse Image", small: "your photo is never saved" },
+  dive: { heap: ["dive", "in"], lines: ["Drop into the pile.", "Turn it, zoom all the way in, tap anyone and they bop."] },
+  ring: { heap: ["widen", "the", "ring"], lines: ["Neighborhood → city → state → world.", "More people fall in. The tower grows."] },
+  talk: { heap: ["the", "pile", "talks"], lines: ["Muse Spark searches today's real news and writes tiny conversations.", "One smart, one funny, one a little perturbed."], tag: "Meta · Muse Spark + web search" },
+  say: { heap: ["say", "some", "thing"], lines: ["Muse Spark rewords you, kindly.", "The people next to you answer."], tag: "Meta · Muse Spark" },
+  together: { heap: ["one", "pile"], lines: ["Everyone who opens the link lands in the same pile and sees what everyone says."] },
+  next: { heap: ["what's", "next"], lines: ["AI conversation that connects strangers: real places, real news, playful questions for each other."], small: "information for the sake of connection" },
+  end: { title: true, lines: ["Made with Meta Muse Image, SAM 3.1 and Muse Spark."], small: "Meta Global AI Developer Hackathon · 2026" },
+};
+
+const card = CARDS[new URLSearchParams(location.search).get("c")] || CARDS.title;
+const stage = document.getElementById("stage");
+let delay = 350;
+if (card.title) {
+  const img = Object.assign(document.createElement("img"), { className: "title-img", src: "../../app/rabble-title.webp", alt: "Rabble" });
+  stage.append(img);
+} else {
+  const frame = Object.assign(document.createElement("div"), { className: "heap ring-pile" });
+  const inner = Object.assign(document.createElement("div"), { className: "ring-card" });
+  frame.append(inner);
+  stage.append(frame);
+  await document.fonts.ready;
+  pileLetters(inner, card.heap);
+  delay = 250 + card.heap.join("").length * 35;
+}
+const lines = Object.assign(document.createElement("div"), { className: "lines" });
+for (const text of card.lines) {
+  const p = Object.assign(document.createElement("p"), { textContent: text });
+  p.style.animationDelay = `${delay}ms`;
+  delay += 110;
+  lines.append(p);
+}
+if (card.small) {
+  const p = Object.assign(document.createElement("p"), { className: "small", textContent: card.small });
+  p.style.animationDelay = `${delay}ms`;
+  lines.append(p);
+}
+stage.append(lines);
+if (card.tag) {
+  const tag = Object.assign(document.createElement("span"), { className: "tag", textContent: card.tag });
+  tag.style.animationDelay = `${delay + 150}ms`;
+  stage.append(tag);
+}
+document.body.dataset.ready = "1";
+</script>
+</body>
+</html>

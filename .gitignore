@@ -1,0 +1,17 @@
+.rabble-env
+.env
+work/
+__pycache__/
+.claude/
+.DS_Store
+# full-size source pictures (the app uses the optimized people-web/)
+app/people/
+# recording leftovers
+demo/raw/
+demo/frames/
+demo/slides/
+demo/audio/
+demo/promo/frames/
+demo/promo/cards/
+demo/promo/out/
+demo/rabble-demo.mp4

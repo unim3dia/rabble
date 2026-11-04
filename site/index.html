@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rabble</title>
+<meta name="description" content="Rabble: a living pile of little clay people, awake together. Made with Meta Muse Image, SAM 3.1 and Muse Spark.">
+<meta name="theme-color" content="#0d1426">
+<meta property="og:title" content="Rabble">
+<meta property="og:description" content="A living pile of little clay people, awake together. Drop in, look around, say something.">
+<meta property="og:image" content="play/icon-512.png">
+<link rel="icon" href="play/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..900,0..100&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #0d1426;
+    --mid: #1f2f52;
+    --glow: #5c7bb8;
+    --cream: #fff4e6;
+    --ink-soft: rgba(255, 244, 230, 0.74);
+    --cocoa: #4a2f25;
+    --coral: #ff7a5c;
+    --coral-deep: #e2563c;
+    --line: rgba(255, 244, 230, 0.16);
+    --font-display: "Fraunces", Georgia, serif;
+    --font-ui: "Figtree", system-ui, sans-serif;
+    --ease-squish: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --gutter: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: dark; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--cream);
+    font: 500 17px/1.55 var(--font-ui);
+    background:
+      radial-gradient(90% 50% at 50% 20%, rgba(92, 123, 184, 0.45), transparent 70%),
+      radial-gradient(70% 40% at 80% 85%, rgba(255, 122, 92, 0.16), transparent 70%),
+      linear-gradient(180deg, var(--deep) 0%, var(--mid) 100%);
+    background-attachment: fixed;
+  }
+  body::after { /* the app's film grain */
+    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: 0.08; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  main { max-width: 1040px; margin: 0 auto; padding: 40px var(--gutter) 64px; }
+
+  .hero { display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 860px) { .hero { grid-template-columns: 1fr 360px; gap: 64px; } }
+  .wordmark { width: min(78vw, 380px); height: auto; display: block; filter: drop-shadow(0 14px 30px rgba(0,0,0,.4)); }
+  .lede { font: 600 clamp(1.35rem, 1.1rem + 1.1vw, 1.75rem)/1.3 var(--font-ui); margin: 22px 0 10px; text-wrap: balance; }
+  .sub { color: var(--ink-soft); margin: 0 0 28px; max-width: 36em; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .join {
+    display: inline-block; text-decoration: none; color: var(--cream);
+    font: 900 1.35rem/1 var(--font-display); font-variation-settings: "SOFT" 100;
+    padding: 18px 34px; border-radius: 999px;
+    background: linear-gradient(180deg, var(--coral), var(--coral-deep));
+    box-shadow: 0 6px 0 #b8432d, 0 16px 36px rgba(255, 122, 92, 0.38);
+    transition: transform 160ms var(--ease-squish), box-shadow 160ms var(--ease-out);
+  }
+  .join:hover { transform: translateY(-2px) scale(1.02); }
+  .join:active { transform: translateY(4px) scale(0.97); box-shadow: 0 2px 0 #b8432d, 0 8px 18px rgba(255, 122, 92, 0.3); }
+  .join:focus-visible, .chip:focus-visible { outline: 3px solid #cfe0ff; outline-offset: 3px; }
+  .chip {
+    color: var(--cream); text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    padding: 10px 16px; border-radius: 999px; background: rgba(46, 33, 27, 0.5); border: 1px solid var(--line);
+    transition: background 160ms ease;
+  }
+  .chip:hover { background: rgba(46, 33, 27, 0.8); }
+
+  .phone {
+    justify-self: center; width: min(86vw, 340px); aspect-ratio: 9 / 16; padding: 10px; border-radius: 44px;
+    background: #05070d; box-shadow: 0 0 0 2px rgba(255,255,255,.12), 0 40px 80px rgba(0,0,0,.5);
+    rotate: 2deg; transition: rotate 600ms var(--ease-squish);
+  }
+  .phone:hover { rotate: 0deg; }
+  .phone video { width: 100%; height: 100%; border-radius: 34px; object-fit: cover; display: block; background: var(--deep); }
+
+  h2 {
+    font: 900 clamp(1.9rem, 1.4rem + 2vw, 2.8rem)/1 var(--font-display); font-variation-settings: "SOFT" 100, "opsz" 144;
+    margin: 88px 0 8px; letter-spacing: -0.01em;
+  }
+  .section-sub { color: var(--ink-soft); margin: 0 0 30px; }
+  .models { display: grid; gap: 14px; }
+  @media (min-width: 760px) { .models { grid-template-columns: 1.2fr 1fr 1fr; } }
+  .model {
+    padding: 22px 22px 24px; border-radius: 22px; background: rgba(255, 252, 246, 0.06);
+    border: 1px solid var(--line); backdrop-filter: blur(8px);
+  }
+  .model:first-child { background: rgba(255, 252, 246, 0.9); color: var(--cocoa); border-color: transparent; }
+  .model:first-child p { color: rgba(74, 47, 37, 0.85); }
+  .model h3 { font: 900 1.45rem/1.1 var(--font-display); font-variation-settings: "SOFT" 100; margin: 0 0 4px; }
+  .model .what { font-weight: 700; font-size: 0.82rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; margin: 0 0 12px; }
+  .model p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
+
+  .steps { counter-reset: s; display: grid; gap: 10px; padding: 0; margin: 0; list-style: none; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+  .steps li::before { content: counter(s); font: 900 1.5rem/1 var(--font-display); color: var(--coral); }
+  .steps strong { font-weight: 700; }
+  .steps span { color: var(--ink-soft); }
+
+  .next { margin-top: 88px; padding: 30px 26px; border-radius: 28px; background: linear-gradient(135deg, rgba(255,122,92,.18), rgba(92,123,184,.18)); border: 1px solid var(--line); }
+  .next h2 { margin-top: 0; }
+  .next p { margin: 0; max-width: 40em; }
+  .note { color: var(--ink-soft); font-size: 0.9rem; margin-top: 18px; }
+  footer { margin-top: 64px; color: var(--ink-soft); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  footer a { color: var(--cream); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .phone { rotate: 0deg; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero" aria-labelledby="title">
+    <div>
+      <h1 id="title" style="margin:0"><img class="wordmark" src="play/rabble-title.webp" width="1200" height="573" alt="Rabble"></h1>
+      <p class="lede">A living pile of little clay people, awake together.</p>
+      <p class="sub">Drop into the pile, look around, zoom right in, tap someone and they bop. The pile talks about real things happening today, and when you say something, the people next to you answer.</p>
+      <div class="actions">
+        <a class="join" href="play/">Join the pile</a>
+        <a class="chip" href="https://github.com/unim3dia/rabble">Code on GitHub</a>
+        <a class="chip" href="rabble-walkthrough.mp4">2-minute walkthrough</a>
+      </div>
+    </div>
+    <div class="phone">
+      <video src="rabble-promo.mp4" poster="rabble-promo.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Rabble promo video"></video>
+    </div>
+  </section>
+
+  <section aria-labelledby="meta">
+    <h2 id="meta">Made with Meta AI</h2>
+    <p class="section-sub">Three Meta models do the work, each where it's best.</p>
+    <div class="models">
+      <article class="model">
+        <h3>Muse Image</h3>
+        <p class="what">Every person</p>
+        <p>Drew all 47 characters, ages 10 to 90, in up to seven poses each: awake, reaching, dozing. It also turns your own photo into a little clay version of you.</p>
+      </article>
+      <article class="model">
+        <h3>SAM 3.1</h3>
+        <p class="what">Every cutout</p>
+        <p>Cuts every figure out of its background, and cuts you out of your photo, then out of your new clay self.</p>
+      </article>
+      <article class="model">
+        <h3>Muse Spark</h3>
+        <p class="what">All the talk</p>
+        <p>Searches the web for today's real news and writes tiny conversations: one smart line, one funny, one a little perturbed. It rewords what you say, kindly, and answers you.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="how">
+    <h2 id="how">How it plays</h2>
+    <p class="section-sub">On a phone, in about a minute.</p>
+    <ol class="steps">
+      <li><div><strong>The pile.</strong> <span>A leaning tower of people with a wide, steady base. Drag to turn it, pinch to zoom anywhere. Newcomers fall from the sky and land on top.</span></div></li>
+      <li><div><strong>Become one of them.</strong> <span>Use your photo and you get your own clay person. The photo is never saved.</span></div></li>
+      <li><div><strong>Drop in.</strong> <span>You fall into the pile and it catches you. A marker shows where you are; press and drag yourself to a new spot.</span></div></li>
+      <li><div><strong>Widen the ring.</strong> <span>Neighborhood, city, state, world: more people pile on and the light of the room changes.</span></div></li>
+      <li><div><strong>Say something.</strong> <span>Your words heap up as you type; the people beside you answer.</span></div></li>
+      <li><div><strong>One shared pile.</strong> <span>Everyone who opens the link is in the same pile and sees what everyone says.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="next" aria-labelledby="next">
+    <h2 id="next">What's next</h2>
+    <p>AI conversation for the sake of connection and play: the pile introducing strangers to each other, talking about real places and real news near them, and asking playful questions that get people talking to one another, not just to the AI.</p>
+  </section>
+
+  <p class="note">This page runs the pile without a server: its talk is a night of conversations Muse Spark wrote ahead of time, and making your own clay person is turned off. The full version (your photo, live AI replies, everyone in one shared pile) runs on the Rabble server in the repository.</p>
+
+  <footer>
+    <span>Rabble · Meta Global AI Developer Hackathon · 2026</span>
+    <a href="https://github.com/unim3dia/rabble">github.com/unim3dia/rabble</a>
+  </footer>
+</main>
+</body>
+</html>

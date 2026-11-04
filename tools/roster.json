@@ -1,0 +1,425 @@
+[
+ {
+  "slug": "amara",
+  "name": "Amara",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "desc": "Deep brown skin, puffy natural hair in two buns, wearing a lilac hoodie and grey leggings.",
+  "age": 27,
+  "bio": "Bakes midnight banana bread for neighbors and hums while it cools."
+ },
+ {
+  "slug": "theo",
+  "name": "Theo",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "desc": "Pale freckled skin, messy ginger hair, wearing striped blue pajamas, holding a tiny pillow.",
+  "age": 12,
+  "bio": "Names constellations from his fire escape and tucks notes under his pillow."
+ },
+ {
+  "slug": "luz",
+  "name": "Luz",
+  "place": "Red Hook",
+  "ring": "neighborhood",
+  "desc": "Light tan skin, long dark braid, wearing a red flannel shirt and denim overalls.",
+  "age": 34,
+  "bio": "Fixes old bikes in Red Hook and rings the bell twice when done."
+ },
+ {
+  "slug": "hiro",
+  "name": "Hiro",
+  "place": "Brooklyn Heights",
+  "ring": "neighborhood",
+  "desc": "Light skin, straight black bowl-cut hair, round glasses, wearing an oversized teal t-shirt.",
+  "age": 45,
+  "bio": "Catalogs library books by smell and doodles tiny owls in margins."
+ },
+ {
+  "slug": "nana-rose",
+  "name": "Rose",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "desc": "Rosy light skin, short white curly hair, little pearl earrings, wearing a pink cardigan.",
+  "age": 81,
+  "bio": "Knits pink scarves for newborns and remembers every baby's birthday."
+ },
+ {
+  "slug": "kwame",
+  "name": "Kwame",
+  "place": "Carroll Gardens",
+  "ring": "neighborhood",
+  "desc": "Dark brown skin, short fade haircut, wearing a cream knit sweater and brown corduroy pants.",
+  "age": 38,
+  "bio": "Roasts plantains on Sundays and tells stories that make everyone linger."
+ },
+ {
+  "slug": "maya",
+  "name": "Maya",
+  "place": "DUMBO",
+  "ring": "neighborhood",
+  "desc": "Medium brown skin, shoulder-length wavy hair, wearing a sage green dress with tiny flowers.",
+  "age": 23,
+  "bio": "Sketches pigeons in DUMBO and names each one after a flower."
+ },
+ {
+  "slug": "sol",
+  "name": "Sol",
+  "place": "Gowanus",
+  "ring": "neighborhood",
+  "desc": "Olive skin, short purple-dyed hair, wearing a baggy orange sweatshirt and black shorts.",
+  "age": 19,
+  "bio": "Dyes hair purple, screen-prints posters, and always shares extra fries."
+ },
+ {
+  "slug": "fatima",
+  "name": "Fatima",
+  "place": "Astoria",
+  "ring": "city",
+  "desc": "Light brown skin, wearing a soft dusty-blue hijab and a cream long-sleeve top.",
+  "age": 41,
+  "bio": "Brews cardamom tea for guests and keeps a garden journal daily."
+ },
+ {
+  "slug": "jun",
+  "name": "Jun",
+  "place": "Flushing",
+  "ring": "city",
+  "desc": "Light skin, fluffy brown-black hair, wearing a navy puffer vest over a white shirt.",
+  "age": 29,
+  "bio": "Photographs sleepy pigeons at dawn and naps with camera strap on."
+ },
+ {
+  "slug": "dolores",
+  "name": "Dolores",
+  "place": "Bronx",
+  "ring": "city",
+  "desc": "Tan skin, grey hair in a bun, wearing a bright embroidered blouse.",
+  "age": 74,
+  "bio": "Embroidered every blouse herself and sings lullabies softly in Spanish."
+ },
+ {
+  "slug": "marcus",
+  "name": "Marcus",
+  "place": "Harlem",
+  "ring": "city",
+  "desc": "Dark skin, short twists, wearing a purple and gold basketball jersey over a grey tee.",
+  "age": 16,
+  "bio": "Practices free throws at sunrise and tutors little kids after school."
+ },
+ {
+  "slug": "ivy",
+  "name": "Ivy",
+  "place": "Williamsburg",
+  "ring": "city",
+  "desc": "Fair skin, sun-bleached blonde hair, wearing a yellow raincoat and rubber boots.",
+  "age": 31,
+  "bio": "Splashes in her yellow boots and rescues worms after rain."
+ },
+ {
+  "slug": "arjun",
+  "name": "Arjun",
+  "place": "Bed-Stuy",
+  "ring": "city",
+  "desc": "Medium brown skin, neat black hair, small mustache, wearing a maroon sweater vest over a white shirt.",
+  "age": 52,
+  "bio": "Grades papers with gold stars and grows tomatoes on his fire escape."
+ },
+ {
+  "slug": "bea",
+  "name": "Bea",
+  "place": "Bushwick",
+  "ring": "city",
+  "desc": "Light skin, short brown bob with bangs, wearing a soft mint green onesie pajama.",
+  "age": 10,
+  "bio": "Reads comics under blankets with a flashlight and giggles at sound effects."
+ },
+ {
+  "slug": "tomas",
+  "name": "Tomas",
+  "place": "Lower East Side",
+  "ring": "city",
+  "desc": "Light brown skin, curly black hair, wearing a red beanie, a grey t-shirt under a denim jacket, and dark pants.",
+  "age": 26,
+  "bio": "Drums on subway railings and saves seats for tired strangers."
+ },
+ {
+  "slug": "grace",
+  "name": "Grace",
+  "place": "Buffalo",
+  "ring": "state",
+  "desc": "Dark brown skin, short grey natural hair, gold-rimmed glasses, wearing a long orange knit dress with a shawl.",
+  "age": 88,
+  "bio": "Crochets shawls for church friends and remembers hymns by heart."
+ },
+ {
+  "slug": "leo",
+  "name": "Leo",
+  "place": "Ithaca",
+  "ring": "state",
+  "desc": "Tan skin, sandy blond curls, wearing a blue surf hoodie and board shorts.",
+  "age": 22,
+  "bio": "Teaches lake swimming in summer and collects smooth stones for friends."
+ },
+ {
+  "slug": "mei",
+  "name": "Mei",
+  "place": "Albany",
+  "ring": "state",
+  "desc": "Light skin, long straight black hair, wearing a cozy lavender bathrobe and fuzzy slippers.",
+  "age": 63,
+  "bio": "Folds origami cranes while tea steeps and mails them to grandchildren."
+ },
+ {
+  "slug": "sam",
+  "name": "Sam",
+  "place": "Rochester",
+  "ring": "state",
+  "desc": "Light skin, short brown hair, wearing a green farm cap and plaid shirt.",
+  "age": 57,
+  "bio": "Wakes early to feed chickens and whistles old folk songs happily."
+ },
+ {
+  "slug": "noor",
+  "name": "Noor",
+  "place": "Hudson",
+  "ring": "state",
+  "desc": "Warm light beige-brown skin, long dark wavy hair, wearing a long sky-blue sweater and white pants.",
+  "age": 35,
+  "bio": "Paints Hudson sunsets in watercolor and leaves kind notes in libraries."
+ },
+ {
+  "slug": "ezra",
+  "name": "Ezra",
+  "place": "Saratoga",
+  "ring": "state",
+  "desc": "Medium brown skin, short dreadlocks, wearing a rust-colored knit poncho.",
+  "age": 44,
+  "bio": "Strums guitar by the lake and teaches chords to shy beginners."
+ },
+ {
+  "slug": "yuki",
+  "name": "Yuki",
+  "place": "Sapporo",
+  "ring": "world",
+  "desc": "Fair skin, short black hair, wearing a thick white winter coat and red scarf.",
+  "age": 68,
+  "bio": "Knits red scarves for newcomers and makes perfect snow rabbits."
+ },
+ {
+  "slug": "kofi",
+  "name": "Kofi",
+  "place": "Accra",
+  "ring": "world",
+  "desc": "Dark skin, shaved head, wearing a long colorful kente-pattern shirt and dark pants.",
+  "age": 49,
+  "bio": "Drums festival rhythms joyfully and teaches kids the clap pattern."
+ },
+ {
+  "slug": "ingrid",
+  "name": "Ingrid",
+  "place": "Oslo",
+  "ring": "world",
+  "desc": "Very fair skin, pale blonde braids, wearing a patterned Nordic wool sweater.",
+  "age": 15,
+  "bio": "Bakes cardamom buns for classmates and braids friendship bracelets at lunch."
+ },
+ {
+  "slug": "rafael",
+  "name": "Rafael",
+  "place": "São Paulo",
+  "ring": "world",
+  "desc": "Tan skin, short wavy brown hair, wearing a green and yellow tracksuit.",
+  "age": 33,
+  "bio": "Coaches street soccer on Sundays and cheers loudest for beginners."
+ },
+ {
+  "slug": "priya",
+  "name": "Priya",
+  "place": "Bengaluru",
+  "ring": "world",
+  "desc": "Medium brown skin, long black braid, small bindi, wearing a coral kurta.",
+  "age": 28,
+  "bio": "Codes apps for farmers and dances while cooking to old songs."
+ },
+ {
+  "slug": "aziz",
+  "name": "Aziz",
+  "place": "Marrakesh",
+  "ring": "world",
+  "desc": "Light brown skin, curly dark hair, wearing a soft striped hooded djellaba.",
+  "age": 61,
+  "bio": "Brews mint tea slowly and tells desert-star stories to grandchildren."
+ },
+ {
+  "slug": "lena",
+  "name": "Lena",
+  "place": "Berlin",
+  "ring": "world",
+  "desc": "Light skin, short pink hair, wearing a black hoodie with tiny star patches.",
+  "age": 24,
+  "bio": "Mends jackets with star patches and bikes through quiet midnight streets."
+ },
+ {
+  "slug": "tama",
+  "name": "Tama",
+  "place": "Auckland",
+  "ring": "world",
+  "desc": "Brown skin, wavy black hair in a top knot, wearing a soft blue rugby shirt.",
+  "age": 40,
+  "bio": "Cooks big rugby-day stews and sings harmonies a little off-key."
+ },
+ {
+  "slug": "olu",
+  "name": "Olu",
+  "place": "Lagos",
+  "ring": "world",
+  "desc": "Dark brown skin, small afro, wearing bright yellow pajamas with moons on them.",
+  "age": 13,
+  "bio": "Charts moon phases in yellow pajamas and wishes on each crescent."
+ },
+ {
+  "slug": "ana",
+  "name": "Ana",
+  "place": "Mexico City",
+  "ring": "world",
+  "desc": "Light tan skin, curly brown hair with a flower clip, wearing a pink knit dress.",
+  "age": 55,
+  "bio": "Grows marigolds on her balcony and clips a fresh flower daily."
+ },
+ {
+  "slug": "ada",
+  "name": "Ada",
+  "place": "Park Slope",
+  "ring": "neighborhood",
+  "desc": "Light brown skin, curly auburn hair, wearing a red beanie and cream hoodie, curled up sideways hugging her knees, eyes closed.",
+  "age": 21,
+  "bio": "Hums sleepy songs curled tight, dreaming of morning hot chocolate."
+ },
+ {
+  "slug": "benji",
+  "name": "Benji",
+  "place": "Prospect Heights",
+  "ring": "neighborhood",
+  "desc": "Pale skin, blond tufts, wearing a blue knit hat and green hoodie, lying on his tummy with arms spread out, sleepy smile.",
+  "age": 11,
+  "bio": "Collects shiny pebbles in his hat and trades them for stories."
+ },
+ {
+  "slug": "zola",
+  "name": "Zola",
+  "place": "Red Hook",
+  "ring": "neighborhood",
+  "desc": "Dark skin, short braids with beads, wearing a pink fleece pullover, sitting with arms hugging herself happily.",
+  "age": 17,
+  "bio": "Beads bracelets for each friend and squeezes hugs extra tight."
+ },
+ {
+  "slug": "omar",
+  "name": "Omar",
+  "place": "Bay Ridge",
+  "ring": "neighborhood",
+  "desc": "Olive skin, short black hair, small beard, wearing an orange beanie and navy hoodie, leaning sideways with one arm up waving.",
+  "age": 46,
+  "bio": "Waves at every ferry captain and keeps chocolates for late-night chats."
+ },
+ {
+  "slug": "kiki",
+  "name": "Kiki",
+  "place": "Fort Greene",
+  "ring": "neighborhood",
+  "desc": "Light skin, short black hair with bangs, wearing a yellow beanie and lilac sweater, lying on her back, arms up for a hug.",
+  "age": 30,
+  "bio": "Bakes lemon muffins for neighbors and asks for hugs before hello."
+ },
+ {
+  "slug": "dev",
+  "name": "Dev",
+  "place": "Sunset Park",
+  "ring": "neighborhood",
+  "desc": "Medium brown skin, wavy black hair, wearing a teal hoodie with hood up, curled up asleep.",
+  "age": 25,
+  "bio": "Dreams hood-up and cozy, clutching library books about stars."
+ },
+ {
+  "slug": "ruth",
+  "name": "Ruth",
+  "place": "Brooklyn Heights",
+  "ring": "neighborhood",
+  "desc": "Very light skin, short grey hair, wearing a lavender beanie and peach cardigan, sitting cross-legged hugging a pillow.",
+  "age": 79,
+  "bio": "Hugs her pillow tight and recites poems memorized decades ago."
+ },
+ {
+  "slug": "jojo",
+  "name": "Jojo",
+  "place": "Crown Heights",
+  "ring": "neighborhood",
+  "desc": "Dark brown skin, small afro, wearing a mustard hoodie and red pants, tumbling sideways with arms out, giggling.",
+  "age": 14,
+  "bio": "Tumbles laughing through pile-ons and invents new secret handshakes daily."
+ },
+ {
+  "slug": "pia",
+  "name": "Pia",
+  "place": "Queens",
+  "ring": "city",
+  "desc": "Tan skin, long dark ponytail, wearing a coral beanie and grey sweatshirt, lying on her side, arms reaching to hug.",
+  "age": 36,
+  "bio": "Brings extra blankets to movie nights and remembers everyone's favorite snack."
+ },
+ {
+  "slug": "eli",
+  "name": "Eli",
+  "place": "Inwood",
+  "ring": "city",
+  "desc": "Light skin, curly brown hair, wearing a green beanie and orange hoodie, sitting, leaning to one side, sleepy.",
+  "age": 58,
+  "bio": "Naps with podcasts half-playing and wakes to share fun facts."
+ },
+ {
+  "slug": "nia",
+  "name": "Nia",
+  "place": "Bronx",
+  "ring": "city",
+  "desc": "Deep brown skin, puffs of hair, wearing a periwinkle hoodie, arms wrapped around herself, content smile.",
+  "age": 43,
+  "bio": "Braids hair while humming gospel and keeps cocoa warm for all."
+ },
+ {
+  "slug": "felix",
+  "name": "Felix",
+  "place": "Staten Island",
+  "ring": "city",
+  "desc": "Pale freckled skin, ginger hair, wearing a blue beanie and yellow raincoat, lying on his back laughing, arms up.",
+  "age": 66,
+  "bio": "Laughs with whole belly and collects jokes to tell ferry riders."
+ },
+ {
+  "slug": "hana",
+  "name": "Hana",
+  "place": "Long Island City",
+  "ring": "city",
+  "desc": "Light skin, black hair in a bun, wearing a soft pink knit hoodie, curled up asleep.",
+  "age": 20,
+  "bio": "Sleeps curled like a cat, dreaming of bakery shifts and sunrise buns."
+ },
+ {
+  "slug": "drew",
+  "name": "Drew",
+  "place": "Harlem",
+  "ring": "city",
+  "desc": "Brown skin, short twists, wearing a beige beanie and green fleece, sitting with arms open wide.",
+  "age": 71,
+  "bio": "Opens arms wide for stories and remembers every kid's name."
+ },
+ {
+  "slug": "you",
+  "name": "you",
+  "place": "",
+  "ring": "you",
+  "desc": "Light tan skin, short brown hair, wearing a soft lavender hoodie and light blue pants, arms and legs spread wide as if happily floating down, joyful open smile, eyes open.",
+  "age": 30,
+  "bio": "Floating joyful in the middle, holding space for everyone's late-night laughter."
+ }
+]

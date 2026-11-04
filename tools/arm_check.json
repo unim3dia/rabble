@@ -1,0 +1,1290 @@
+{
+ "amara": {
+  "arms": 2,
+  "hands": 2
+ },
+ "amara-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "amara-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "amara-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "amara-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "amara-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "amara-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "theo": {
+  "arms": 2,
+  "hands": 2
+ },
+ "theo-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "theo-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "theo-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "theo-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "theo-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "theo-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "luz": {
+  "arms": 2,
+  "hands": 2
+ },
+ "luz-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "luz-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "luz-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "luz-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "luz-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "luz-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hiro": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hiro-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hiro-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "hiro-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hiro-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hiro-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hiro-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nana-rose": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nana-rose-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "nana-rose-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "nana-rose-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nana-rose-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nana-rose-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nana-rose-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kwame": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kwame-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "kwame-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kwame-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kwame-prop": {
+  "arms": 3,
+  "hands": 2
+ },
+ "kwame-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kwame-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "maya": {
+  "arms": 2,
+  "hands": 2
+ },
+ "maya-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "maya-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "maya-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "maya-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "maya-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "maya-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sol": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sol-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "sol-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "sol-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "sol-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sol-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sol-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "fatima-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jun": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jun-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "jun-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jun-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jun-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jun-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jun-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dolores": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dolores-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dolores-drape": {
+  "arms": 3,
+  "hands": 2
+ },
+ "dolores-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dolores-prop": {
+  "arms": 3,
+  "hands": 2
+ },
+ "dolores-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dolores-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "marcus": {
+  "arms": 2,
+  "hands": 2
+ },
+ "marcus-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "marcus-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "marcus-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "marcus-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "marcus-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "marcus-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ivy": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ivy-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ivy-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ivy-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ivy-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ivy-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ivy-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "arjun": {
+  "arms": 2,
+  "hands": 2
+ },
+ "arjun-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "arjun-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "arjun-lean": {
+  "arms": 3,
+  "hands": 2
+ },
+ "arjun-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "arjun-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "arjun-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "bea": {
+  "arms": 2,
+  "hands": 2
+ },
+ "bea-curl": {
+  "arms": 1,
+  "hands": 1
+ },
+ "bea-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "bea-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "bea-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "bea-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "bea-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tomas": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tomas-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "tomas-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tomas-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tomas-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tomas-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tomas-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "grace-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "leo": {
+  "arms": 2,
+  "hands": 2
+ },
+ "leo-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "leo-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "leo-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "leo-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "leo-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "leo-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "mei": {
+  "arms": 2,
+  "hands": 2
+ },
+ "mei-curl": {
+  "arms": 3,
+  "hands": 2
+ },
+ "mei-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "mei-lean": {
+  "arms": 3,
+  "hands": 2
+ },
+ "mei-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "mei-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "mei-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sam": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sam-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sam-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sam-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "sam-prop": {
+  "arms": 0,
+  "hands": 0
+ },
+ "sam-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "sam-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "noor": {
+  "arms": 2,
+  "hands": 2
+ },
+ "noor-curl": {
+  "arms": 3,
+  "hands": 2
+ },
+ "noor-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "noor-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "noor-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "noor-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "noor-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ezra": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ezra-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ezra-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ezra-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ezra-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ezra-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ezra-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "yuki": {
+  "arms": 2,
+  "hands": 2
+ },
+ "yuki-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "yuki-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "yuki-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "yuki-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "yuki-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "yuki-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kofi": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kofi-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kofi-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "kofi-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kofi-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kofi-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kofi-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ingrid": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ingrid-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ingrid-drape": {
+  "arms": 3,
+  "hands": 2
+ },
+ "ingrid-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ingrid-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ingrid-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ingrid-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "rafael": {
+  "arms": 2,
+  "hands": 2
+ },
+ "rafael-curl": {
+  "arms": 3,
+  "hands": 2
+ },
+ "rafael-drape": {
+  "arms": 3,
+  "hands": 2
+ },
+ "rafael-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "rafael-prop": {
+  "arms": 0,
+  "hands": 0
+ },
+ "rafael-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "rafael-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "priya": {
+  "arms": 2,
+  "hands": 2
+ },
+ "priya-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "priya-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "priya-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "priya-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "priya-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "priya-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "aziz": {
+  "arms": 2,
+  "hands": 2
+ },
+ "aziz-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "aziz-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "aziz-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "aziz-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "aziz-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "aziz-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "lena": {
+  "arms": 2,
+  "hands": 2
+ },
+ "lena-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "lena-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "lena-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "lena-prop": {
+  "arms": 3,
+  "hands": 2
+ },
+ "lena-chin": {
+  "arms": 3,
+  "hands": 2
+ },
+ "lena-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tama": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tama-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "tama-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tama-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "tama-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tama-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "tama-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "olu": {
+  "arms": 2,
+  "hands": 2
+ },
+ "olu-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "olu-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "olu-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "olu-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "olu-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "olu-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ana": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ana-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ana-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ana-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ana-prop": {
+  "arms": 3,
+  "hands": 3
+ },
+ "ana-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ana-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ada": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ada-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ada-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ada-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ada-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ada-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ada-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "benji": {
+  "arms": 2,
+  "hands": 2
+ },
+ "benji-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "benji-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "benji-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "benji-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "benji-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "benji-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "zola": {
+  "arms": 2,
+  "hands": 0
+ },
+ "zola-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "zola-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "zola-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "zola-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "zola-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "zola-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "omar": {
+  "arms": 2,
+  "hands": 2
+ },
+ "omar-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "omar-drape": {
+  "arms": 3,
+  "hands": 2
+ },
+ "omar-lean": {
+  "arms": 3,
+  "hands": 2
+ },
+ "omar-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "omar-chin": {
+  "arms": 3,
+  "hands": 3
+ },
+ "omar-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "kiki-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dev": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dev-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dev-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dev-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "dev-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dev-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "dev-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ruth": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ruth-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "ruth-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ruth-lean": {
+  "arms": 3,
+  "hands": 2
+ },
+ "ruth-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ruth-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "ruth-snuggle": {
+  "arms": 3,
+  "hands": 2
+ },
+ "jojo": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jojo-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jojo-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jojo-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jojo-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jojo-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "jojo-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "pia": {
+  "arms": 2,
+  "hands": 2
+ },
+ "pia-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "pia-drape": {
+  "arms": 2,
+  "hands": 1
+ },
+ "pia-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "pia-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "pia-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "pia-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "eli": {
+  "arms": 2,
+  "hands": 2
+ },
+ "eli-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "eli-drape": {
+  "arms": 0,
+  "hands": 0
+ },
+ "eli-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "eli-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "eli-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "eli-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nia": {
+  "arms": 2,
+  "hands": 0
+ },
+ "nia-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nia-drape": {
+  "arms": 2,
+  "hands": 1
+ },
+ "nia-lean": {
+  "arms": 2,
+  "hands": 1
+ },
+ "nia-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nia-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "nia-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "felix": {
+  "arms": 2,
+  "hands": 2
+ },
+ "felix-curl": {
+  "arms": 0,
+  "hands": 0
+ },
+ "felix-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "felix-lean": {
+  "arms": 2,
+  "hands": 2
+ },
+ "felix-prop": {
+  "arms": 2,
+  "hands": 2
+ },
+ "felix-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "felix-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hana": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hana-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hana-drape": {
+  "arms": 2,
+  "hands": 1
+ },
+ "hana-lean": {
+  "arms": 0,
+  "hands": 0
+ },
+ "hana-prop": {
+  "arms": 0,
+  "hands": 0
+ },
+ "hana-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "hana-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "drew": {
+  "arms": 2,
+  "hands": 2
+ },
+ "drew-curl": {
+  "arms": 2,
+  "hands": 2
+ },
+ "drew-drape": {
+  "arms": 2,
+  "hands": 2
+ },
+ "drew-lean": {
+  "arms": 2,
+  "hands": 0
+ },
+ "drew-chin": {
+  "arms": 2,
+  "hands": 2
+ },
+ "drew-snuggle": {
+  "arms": 2,
+  "hands": 2
+ },
+ "you": {
+  "arms": 2,
+  "hands": 2
+ }
+}

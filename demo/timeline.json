@@ -1,0 +1,45 @@
+{
+ "end": 139.127,
+ "scenes": [
+  {
+   "id": "intro",
+   "start": 0.778
+  },
+  {
+   "id": "people",
+   "start": 9.969
+  },
+  {
+   "id": "ring",
+   "start": 24.899
+  },
+  {
+   "id": "selfie",
+   "start": 36.549
+  },
+  {
+   "id": "join",
+   "start": 47.901
+  },
+  {
+   "id": "chat",
+   "start": 56.852
+  },
+  {
+   "id": "say",
+   "start": 70.612
+  },
+  {
+   "id": "shared",
+   "start": 94.917
+  },
+  {
+   "id": "zoom",
+   "start": 119.697
+  },
+  {
+   "id": "outro",
+   "start": 127.746
+  }
+ ]
+}
