@@ -43,6 +43,7 @@ HOST = os.environ.get("RABBLE_HOST", "127.0.0.1")
 # Set only where a host's proxy sits in front and adds X-Forwarded-For itself.
 TRUST_PROXY = os.environ.get("RABBLE_TRUST_PROXY") == "1"
 MAX_BODY = 8 * 1024 * 1024
+MAX_PIXELS = 4096 * 4096
 CREAM = (246, 238, 222)
 SELFIES_AT_ONCE = threading.BoundedSemaphore(2)   # photo jobs running at the same time
 SLOW_DOWN = "slow down a little, try again soon"
@@ -66,6 +67,10 @@ def read_photo(body):
     if not data_url.startswith("data:image/"):
         raise ValueError("expected an image")
     photo = Image.open(io.BytesIO(base64.b64decode(data_url.split(",", 1)[1])))
+    # Opening reads only the header: refuse huge pictures before decoding any pixels.
+    if photo.width * photo.height > MAX_PIXELS:
+        raise ValueError("photo too large")
+    photo.draft("RGB", (1024, 1024))          # JPEGs decode straight at a smaller size
     return photo.convert("RGB")
 
 
