@@ -17,6 +17,7 @@ import { setupTalk, playLines } from "./talk.js";
 import { sendSqueeze } from "./squeeze.js";
 import { createWelcome } from "./welcome.js";
 import { react } from "./gestures.js";
+import { createOrbitDial } from "./orbit.js";
 import { connectPile } from "./shared.js";
 import { connectOffline } from "./offline.js";
 import { createRoom } from "./room.js";
@@ -62,7 +63,7 @@ const app = {
   visitors: 0,
 };
 
-let world, cam, renderer, tilt, sfx, cards, ui, lighting, room, talkBox, welcome;
+let world, cam, renderer, tilt, sfx, cards, ui, lighting, room, talkBox, welcome, orbit;
 
 const loadImage = (src) => new Promise((resolve, reject) => {
   const img = new Image();
@@ -174,8 +175,11 @@ function nextRing() {
   app.arriving = crowd.filter((c) => !here.has(c.id));
   const s = personSize(crowd.length + (app.you ? 1 : 0));
   for (const p of world.people) p.sTarget = s;
-  // Reframe for the new ring while it fills in, then hold still again.
-  reframe(3000);
+  // A big crowd rains in faster, so any ring fills in within a few seconds;
+  // the camera keeps framing until everyone has landed, then holds still.
+  app.spawnEvery = Math.max(18, Math.min(FLOW.spawnEveryMs, FLOW.arrivalBatchMs / Math.max(1, app.arriving.length)));
+  app.leaveEvery = Math.max(14, Math.min(FLOW.leaveEveryMs, FLOW.arrivalBatchMs / Math.max(1, app.leaving.length)));
+  reframe(Math.max(3000, app.arriving.length * app.spawnEvery + 4000, app.leaving.length * app.leaveEvery + 4000));
   app.growSettledAt = 0;
 }
 
@@ -183,7 +187,7 @@ function stepComings(t) {
   if (app.leaving.length && t > app.nextLeave) {
     const p = app.leaving.shift();
     if (world.people.includes(p) && !p.rolling) rollOut(p);
-    app.nextLeave = t + FLOW.leaveEveryMs;
+    app.nextLeave = t + (app.leaveEvery || FLOW.leaveEveryMs);
   }
   if (app.arriving.length && t > app.nextArrive) {
     const info = app.arriving.shift();
@@ -192,7 +196,7 @@ function stepComings(t) {
     p.sTarget = s;
     setPose(p, pick(["open", "prop", "snuggle"]));
     p.poseT = 1;                       // no crossfade while falling
-    app.nextArrive = t + FLOW.spawnEveryMs;
+    app.nextArrive = t + (app.spawnEvery || FLOW.spawnEveryMs);
   }
   stepTalk(performance.now());
   // Now and then someone leaves and someone new arrives, like real people would.
@@ -309,9 +313,24 @@ function rollYouOut() {
   app.closeUpUntil = 0;
 }
 
+// ---------- the orbit dial: circle whoever is in the middle of your close-up ----------
+const ORBIT_ZOOM = 1.3;           // zoomed in at least this much, the dial shows
+
+function findAnchor() {
+  const cx = renderer.w / 2, cy = renderer.h / 2;
+  let best = null, bd = Infinity;
+  for (const p of world.people) {
+    if (p.falling || p.rolling) continue;
+    const d = Math.hypot(p.sx - cx, p.sy - cy);
+    if (d < bd) { bd = d; best = p; }
+  }
+  return best && { x: best.pos.x, y: best.pos.y, z: best.pos.z, sx: best.sx, sy: best.sy };
+}
+
 // ---------- tap someone; tap your light to talk ----------
 const LIGHT_TAP_PX = 30;
 const youLightY = () => app.you.sy - app.you.size * 0.95 - 14;   // where render.js draws your light
+const onYourLight = (x, y) => app.you && !app.you.rolling && Math.hypot(x - app.you.sx, y - youLightY()) < LIGHT_TAP_PX;
 
 function personAt(x, y) {
   let best = null;
@@ -328,12 +347,11 @@ function personAt(x, y) {
 // smile you can hear); only your own person moves when you touch it.
 function onTap(x, y) {
   sfx.unlock();
-  // Your light (or you): say something, right there beside you.
-  if (app.you && !app.you.rolling && (Math.hypot(x - app.you.sx, y - youLightY()) < LIGHT_TAP_PX || personAt(x, y) === app.you)) {
-    return talkBox.toggleAt({ x: app.you.sx, y: youLightY() });
-  }
+  // Your light: say something, right there beside you.
+  if (onYourLight(x, y)) return talkBox.toggleAt({ x: app.you.sx, y: youLightY() });
   const p = personAt(x, y);
   if (!p || p.rolling) return;
+  if (p.isYou) return closeUp();              // tap yourself: a close-up
   sfx.note(p.info.slug);                  // everyone holds a note: tap around to make music
   if (!p.base) p.squish = Math.max(p.squish, 0.12);
 }
@@ -628,7 +646,7 @@ function setupSelfie() {
     dialog.close();
     if (!file) return;
     joinBtn.disabled = true;
-    showMaking("working", "Making you…", "SAM is cutting you out, Muse is making you squishy. About half a minute.");
+    showMaking("working", "Making you…", "Muse is making a little you. About half a minute.");
     try {
       const { img, figure } = await makeRabbleFromPhoto(file);
       app.youPoses = { open: img };
@@ -752,6 +770,7 @@ function tick(t) {
   if (!app.dropping) stepCloseUp(t);
 
   updateCamera(cam, renderer, world, reducedMotion ? 0 : app.scene.tilt, reducedMotion ? 0 : t);
+  orbit?.step();
   app.scene.light = lighting.update(t);
   draw(renderer, world, cam, app.scene, t);
   placeCards(overlay, { w: renderer.w, ceiling: cardCeiling(), floor: pileTopOnScreen(), zoom: cardZoom() });
@@ -785,6 +804,12 @@ function pileTopOnScreen() {
 
 function setupButtons() {
   setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou });
+  orbit = createOrbitDial({
+    el: $("#orbit"), cam,
+    // Close up, in the pile, and not while you're typing.
+    isShown: () => app.joined && cam.view.zoom > ORBIT_ZOOM && $("#say").hidden,
+    findAnchor,
+  });
   joinBtn.addEventListener("click", join);
   // Found it: the ring button stops calling for attention.
   $("#ring").addEventListener("click", () => $("#ring").classList.add("tried"), { once: true });
@@ -806,6 +831,11 @@ function setupButtons() {
   setupSelfie();
   talkBox = setupTalk({
     getYou: () => app.you,
+    isOpener: (target, x, y) => {
+      if (target !== canvas) return false;
+      const r = canvas.getBoundingClientRect();
+      return onYourLight(x - r.left, y - r.top);
+    },
     send: (text) => { app.lastSaid = text; return app.pile.say(text); },
     // While the AI is finding your words, the pile's own chat waits.
     onTyping(on) {

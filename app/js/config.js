@@ -12,9 +12,9 @@ export const HOME = {
 // How many people are in the pile for each ring (reusing the cast as needed).
 export const CROWD = {
   neighborhood: 44,
-  city: 72,
-  state: 100,
-  world: 140,
+  city: 110,
+  state: 240,
+  world: 480,               // a journey: each ring is a much taller tower than the last
 };
 
 // The pile is a real 3D mound of soft balls. World units are pixels at the
@@ -143,8 +143,9 @@ export const FLOW = {
   rollSpeed: 6,              // px/step along the floor when rolling out
   followAfterMs: 7000,      // after you land, someone else drops in after you
   resizeEase: 0.035,        // how quickly everyone resizes when the ring changes
-  spawnEveryMs: 90,         // newcomers tumbling in when the ring grows
-  landSpread: 1,            // × the base's reach: newcomers land anywhere on it, so it widens as it grows
+  spawnEveryMs: 90,         // newcomers tumbling in when the ring grows (faster for a big crowd)
+  arrivalBatchMs: 9000,     // however many arrive, they've all fallen in within about this long
+  landSpread: 0.8,          // × the tower's foot: newcomers land within it, so it grows up, not out
   expressEveryMs: [25000, 50000],  // someone smiles, chuckles, sighs… now and then         // newcomers land anywhere within this × the mound's radius
   leaveEveryMs: 70,         // people rolling out when the ring shrinks
   menuFirstArrivalsMs: [4500, 6000], // on the opening screen: the first one lands within 5 s, the next 6 s later…

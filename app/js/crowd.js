@@ -40,8 +40,9 @@ export function stepRolling(world, cam, w, onGone) {
 // A newcomer drops in from the sky: it starts above the top of the screen,
 // straight over a spot on the mound, and falls down onto the pile.
 export function dropIn(world, person, s, cam) {
-  // Anywhere over the footprint this crowd needs, so the heap widens as it grows.
-  const reach = Math.max(world.radius, world.shapeFor?.foot || 0) * FLOW.landSpread;
+  // Within the tower's own foot (not the whole spread of the pile), so a big
+  // crowd builds up into a tall tower instead of slumping into a wide mound.
+  const reach = (world.shapeFor?.foot || world.radius) * FLOW.landSpread;
   const surfaceAt = (x, z) => {
     let top = 0;
     for (const q of world.people) {

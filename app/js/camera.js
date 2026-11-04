@@ -88,6 +88,14 @@ export function updateCamera(cam, { w, h }, world, tilt, t) {
   const onFloor = h * cam.stage.floor + cam.lift - front.y;
   // For a close-up, the focus point (which lands at cy) moves to the middle.
   cam.cy = onFloor + (h * 0.48 - onFloor) * cam.center;
+  // Orbiting in close-up (the dial): whoever you were looking at stays where
+  // they were on screen while the camera circles them.
+  const a = cam.orbitAnchor;
+  if (a) {
+    const p = project(cam, a.x, a.y, a.z);
+    cam.view.panX += a.sx - p.x;
+    cam.view.panY += a.sy - p.y;
+  }
 }
 
 // World point -> screen point, plus scale (k) and distance from the camera.

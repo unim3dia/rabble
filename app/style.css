@@ -313,6 +313,43 @@ body.in-pile .dock { opacity: 0; transform: translateY(12px); pointer-events: no
   transition: opacity 600ms var(--ease-out) 300ms;
 }
 body.in-pile .corner { opacity: 1; pointer-events: auto; }
+/* The orbit dial: a frosted strip on the bottom row, left of the buttons,
+   with ticks like a lens ring that scroll as you turn. Only when zoomed in. */
+.orbit-dial {
+  position: fixed;
+  left: max(env(safe-area-inset-left), 16px);
+  right: calc(max(env(safe-area-inset-right), 16px) + 3 * 44px + 2 * 10px + 14px);
+  bottom: max(env(safe-area-inset-bottom), 18px);
+  height: 44px;
+  z-index: 5;
+  border-radius: 22px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 244, 230, 0.5) 0 1.5px, transparent 1.5px 14px) var(--ticks, 0px) 50% / auto 40% repeat-x,
+    rgba(255, 250, 242, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  touch-action: none;
+  cursor: ew-resize;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+.orbit-dial.on { opacity: 1; pointer-events: auto; transform: none; }
+/* A small notch in the middle, where your finger lands. */
+.orbit-dial::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 9px; bottom: 9px;
+  width: 3px; margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--cream);
+  opacity: 0.85;
+}
+.orbit-dial:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+
 .corner-btn {
   position: relative;
   width: 44px; height: 44px;
@@ -441,7 +478,7 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
   width: 100%;
   height: 100%;
   border: 0;
-  padding: 12px 12px 44px;
+  padding: 12px;
   resize: none;
   background: transparent;
   font-family: var(--font-display);
@@ -453,17 +490,22 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
   outline: none;
 }
 /* Until you type, the card says "say something to the pile" in a little heap. */
+/* The letters heap across the whole card, beside the Say button too, and
+   nothing is clipped (the "y" of "mind?" keeps its tail). */
 .say-hint {
   position: absolute;
-  inset: 10px 10px 46px;
+  inset: 10px 10px 14px;
   width: auto;
   height: auto;
   background: transparent;
   box-shadow: none;
+  overflow: visible;
+  justify-content: center;      /* the rows sit together in the middle, clear of the Say button */
+  gap: 0.15em;
   pointer-events: none;
   opacity: 0.5;
 }
-.say-hint.typed { opacity: 1; justify-content: center; gap: 0.15em; }
+.say-hint.typed { opacity: 1; }
 /* A soft blinking bar after the last letter, so you can see where you're typing. */
 .say-hint.typed .ring-row:last-child::after {
   content: "";

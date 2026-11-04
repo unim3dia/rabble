@@ -7,9 +7,9 @@ POST /api/leave    {"token"}
 POST /api/say      {"text", "token"} -> {"sid", "text"}: checked, then everyone sees it as written
 GET  /api/figure/ID  a selfie figure, so others in the pile can see you
 POST /api/selfie  body: {"image": "data:image/jpeg;base64,..."}
-  1. SAM 3.1 cuts the person out of the photo (concept "person").
-  2. Muse Image redraws that cutout as a Rabble person.
-  3. SAM 3.1 cuts the new Rabble person out onto transparency.
+  1. Muse Image redraws the photo as a Rabble person, exactly as they are,
+     on a flat green background.
+  2. greenscreen.py keys out the green (clean, soft edges; no SAM rim).
   -> {"image": "data:image/png;base64,...", "figure": id}
 Photos stay in memory only; nothing is written to disk or logged. The made
 figure is kept in memory while you're in the pile, so others can see you.
@@ -30,7 +30,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import meta_api  # noqa: E402
-from make_person import STYLE, cut_out  # noqa: E402
+import greenscreen  # noqa: E402
 import whispers  # noqa: E402
 import chat  # noqa: E402
 import room  # noqa: E402
@@ -45,14 +45,18 @@ HOST = os.environ.get("RABBLE_HOST", "127.0.0.1")
 CLIENT_IP_HEADER = os.environ.get("RABBLE_CLIENT_IP_HEADER", "")
 MAX_BODY = 8 * 1024 * 1024
 MAX_PIXELS = 4096 * 4096
-CREAM = (246, 238, 222)
 SELFIES_AT_ONCE = threading.BoundedSemaphore(2)   # photo jobs running at the same time
 SLOW_DOWN = "slow down a little, try again soon"
 
 SELFIE_PROMPT = (
-    "Redraw this person as a Rabble person. Keep what makes them recognizable: "
-    "their skin tone, hair color and style, facial hair, glasses, head covering "
-    "and clothing colors. " + STYLE
+    "Redraw this exact person as a single small, squishy, chunky clay figurine, full body, standing, "
+    "facing us. Keep them exactly as they are in the photo: the same age, face, skin tone, hair color "
+    "and hairstyle, facial hair, glasses, head covering and clothing colors. Do not make them older, "
+    "do not add grey or white hair. Only the proportions are toy-like: big round head, soft round body, "
+    "short stubby arms and legs, little feet, rosy cheeks. Fully clothed. Soft matte clay look, gentle "
+    "even light. Background: perfectly flat, solid pure green (#00FF00) filling the whole frame, no "
+    "shadow on it, no floor, no gradient. Nothing green on the figure itself. Whole body visible with "
+    "space around it, no other people, nothing else in the frame."
 )
 
 
@@ -78,18 +82,10 @@ def read_photo(body):
 def selfie_to_rabble(photo):
     photo = photo.copy()
     photo.thumbnail((1024, 1024))
-    raw = png_bytes(photo)
-    person = cut_out(raw)
-    if person is None:
-        raise ValueError("no person found in the photo")
-    # Put the cutout on plain cream so Muse Image sees only the person.
-    pad = max(person.size) // 6
-    canvas = Image.new("RGB", (person.width + 2 * pad, person.height + 2 * pad), CREAM)
-    canvas.paste(person, (pad, pad), person)
-    made = meta_api.images_edit(png_bytes(canvas), "image/png", SELFIE_PROMPT, "rabble selfie")
-    rabble = cut_out(made)
+    made = meta_api.images_edit(png_bytes(photo), "image/png", SELFIE_PROMPT, "rabble selfie")
+    rabble = greenscreen.key(made)
     if rabble is None:
-        raise ValueError("could not cut out the Rabble person")
+        raise ValueError("couldn't make your Rabble person from that photo")
     rabble.thumbnail((420, 420))
     return png_bytes(rabble)
 

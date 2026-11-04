@@ -30,7 +30,9 @@ function heapRows(text) {
 const BETWEEN_REPLIES_MS = 3600;
 const READ_MS = 6500;            // how long the last line stays once it's in
 
-export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, sfx }) {
+// isOpener(target, x, y): is this press on something that opens the card itself
+// (your light), so tapping it doesn't close and reopen the card.
+export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, sfx, isOpener }) {
   const form = $("#say");
   const input = $("#say-input");
   let busy = false;
@@ -95,6 +97,12 @@ export function setupTalk({ getYou, send, onSaid, onThinking, onTyping, cards, s
     input.blur();
   };
   $("#say-btn").addEventListener("click", () => (form.hidden ? open() : close()));
+  // Tap anywhere else (the pile, the menu, the sky) and the card goes away.
+  document.addEventListener("pointerdown", (e) => {
+    if (form.hidden || form.contains(e.target) || $("#say-btn").contains(e.target)) return;
+    if (isOpener?.(e.target, e.clientX, e.clientY)) return;
+    close();
+  }, true);
   // Enter sends; Shift+Enter makes a new line.
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {

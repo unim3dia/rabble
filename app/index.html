@@ -54,6 +54,9 @@
 </main>
 
 <!-- Once you're in the pile, everything else fades away; this is all that stays. -->
+<!-- Zoomed in: slide along this to circle around the pile. -->
+<div class="orbit-dial" id="orbit" role="slider" aria-label="Turn around the pile" aria-valuetext="turn" tabindex="-1"></div>
+
 <div class="corner" id="corner">
   <div class="corner-menu" id="corner-menu" hidden>
     <button id="m-mine" class="chip">My Rabble</button>
@@ -94,7 +97,7 @@
   </div>
   <img id="making-img" alt="Your Rabble person" hidden>
   <strong id="making-title">Making you…</strong>
-  <p id="making-text">SAM is cutting you out, Muse is making you squishy. About half a minute.</p>
+  <p id="making-text">Muse is making a little you. About half a minute.</p>
   <div class="making-row">
     <button id="making-again" class="chip" hidden>Try another photo</button>
     <button id="making-join" class="join small" hidden>Join the pile</button>
@@ -111,7 +114,7 @@
 
 <dialog id="consent" class="sheet">
   <h2>Become your Rabble person</h2>
-  <p>Take one now or pick one you have. Your photo goes to Meta's AI. SAM&nbsp;3.1 cuts you out, and Muse&nbsp;Image makes you squishy. Your photo isn't saved; your Rabble person is shown to others in the pile while you're in it.</p>
+  <p>Take one now or pick one you have. Your photo goes to Meta's AI. Muse&nbsp;Image makes a little clay you from it. Your photo isn't saved; your Rabble person is shown to others in the pile while you're in it.</p>
   <div class="sheet-row">
     <button value="cancel" id="consent-no" class="chip">Not now</button>
     <label class="join small">Choose a photo<input id="photo" type="file" accept="image/*" hidden></label>

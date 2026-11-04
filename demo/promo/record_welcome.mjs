@@ -128,7 +128,7 @@ cap.mark("menu-end");
 cap.mark("photo");
 await tap("#selfie");
 await sleep(1300);
-await page.setInputFiles("#photo", path.join(DIR, process.env.SELFIE || "selfie-bob.jpg"));
+await page.setInputFiles("#photo", path.join(DIR, process.env.SELFIE || "selfie-auburn.jpg"));
 cap.mark("making");
 await page.waitForSelector("#making-img:not([hidden])", { timeout: 180000 });
 cap.mark("made");
