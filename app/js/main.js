@@ -644,18 +644,29 @@ function showSay(person, text) {
 }
 
 
-// A clay person near you answers: its words, a squeeze that travels to you,
-// and the people around you react with their bodies to what you said.
+// People near you answer, one after another, and later talk it over among
+// themselves: the same few faces carry the whole thread. On the first round a
+// squeeze travels to you and the pile reacts with its bodies to what you said.
 function onReply(e) {
   const to = e.to && e.to === app.pile?.id ? app.you : null;     // only answers to you
   if (!to) return;
+  const lines = e.lines || [e];                                  // (the server-free page sends one line)
   const near = nearTo(to, to);
-  const [who] = castLines([{ who: e.who || "grown-up" }], near);
-  if (!who) return;
-  sendSqueeze(overlay, who, to, { onArrive: () => sfx.boop() });
-  cards.show(who, e.text, { cls: "companion", ms: SAY_MS / 2 });
-  sfx.express(e.tone || "smile");
-  setTimeout(() => react(e.gesture, to, near.filter((p) => p !== who), { sfx, hush }), 900);
+  if (!app.thread || app.thread.sid !== e.sid) app.thread = { sid: e.sid, cast: [] };
+  const speakers = lines.map((line, i) => {
+    const held = app.thread.cast[i % Math.max(1, app.thread.cast.length)];
+    if (held && world.people.includes(held) && (e.round || i < app.thread.cast.length)) return held;
+    const who = castLines([line], near.filter((p) => !app.thread.cast.includes(p)))[0];
+    if (who) app.thread.cast.push(who);
+    return who;
+  });
+  const run = playLines({ lines, speakers, cards, sfx });
+  hush(run.ms + 4000);                   // the room's own talk waits while your thread is going
+  const first = speakers[0];
+  if (!e.round && first) {
+    sendSqueeze(overlay, first, to, { onArrive: () => sfx.boop() });
+    setTimeout(() => react(e.gesture, to, near.filter((p) => !speakers.includes(p)), { sfx, hush }), 900);
+  }
 }
 
 // The answer didn't come: say so gently, with a way to ask again.

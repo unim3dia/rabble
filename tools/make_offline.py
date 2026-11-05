@@ -37,8 +37,8 @@ def safely(fn, *args):
 
 
 def companion(text):
-    line = safely(chat.companion, text, QUESTION, random.choice(["kid", "teen", "grown-up", "elder"]))
-    return {"replies": [line]} if line else None
+    part = safely(chat.reply_thread, text, QUESTION)
+    return {"replies": part["lines"]} if part else None
 
 
 def main():

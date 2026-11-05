@@ -48,7 +48,8 @@ _viewers = {}              # viewer key -> last poll time (people watching, join
 _busy_until = 0.0          # the pile is mid-conversation (or someone's speaking) until then
 _says = {}                 # sid -> {"id", "text", "answered"}: recent things people said
 _talks = {}                # player id -> their last few lines with the companions, for continuity
-TALK_KEPT = 6
+_latest = {}               # player id -> their newest message (sid): the thread that's live
+TALK_KEPT = 14
 
 QUESTIONS = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                                         "app", "questions.json"), encoding="utf-8"))
@@ -122,6 +123,7 @@ def leave(token):
 def _drop(p):
     _players.pop(p["id"], None)
     _talks.pop(p["id"], None)
+    _latest.pop(p["id"], None)
     if p["figure"]:
         _figures.pop(p["figure"], None)
         _claimed.discard(p["figure"])
@@ -151,6 +153,7 @@ def say(token, text):
     with _lock:
         sid = secrets.token_urlsafe(6)
         _says[sid] = {"id": p["id"], "text": text, "answered": False}
+        _latest[p["id"]] = sid                 # a new message: any older thread winds down
         while len(_says) > SAYS_KEPT:
             _says.pop(next(iter(_says)))
         _busy_until = max(_busy_until, time.time()) + ALONE_S + READ_S
@@ -159,34 +162,52 @@ def say(token, text):
     return {"sid": sid, "text": text}
 
 
+THREAD_GAPS_S = (9, 12)    # the pauses between a thread's rounds
+
+
 def _companion_answers(sid, not_before=0):
-    """No one answered in time: one clay companion does, as a companion
-    (not before `not_before`, so it never feels instant)."""
-    import random
+    """Two people of the pile answer a visitor, then (after a pause, and again)
+    they talk it over with each other: a little thread around what was said.
+    It stops if the visitor leaves or says something new (that starts its own)."""
     with _lock:
         said = _says.get(sid)
         if not said or said["answered"] or said["id"] not in _players:
             return
         said["answered"] = True
-        history = list(_talks.get(said["id"], []))
-    if not SAY_LIMIT.acquire(timeout=30):
+        history = list(_talks.get(said["id"], [])) + [f"Visitor: {said['text']}"]
+    rounds = len(chat.ROUNDS)
+    for round_ in range(rounds):
+        if round_:
+            time.sleep(THREAD_GAPS_S[round_ - 1])
         with _lock:
-            _emit("missed", only=said["id"], to=said["id"], sid=sid)
-        return
-    try:
-        line = chat.companion(said["text"], question(), random.choice(["grown-up", "elder"]), history)   # grown-ups only
-    except Exception as e:  # API failure; no key material in the message
-        sys.stderr.write(f"rabble: companion failed: {type(e).__name__}\n")
+            if said["id"] not in _players or _latest.get(said["id"]) != sid:
+                return                        # gone, or onto something new
+        if not SAY_LIMIT.acquire(timeout=30):
+            if not round_:
+                with _lock:
+                    _emit("missed", only=said["id"], to=said["id"], sid=sid)
+            return
+        try:
+            part = chat.reply_thread(said["text"], question(), history, round_)
+        except Exception as e:  # API failure; no key material in the message
+            sys.stderr.write(f"rabble: thread failed: {type(e).__name__}\n")
+            if not round_:
+                with _lock:
+                    _emit("missed", only=said["id"], to=said["id"], sid=sid)
+            return
+        finally:
+            SAY_LIMIT.release()
+        if not round_:
+            time.sleep(max(0, not_before - time.time()))
+        history += [f"Person: {l['text']}" for l in part["lines"]]
         with _lock:
-            _emit("missed", only=said["id"], to=said["id"], sid=sid)
-        return
-    finally:
-        SAY_LIMIT.release()
-    time.sleep(max(0, not_before - time.time()))
-    with _lock:
-        if said["id"] in _players:
-            _talks[said["id"]] = (history + [f"Visitor: {said['text']}", f"Companion: {line['text']}"])[-TALK_KEPT:]
-            _emit("reply", only=said["id"], to=said["id"], sid=sid, **line)
+            if said["id"] not in _players:
+                return
+            global _busy_until
+            _busy_until = max(_busy_until, time.time()) + len(part["lines"]) * LINE_S + THREAD_GAPS_S[0]
+            _talks[said["id"]] = history[-TALK_KEPT:]
+            _emit("reply", only=said["id"], to=said["id"], sid=sid, round=round_,
+                  lines=part["lines"], gesture=part["gesture"] if not round_ else None)
 
 
 def events(since, viewer, token=None):

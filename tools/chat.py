@@ -152,30 +152,39 @@ a local crisis line.
 
 Return ONLY JSON: {"ok": true} or {"ok": false, "note": "..."}"""
 
-COMPANION = """You are one of the people of Rabble: little clay people in a big
-group hug who keep visitors company. If you mention yourselves, say "people"
-or "us", never "companions". Everyone here was asked tonight:
-{question}
+THREAD = """You voice the little people of Rabble, a big group hug of people who
+keep visitors company late at night. If you mention yourselves, say "people" or "us".
+Everyone here was asked tonight: {question}
 
 {history}A real visitor said: {text}
 
-No one else has answered yet. Answer them as a "{who}", warmly and simply: meet
-them halfway, like someone glad they spoke. You're a companion, not a person
-who was there; never claim to have done or seen things. One short line (at most
-14 words), maybe a tiny question back. Plain and kind, no emoji, no hashtags,
-no advice unless asked. Never ask for their name, where they live or anything
-personal; any question back is about the moment itself.
+{round_note}
 
-Also pick how the little people around them react with their bodies, from
-what they actually said:
-  "cheer"    a small win or good news (a few nearby people bounce)
-  "lean"     tired, sad or a hard day (people lean in close, the pile hushes)
-  "chuckle"  playful or funny (a ripple of little laughs)
-  "doze"     winding down, sleepy, calm (people nearby settle and doze)
+How they talk: like real people half-asleep in a heap at 1am. Spoken, casual,
+imperfect: contractions, fragments, "wait", "ha", "okay but", teasing gently,
+reacting before adding. Each line at most 14 words. Never a greeting card, a poem
+or a lecture. They're people of the pile, not people who were there: never claim
+to have done or seen what the visitor did. No advice unless asked. Never ask for
+their name, where they live or anything personal; questions are about the moment.
+No emoji, no hashtags. Each line is said by a "grown-up" or an "elder".
 
-Tone: "smile", "chuckle", "aww" or "idea".
+Also pick how the little people around the visitor react with their bodies, from
+what the visitor actually said: "cheer" (a small win), "lean" (tired, sad, a hard
+day), "chuckle" (playful), "doze" (winding down).
 
-Return ONLY JSON: {{"text": "...", "tone": "...", "gesture": "cheer|lean|chuckle|doze"}}"""
+Return ONLY JSON: {{"lines": [{{"text": "...", "who": "grown-up|elder",
+"tone": "smile|chuckle|aww|idea|hmm"}}], "gesture": "cheer|lean|chuckle|doze"}}"""
+
+ROUNDS = [
+    "Write exactly 2 lines, from two different people, both answering the visitor "
+    "directly and warmly, meeting them halfway; the second builds on the first.",
+    "A little later. Write 2 or 3 lines: those people keep talking about what the "
+    "visitor said WITH EACH OTHER, picking up each other's words, taking it somewhere "
+    "a little new (a memory, a funny angle, a small wonder). One may toss the visitor "
+    "an easy question.",
+    "A little later still. Write 2 lines that gently round the thread off, the way a "
+    "conversation drifts: one last thought, then a soft, warm closing beat.",
+]
 
 
 def _ask(instructions, text, detail, max_tokens=1500):
@@ -208,18 +217,26 @@ def check(text):
     return False, note or "That one can't go up here. Try saying it another way?"
 
 
-def companion(text, question, who="grown-up", history=()):
-    """One clay companion's answer to a real visitor no one else answered.
-    `history`: their last few lines with the companions, so it can follow on."""
-    earlier = ("Earlier tonight:\n" + "\n".join(history) + "\n\n") if history else ""
-    data = _ask(COMPANION.format(question=question, text=json.dumps(tidy(text)), who=_who(who), history=earlier),
-                "Answer them.", "companion")
-    line = " ".join(str(data.get("text") or "").split())[:200]
-    if not line:
-        raise RuntimeError("no companion line")
-    tone = data.get("tone") if data.get("tone") in TONES else "smile"
+def reply_thread(text, question, history=(), round_=0):
+    """A round of the little thread the people of the pile weave around what a
+    visitor said: round 0 two answers, then they talk it over (see ROUNDS).
+    `history`: what's been said so far, so each round follows on."""
+    earlier = ("So far:\n" + "\n".join(history) + "\n\n") if history else ""
+    data = _ask(THREAD.format(question=question, text=json.dumps(tidy(text)), history=earlier,
+                              round_note=ROUNDS[min(round_, len(ROUNDS) - 1)]),
+                "Continue.", "thread")
+    lines = []
+    for item in data.get("lines", [])[:3]:
+        if not isinstance(item, dict):
+            continue
+        line = " ".join(str(item.get("text") or "").split())[:200]
+        if line:
+            tone = item.get("tone") if item.get("tone") in TONES else "smile"
+            lines.append({"text": line, "tone": tone, "who": "elder" if item.get("who") == "elder" else "grown-up"})
+    if not lines:
+        raise RuntimeError("no thread lines")
     gesture = data.get("gesture") if data.get("gesture") in GESTURES else "cheer"
-    return {"text": line, "tone": tone, "who": _who(who), "gesture": gesture}
+    return {"lines": lines, "gesture": gesture}
 
 
 OPENER = """You voice Rabble: a pile of little people in a big group hug, awake late at

@@ -79,7 +79,7 @@ export function createCards(overlay) {
     el._drift = { x: (Math.random() - 0.5) * 36, y: Math.random() * 22, phase: Math.random() * Math.PI * 2 };
     overlay.appendChild(el);
     // Never more than a few on screen: the oldest quietly makes room.
-    const showing = [...overlay.querySelectorAll(".card:not(.leaving)")];
+    const showing = [...overlay.querySelectorAll(".card:not(.leaving):not(.yours)")];   // your words stay up
     for (const old of showing.slice(0, Math.max(0, showing.length - MAX_CARDS))) {
       old.classList.add("leaving");
       setTimeout(() => old.remove(), 900);
@@ -102,7 +102,8 @@ export function createCards(overlay) {
 }
 
 const GAP = 6;
-const GLIDE = 0.08;      // per frame, how quickly a sticker eases toward its spot
+const GLIDE = 0.04;      // per frame, how gently a sticker eases toward its spot
+const MAX_GLIDE_PX = 1.4; // …and never faster than this per frame
 const ROOM = 26;         // px between the stickers and the top of the pile: they keep clear of heads
 
 // Cards float in the air above the pile, never over it: each one as close
@@ -200,6 +201,11 @@ export function placeCards(overlay, { w, ceiling, floor, zoom = 1, tucked = fals
     // Try rows from the pile's top edge upward; in each row, right above the
     // speaker first, then a step to either side.
     let box = null;
+    // Keep its spot while that spot stays clear: stickers don't hop about.
+    if (el._spot) {
+      const c = { x: clampX(el._spot.x), y: el._spot.y, w: bw, h: bh };
+      if (free(c) && c.y >= ceiling - 0.5 && c.y + bh <= bottom + bh * 0.5) box = c;
+    }
     for (let y = bottom - bh - drift.y; !box && y >= ceiling - 0.5; y -= bh + GAP) {
       for (const dx of [0, bw + GAP, -(bw + GAP), 2 * (bw + GAP), -2 * (bw + GAP)]) {
         const c = { x: clampX(home + dx), y, w: bw, h: bh };
@@ -215,12 +221,14 @@ export function placeCards(overlay, { w, ceiling, floor, zoom = 1, tucked = fals
       }
     }
     box = box || { x: home, y: ceiling, w: bw, h: bh };
-    placed.push(box);
+    el._spot = { x: box.x, y: box.y };
+    placed.push({ ...box });
     const t = performance.now() / 1000;
     // Glide, don't jump: when a sticker must make room, it eases over to its new spot.
     const at = el._at || { x: box.x, y: box.y };
-    at.x += (box.x - at.x) * GLIDE;
-    at.y += (box.y - at.y) * GLIDE;
+    const ease = (d) => Math.max(-MAX_GLIDE_PX, Math.min(MAX_GLIDE_PX, d * GLIDE));   // soft, and never fast
+    at.x += ease(box.x - at.x);
+    at.y += ease(box.y - at.y);
     el._at = at;
     box.x = at.x + Math.sin(t * 0.35 + drift.phase) * 4;
     box.y = at.y + Math.sin(t * 0.5 + drift.phase * 1.3) * 3.5;
