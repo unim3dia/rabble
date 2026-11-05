@@ -1,6 +1,6 @@
 # Rabble
 
-**A living pile of little clay people, awake together.**
+**A living pile of little people, awake together.**
 
 Play it: **https://unim3dia.github.io/rabble/**
 
@@ -15,8 +15,8 @@ Built for the Meta Global AI Developer Hackathon, 2026.
 
 | Model | What it does in Rabble |
 |---|---|
-| **Muse Image** | Drew every character (47 people, ages 10 to 90, up to seven poses each), and turns your photo into your own clay person. |
-| **SAM 3.1** | Cuts every figure out of its background, and cuts you out of your photo before and after you're remade. |
+| **Muse Image** | Drew every character (47 people, ages 10 to 90, up to seven poses each), and turns your photo into your own Rabble person. |
+| **SAM 3.1** | Cut every person in the pile out of their background, so they can tumble and stack as separate figures. |
 | **Muse Spark** | Searches the web for today's real news and writes the pile's tiny conversations (one smart line, one funny, one a little perturbed); rewords what you say, kindly, and answers you; checked all the pictures for extra arms. |
 
 ## Two ways to run it
@@ -49,5 +49,5 @@ a minute. Photos, chat and joins are limited per visitor and per day
 - `site/`: the landing page. `.github/workflows/pages.yml` publishes it with the app at `/play/`.
 - `demo/promo/`: how the promo video was recorded and cut.
 
-Your photo is never saved: it's handled in memory only, and your clay figure is
+Your photo is never saved: it's handled in memory only, and your Rabble figure is
 forgotten when you leave the pile.

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rabble</title>
-<meta name="description" content="Rabble: a living pile of little clay people, awake together. Made with Meta Muse Image, SAM 3.1 and Muse Spark.">
+<meta name="description" content="Rabble: a living pile of little people, awake together. Made with Meta Muse Image, SAM 3.1 and Muse Spark.">
 <meta name="theme-color" content="#0d1426">
 <meta property="og:title" content="Rabble">
-<meta property="og:description" content="A little company at the end of the day. Drop into a soft, living pile of AI clay characters. Share something small, or just settle in.">
+<meta property="og:description" content="A little company at the end of the day. Drop into a soft, living pile of AI characters. Share something small, or just settle in.">
 <meta property="og:image" content="play/icon-512.png">
 <link rel="icon" href="play/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,6 +110,11 @@
   .spots .phone { width: 100%; rotate: 0deg; padding: 8px; border-radius: 36px; }
   .spots .phone video { border-radius: 28px; }
   .spots figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 0.95rem; text-align: center; }
+  .wide-video { margin: 28px 0 0; max-width: 860px; }
+  .wide-video .yt { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #000; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4); }
+  .wide-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .wide-video figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 0.95rem; }
+  .wide-video a { color: inherit; }
   .next { margin-top: 88px; padding: 30px 26px; border-radius: 28px; background: linear-gradient(135deg, rgba(255,122,92,.18), rgba(92,123,184,.18)); border: 1px solid var(--line); }
   .next h2 { margin-top: 0; }
   .next p { margin: 0; max-width: 40em; }
@@ -126,7 +131,7 @@
     <div>
       <h1 id="title" style="margin:0"><img class="wordmark" src="play/rabble-title.webp" width="1200" height="573" alt="Rabble"></h1>
       <p class="lede">A little company at the end of the day.</p>
-      <p class="sub">Drop into a soft, living pile of AI clay characters. Share something small, hear a reply, or just settle in.</p>
+      <p class="sub">Drop into a soft, living pile of AI characters. Share something small, hear a reply, or just settle in.</p>
       <div class="actions">
         <a class="join" href="https://rabble-pile.onrender.com/">Join the pile</a>
         <a class="chip" href="play/">Explore the demo</a>
@@ -145,40 +150,44 @@
       <article class="model">
         <h3>Muse Image</h3>
         <p class="what">Every person</p>
-        <p>Drew all 47 characters, ages 10 to 90, in up to seven poses each: awake, reaching, dozing. It also turns your own photo into a little clay version of you.</p>
+        <p>Drew all 47 characters, ages 10 to 90, in up to seven poses each: awake, reaching, dozing. It also turns your own photo into a little Rabble version of you, exactly as you are.</p>
       </article>
       <article class="model">
         <h3>SAM 3.1</h3>
         <p class="what">Every cutout</p>
-        <p>Cuts every figure out of its background, and cuts you out of your photo, then out of your new clay self.</p>
+        <p>Cut every person in the pile out of their background, so they can tumble, stack and lean on each other.</p>
       </article>
       <article class="model">
         <h3>Muse Spark</h3>
         <p class="what">All the talk</p>
-        <p>Checks that what you share is kind, then answers it as a clay person beside you, remembering what you said earlier, and picks how the pile reacts with its bodies: a cheer, a lean, a laugh, a doze.</p>
+        <p>Checks that what you share is kind, then answers it as one of the people beside you, remembering what you said earlier, and picks how the pile reacts with its bodies: a cheer, a lean, a laugh, a doze.</p>
       </article>
     </div>
   </section>
 
   <section aria-labelledby="how">
     <h2 id="how">How it plays</h2>
-    <p class="section-sub">A living pile of little clay people, on a phone, in about a minute.</p>
+    <p class="section-sub">A living pile of little people, on a phone, in about a minute.</p>
     <ol class="steps">
-      <li><div><strong>Become one of them.</strong> <span>Optionally, use your photo and you get your own clay self. The photo is never saved.</span></div></li>
+      <li><div><strong>Become one of them.</strong> <span>Optionally, use your photo and you get your own Rabble self. The photo is never saved.</span></div></li>
       <li><div><strong>Get caught.</strong> <span>You fall into the pile and it catches you. "There you are. We made room."</span></div></li>
       <li><div><strong>What's on your mind?</strong> <span>Someone beside you asks. Answer, or just sit.</span></div></li>
-      <li><div><strong>Your words stay yours.</strong> <span>What you share goes up as you wrote it. A clay person answers, a squeeze reaches you, and the people around you react: a cheer for a small win, a lean on a hard day.</span></div></li>
+      <li><div><strong>Your words stay yours.</strong> <span>What you share goes up as you wrote it. Someone beside you answers, a squeeze reaches you, and the people around you react: a cheer for a small win, a lean on a hard day.</span></div></li>
       <li><div><strong>Or just be there.</strong> <span>Choose quiet and the pile settles and dozes around you. Drag to look around, pinch to zoom, widen the ring from neighborhood to world.</span></div></li>
     </ol>
   </section>
 
   <section aria-labelledby="spots">
-    <h2 id="spots">Two short spots</h2>
-    <p class="section-sub">Thirty seconds each, sound on.</p>
+    <h2 id="spots">Videos</h2>
+    <p class="section-sub">Two short spots, and our hackathon submission. Sound on.</p>
     <div class="spots">
       <figure><div class="phone"><video src="rabble-everyone.mp4" controls playsinline preload="metadata" aria-label="Everyone: a 30-second Rabble spot"></video></div><figcaption>Everyone.</figcaption></figure>
       <figure><div class="phone"><video src="rabble-there-you-are.mp4" controls playsinline preload="metadata" aria-label="There you are: a 30-second Rabble spot"></video></div><figcaption>There you are.</figcaption></figure>
     </div>
+    <figure class="wide-video">
+      <div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/608Y-sd3VLE" title="Rabble: our Meta hackathon submission" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <figcaption>Our Meta Global AI Developer Hackathon submission. <a href="https://youtu.be/608Y-sd3VLE">Watch on YouTube</a></figcaption>
+    </figure>
   </section>
 
   <section class="next" aria-labelledby="next">
