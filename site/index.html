@@ -105,12 +105,12 @@
   .steps strong { font-weight: 700; }
   .steps span { color: var(--ink-soft); }
 
-  .spots { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); max-width: 640px; }
-  .spots figure { margin: 0; }
+  .spots { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; max-width: 1100px; }
+  .spots > figure { margin: 0; flex: 0 0 260px; }
   .spots .phone { width: 100%; rotate: 0deg; padding: 8px; border-radius: 36px; }
   .spots .phone video { border-radius: 28px; }
   .spots figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 0.95rem; text-align: center; }
-  .wide-video { margin: 28px 0 0; max-width: 860px; }
+  .spots > .wide-video { flex: 1 1 420px; margin: 0; }
   .wide-video .yt { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #000; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4); }
   .wide-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .wide-video figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 0.95rem; }
@@ -181,11 +181,11 @@
     <p class="section-sub">A short spot, and our hackathon submission. Sound on.</p>
     <div class="spots">
       <figure><div class="phone"><video src="rabble-everyone.mp4" controls playsinline preload="metadata" aria-label="Everyone: a 30-second Rabble spot"></video></div><figcaption>Everyone.</figcaption></figure>
+      <figure class="wide-video">
+        <div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/608Y-sd3VLE" title="Rabble: our Meta hackathon submission" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <figcaption>Our Meta Global AI Developer Hackathon submission. <a href="https://youtu.be/608Y-sd3VLE">Watch on YouTube</a></figcaption>
+      </figure>
     </div>
-    <figure class="wide-video">
-      <div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/608Y-sd3VLE" title="Rabble: our Meta hackathon submission" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
-      <figcaption>Our Meta Global AI Developer Hackathon submission. <a href="https://youtu.be/608Y-sd3VLE">Watch on YouTube</a></figcaption>
-    </figure>
   </section>
 
   <section aria-labelledby="build">
