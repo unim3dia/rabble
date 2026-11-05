@@ -301,6 +301,7 @@ function nearest(p) {
 function onGone(p) {
   if (p !== app.you) return;
   app.pile?.leave();
+  overlay.querySelectorAll(".card").forEach((c) => c.remove());   // the pile's stickers stay in the pile
   app.you = null;
   app.joined = false;
   app.baseZoom = 1;
@@ -326,6 +327,7 @@ function leaveNow() {
 
 // ---------- the orbit dial: circle whoever is in the middle of your close-up ----------
 const ORBIT_ZOOM = 1.3;           // zoomed in at least this much, the dial shows
+const TUCK_ZOOM = 1.3;            // …and the stickers tuck up along the top edge
 
 function findAnchor() {
   const cx = renderer.w / 2, cy = renderer.h / 2;
@@ -634,7 +636,9 @@ function chatLines(lines, thread) {
 function showSay(person, text) {
   if (talk.now?.kind === "chat") { talk.now.cancel(); talk.now = null; }
   talk.quietUntil = performance.now() + SAY_MS;
-  cards.show(person, text, { cls: "yours", ms: SAY_MS });
+  // Tap your own sticker to write another message, right there.
+  const writeMore = () => app.you && talkBox.openAt({ x: app.you.sx, y: youLightY() });
+  cards.show(person, text, { cls: "yours", ms: SAY_MS, onTap: writeMore });
   sfx.express("smile");
   person.squish = Math.max(person.squish, 0.15);
 }
@@ -848,7 +852,8 @@ function tick(t) {
   orbit?.step();
   app.scene.light = lighting.update(t);
   draw(renderer, world, cam, app.scene, t);
-  placeCards(overlay, { w: renderer.w, ceiling: cardCeiling(), floor: pileTopOnScreen(), zoom: cardZoom() });
+  placeCards(overlay, { w: renderer.w, ceiling: cardCeiling(), floor: pileTopOnScreen(), zoom: cardZoom(),
+    tucked: app.joined && cam.view.zoom > TUCK_ZOOM });
 }
 
 // Where the space for speech cards starts: under the title before you join,
@@ -861,7 +866,7 @@ function cardCeiling() {
 
 // Zoom in and the words grow with the people (up to a point, so a close-up
 // stays readable rather than all text).
-const MAX_CARD_ZOOM = 2.2;
+const MAX_CARD_ZOOM = 1.15;      // stickers grow only a little when you zoom in (they stay sharp)
 function cardZoom() {
   const z = cam.view.zoom * (cam.zoom / (app.baseZoom || 1));
   return Math.max(1, Math.min(MAX_CARD_ZOOM, z));

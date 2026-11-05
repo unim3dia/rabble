@@ -742,3 +742,43 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 }
 @media (prefers-reduced-motion: reduce) { .card-inner { animation: none; } }
 
+
+/* Zoomed in: stickers wait in the sky just above the frame, a sliver showing. */
+.card.tucked { z-index: 1; }
+.card.tucked.open { z-index: 2; }
+/* Every sticker can be touched: tap to peel it off, hold and drag to move it. */
+.card { pointer-events: auto; cursor: pointer; touch-action: none; }
+.card.leaving { pointer-events: none; }
+.card.held .card-inner { animation: none; transform: rotate(var(--tilt, 0deg)) scale(1.08); }
+.card.held { filter: drop-shadow(0 12px 14px rgba(15, 8, 4, 0.45)); cursor: grabbing; }
+.card.peeled .card-inner { animation: peel 450ms ease-in forwards; transform-origin: 85% 15%; }
+@keyframes peel {
+  to { transform: rotate(calc(var(--tilt, 0deg) - 25deg)) translate(18px, -26px) scale(0.85); opacity: 0; }
+}
+
+/* Leaving: a kind check, then a thank-you, on a paper sticker slapped on the screen. */
+.sheet.leave {
+  text-align: center;
+  border: 5px solid #fffdf8;
+  border-radius: 16px;
+  background: #fffaf2 url(stickers/paper.webp) center / cover;
+  clip-path: polygon(0% 3px, 12% 0%, 25% 4px, 38% 1px, 51% 3px, 63% 0%, 76% 4px, 88% 1px, 100% 3px,
+    calc(100% - 3px) 25%, 100% 50%, calc(100% - 4px) 75%, 100% 100%,
+    86% calc(100% - 3px), 72% 100%, 58% calc(100% - 4px), 44% 100%, 30% calc(100% - 2px), 15% 100%, 0% calc(100% - 3px),
+    4px 75%, 0% 50%, 3px 25%);
+  filter: drop-shadow(0 8px 10px rgba(15, 8, 4, 0.45));
+  --tilt: -2deg;
+  transform: rotate(var(--tilt));
+}
+.sheet.leave[open] { animation: slap 520ms cubic-bezier(0.2, 1.4, 0.4, 1); }
+.sheet.leave h2 { margin: 4px 0 6px; font-family: var(--font-display); font-size: 1.35rem; }
+.sheet.leave p { margin: 0 0 16px; }
+.sheet.leave .sheet-row { justify-content: center; }
+.leave-thanks { animation: say-in 500ms var(--ease-out); }
+.leave-thanks[hidden], .leave-ask[hidden] { display: none; }
+
+/* No double-tap zoom on phones: quick taps are for bopping people. (Pinch still zooms the pile.) */
+html, body, button, .corner, .say-card { touch-action: manipulation; }
+
+/* Stickers belong to the pile: none on the start screen. */
+body:not(.in-pile) #overlay .card { display: none; }

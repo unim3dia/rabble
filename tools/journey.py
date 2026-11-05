@@ -79,9 +79,16 @@ story: every line clearly answers or builds on the line right before it (pick up
 words or idea), and the exchange as a whole moves the chapter's question toward the goal.
 {recap} Mix it up: a real detail from the Curator (use web
 search for something true and current when it helps), a personal memory, a pushback, a
-simple question. Short, natural spoken lines, at most 16 words each, the way friends
-talk late at night. Plain, warm, a little funny, never preachy or cheesy. No emoji, no
-hashtags, no names of real private people.
+simple question.
+
+How they talk: like real people half-asleep in a heap at 1am, not like writers. Spoken,
+casual, imperfect: contractions, fragments, "wait", "ha", "okay but", "honestly",
+trailing off, interrupting, teasing each other, reacting before adding. Each line at
+most 14 words. Never sound like a guidebook, a poem, a greeting card or a TED talk: no
+"Evening, friends", no flowery metaphors, no tidy morals. The Curator shares a fact the
+way you'd tell a friend something cool you read ("did you know in Japan they…"), never
+like an encyclopedia. Never repeat a fact, place, food or example that's already in the last lines or the
+threads: always bring something new. No emoji, no hashtags, no names of real private people.
 
 Rules: kind and PG; no partisan politics, no religion; "helpful" means gentle everyday
 wisdom, never medical advice or health claims, and never name doctors, experts, brands

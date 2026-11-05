@@ -24,7 +24,8 @@ const READ_FIRST_MS = 2500;
 export function createCards(overlay) {
   // Show a card over someone. Returns { el, done } where done resolves once the
   // words have all appeared. opts.cls adds a style, opts.ms how long it stays,
-  // opts.actions ([{ label, onClick }]) small buttons on it (one press, then gone).
+  // opts.actions ([{ label, onClick }]) small buttons on it (one press, then gone),
+  // opts.onTap what tapping the card itself does.
   function show(person, text, opts = {}) {
     const el = document.createElement("div");
     el.className = `card ${opts.cls || ""}`;
@@ -62,6 +63,18 @@ export function createCards(overlay) {
     el.style.setProperty("--rip", rippedEdge());
     el.style.setProperty("--sway", `${(5 + Math.random() * 3).toFixed(1)}s`);   // each floats at its own pace
     el._person = person;
+    // Hands on: press and hold a sticker, then drag, to move it (it stays put);
+    // tap it to peel it off. Your own words (opts.onTap) open the message box
+    // instead, and a tucked sticker (zoomed in) opens to be read first.
+    if (!opts.actions?.length) grabbable(el);   // stickers with buttons stay put; their buttons decide
+    el.addEventListener("click", (e) => {
+      if (e.target.closest(".card-action") || el.classList.contains("has-action")) return;   // its buttons decide
+      e.stopPropagation();
+      if (el._dragged) { el._dragged = false; return; }
+      if (el.classList.contains("tucked") && !el.classList.contains("open")) el.classList.add("open");
+      else if (opts.onTap && !el.classList.contains("tucked")) opts.onTap();
+      else peel(el);
+    });
     // Its own little place in the air: a slight offset and a slow float.
     el._drift = { x: (Math.random() - 0.5) * 36, y: Math.random() * 22, phase: Math.random() * Math.PI * 2 };
     overlay.appendChild(el);
@@ -98,8 +111,81 @@ const ROOM = 8;          // px between the cards and the top of the pile
 // whoever is speaking. `ceiling` is where the space
 // starts (under the title), `floor` the top of the pile on screen, and `zoom`
 // how far you've zoomed in: the cards grow with the people.
-export function placeCards(overlay, { w, ceiling, floor, zoom = 1 }) {
+const HOLD_MS = 300;
+const HOLD_SLOP_PX = 10;
+
+function grabbable(el) {
+  el.addEventListener("pointerdown", (e) => {
+    if (e.target.closest(".card-action")) return;
+    e.stopPropagation();
+    el.setPointerCapture(e.pointerId);
+    const start = { x: e.clientX, y: e.clientY };
+    let held = false;
+    const hold = setTimeout(() => { held = true; el.classList.add("held"); navigator.vibrate?.(8); }, HOLD_MS);
+    const move = (ev) => {
+      if (!held) {
+        if (Math.hypot(ev.clientX - start.x, ev.clientY - start.y) > HOLD_SLOP_PX) clearTimeout(hold);
+        return;
+      }
+      const r = el.parentElement.getBoundingClientRect();
+      el._pinned = { x: ev.clientX - r.left - el.offsetWidth / 2, y: ev.clientY - r.top - el.offsetHeight / 2 };
+      el._dragged = true;
+    };
+    const up = () => {
+      clearTimeout(hold);
+      el.classList.remove("held");
+      el.removeEventListener("pointermove", move);
+    };
+    el.addEventListener("pointermove", move);
+    el.addEventListener("pointerup", up, { once: true });
+    el.addEventListener("pointercancel", up, { once: true });
+  });
+}
+
+// Peeled off: it lifts at a corner and is gone.
+function peel(el) {
+  el.classList.add("peeled");
+  setTimeout(() => el.remove(), 450);
+}
+
+// A sticker you placed by hand stays there (with the same gentle float).
+function placePinned(el, t) {
+  const drift = el._drift || { phase: 0 };
+  const x = el._pinned.x + Math.sin(t * 0.35 + drift.phase) * 3;
+  const y = el._pinned.y + Math.sin(t * 0.5 + drift.phase * 1.3) * 2.5;
+  el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  el.classList.add("no-tail");
+  return { x, y, w: el.offsetWidth, h: el.offsetHeight };
+}
+
+// Zoomed in close, stickers stay up in the sky, just above the frame: only a
+// sliver peeks down over their speaker. Tap the sliver and it drops in to be read.
+const PEEK_PX = 14;
+function tuck(cards, w, ceiling) {
   const placed = [];
+  for (const el of cards) {
+    el.classList.add("tucked", "no-tail");
+    const cw = el.offsetWidth, ch = el.offsetHeight;
+    let x = Math.max(8, Math.min(w - cw - 8, (el._person?.sx ?? w / 2) - cw / 2));
+    for (const b of placed) if (x < b.x + b.w + GAP && x + cw + GAP > b.x) x = Math.min(w - cw - 8, b.x + b.w + GAP);
+    const y = el.classList.contains("open") ? ceiling : PEEK_PX - ch;
+    placed.push({ x, w: cw });
+    const at = el._at || { x, y };
+    at.x += (x - at.x) * GLIDE;
+    at.y += (y - at.y) * GLIDE;
+    el._at = at;
+    el.style.transform = `translate3d(${at.x}px, ${at.y}px, 0)`;
+  }
+}
+
+export function placeCards(overlay, { w, ceiling, floor, zoom = 1, tucked = false }) {
+  const now = performance.now() / 1000;
+  const cards = [...overlay.querySelectorAll(".card")].filter((el) => el._person);
+  const pinned = cards.filter((el) => el._pinned).map((el) => placePinned(el, now));
+  const all = cards.filter((el) => !el._pinned);
+  if (tucked) return tuck(all, w, ceiling);
+  for (const el of all) el.classList.remove("tucked", "open");
+  const placed = [...pinned];
   const hits = (a, b) => a.x < b.x + b.w + GAP && a.x + a.w + GAP > b.x && a.y < b.y + b.h + GAP && a.y + a.h + GAP > b.y;
   const free = (box) => !placed.some((b) => hits(box, b));
   const bottom = Math.max(ceiling, floor - ROOM);
