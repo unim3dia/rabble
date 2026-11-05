@@ -712,8 +712,8 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
   --a: #ff5fb4; --b: #ffb347;
   background: url(stickers/vinyl.webp) center / cover, linear-gradient(120deg, var(--a), var(--b));
   background-blend-mode: soft-light;
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(60, 10, 70, 0.55), 0 0 6px rgba(60, 10, 70, 0.35);
+  color: #1b1020;
+  text-shadow: none;
   font-style: normal;
   padding-right: 22px;
 }
@@ -723,14 +723,14 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
   right: 6px; top: 3px;
   font-size: 0.75rem;
   color: #fff;
-  text-shadow: 0 0 6px #fff;
+  text-shadow: 0 0 4px rgba(120, 60, 140, 0.6);
 }
-.card.p-guide .card-inner { --a: #ff5fb4; --b: #ffb347; }
-.card.p-curator .card-inner { --a: #22d3ee; --b: #a855f7; }
-.card.p-storyteller .card-inner { --a: #fde047; --b: #fb7185; }
-.card.p-skeptic .card-inner { --a: #8b5cf6; --b: #3b82f6; }
-.card.p-wonderer .card-inner { --a: #a3e635; --b: #22d3ee; }
-.card.companion .card-inner { --a: #f472b6; --b: #c084fc; }
+.card.p-guide .card-inner { --a: #ff9fd2; --b: #ffcf8a; }
+.card.p-curator .card-inner { --a: #8ee8f7; --b: #c9a2fb; }
+.card.p-storyteller .card-inner { --a: #fdec8a; --b: #fda4af; }
+.card.p-skeptic .card-inner { --a: #c4b5fd; --b: #93c5fd; }
+.card.p-wonderer .card-inner { --a: #cdf28a; --b: #8ee8f7; }
+.card.companion .card-inner { --a: #f9a8d4; --b: #d8b4fe; }
 /* Holographic chrome: a thread the room found. */
 .card.thread .card-inner {
   background: url(stickers/chrome.webp) center / cover;
@@ -782,3 +782,7 @@ html, body, button, .corner, .say-card { touch-action: manipulation; }
 
 /* Stickers belong to the pile: none on the start screen. */
 body:not(.in-pile) #overlay .card { display: none; }
+
+/* A little smaller, so the stickers leave the faces clear. */
+.card { max-width: min(40vw, 190px); }
+.card-inner { font-size: 0.74rem; }

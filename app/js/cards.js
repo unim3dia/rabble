@@ -3,7 +3,7 @@
 // in one at a time. A card floats above its
 // speaker, never covers your face, and never lands on another card.
 
-const MAX_CARDS = 3;
+const MAX_CARDS = 2;             // at most two stickers at once, so the faces stay clear
 const MAX_TILT_DEG = 7;
 const RIP_PX = 3.5;               // how far the ripped edge bites into the sticker
 
@@ -103,7 +103,7 @@ export function createCards(overlay) {
 
 const GAP = 6;
 const GLIDE = 0.08;      // per frame, how quickly a sticker eases toward its spot
-const ROOM = 8;          // px between the cards and the top of the pile
+const ROOM = 26;         // px between the stickers and the top of the pile: they keep clear of heads
 
 // Cards float in the air above the pile, never over it: each one as close
 // above its speaker as it can be, a little off-line from the others so they
