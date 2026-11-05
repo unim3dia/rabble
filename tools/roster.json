@@ -421,5 +421,1573 @@
   "desc": "Light tan skin, short brown hair, wearing a soft lavender hoodie and light blue pants, arms and legs spread wide as if happily floating down, joyful open smile, eyes open.",
   "age": 30,
   "bio": "Floating joyful in the middle, holding space for everyone's late-night laughter."
+ },
+ {
+  "slug": "w-afghanistan-woman",
+  "name": "Fatima",
+  "place": "Afghanistan",
+  "ring": "world",
+  "desc": "Light brown skin with round cheeks, long straight black hair tied in a low ponytail, wearing a plain dark green long-sleeved tunic and loose black trousers.",
+  "age": 34
+ },
+ {
+  "slug": "w-albania-man",
+  "name": "Arben",
+  "place": "Albania",
+  "ring": "world",
+  "desc": "Light olive skin with a square jaw, short dark cropped hair fading at the sides, wearing a plain navy polo shirt and gray chinos.",
+  "age": 45
+ },
+ {
+  "slug": "w-algeria-woman",
+  "name": "Amel",
+  "place": "Algeria",
+  "ring": "world",
+  "desc": "Medium olive skin with full cheeks, long wavy dark brown hair in a high ponytail, wearing a plain pink sweater and light blue jeans.",
+  "age": 19
+ },
+ {
+  "slug": "w-andorra-man",
+  "name": "Jordi",
+  "place": "Andorra",
+  "ring": "world",
+  "desc": "Light fair skin with light stubble, short straight brown hair neatly combed, wearing a plain dark gray jacket and blue jeans.",
+  "age": 38
+ },
+ {
+  "slug": "w-angola-woman",
+  "name": "Luisa",
+  "place": "Angola",
+  "ring": "world",
+  "desc": "Deep brown skin with high cheekbones, short coily black hair in a natural tapered cut, wearing a plain yellow blouse and dark blue jeans.",
+  "age": 29
+ },
+ {
+  "slug": "w-antigua-and-barbuda-man",
+  "name": "Andre",
+  "place": "Antigua and Barbuda",
+  "ring": "world",
+  "desc": "Dark brown skin with a weathered face, short graying black hair cut close, wearing a plain light blue short-sleeve shirt and beige shorts.",
+  "age": 67
+ },
+ {
+  "slug": "w-argentina-woman",
+  "name": "Lucia",
+  "place": "Argentina",
+  "ring": "world",
+  "desc": "Light olive skin with delicate features, long straight dark brown hair with a middle part, wearing a plain black top and light blue jeans.",
+  "age": 31
+ },
+ {
+  "slug": "w-armenia-man",
+  "name": "Hayk",
+  "place": "Armenia",
+  "ring": "world",
+  "desc": "Light olive skin with a strong nose and brow, short straight black hair with some gray, wearing a plain white shirt and dark gray trousers.",
+  "age": 55
+ },
+ {
+  "slug": "w-australia-woman",
+  "name": "Sarah",
+  "place": "Australia",
+  "ring": "world",
+  "desc": "Fair sun-touched skin with freckles, shoulder-length straight blonde hair in a ponytail, wearing a plain light gray t-shirt and blue denim shorts.",
+  "age": 36
+ },
+ {
+  "slug": "w-austria-man",
+  "name": "Lukas",
+  "place": "Austria",
+  "ring": "world",
+  "desc": "Fair pinkish skin with a broad face, short thin gray hair combed back, wearing a plain olive sweater and brown trousers.",
+  "age": 75
+ },
+ {
+  "slug": "w-azerbaijan-woman",
+  "name": "Aysel",
+  "place": "Azerbaijan",
+  "ring": "world",
+  "desc": "Fair olive skin with an oval face, long straight black hair worn loose, wearing a plain cream blouse and black trousers.",
+  "age": 27
+ },
+ {
+  "slug": "w-bahamas-man",
+  "name": "Jamal",
+  "place": "Bahamas",
+  "ring": "world",
+  "desc": "Dark brown skin with a broad face, short black hair with a bald crown, wearing a plain white short-sleeve shirt and navy shorts.",
+  "age": 59
+ },
+ {
+  "slug": "w-bahrain-woman",
+  "name": "Noora",
+  "place": "Bahrain",
+  "ring": "world",
+  "desc": "Light olive skin with soft features, long straight dark brown hair down past the shoulders, wearing a plain mauve blouse and black trousers.",
+  "age": 33
+ },
+ {
+  "slug": "w-bangladesh-man",
+  "name": "Rahim",
+  "place": "Bangladesh",
+  "ring": "world",
+  "desc": "Medium brown skin with a thin weathered face, short gray hair and a short gray beard, wearing a plain light green shirt and dark lungi-style long skirt trousers.",
+  "age": 71
+ },
+ {
+  "slug": "w-barbados-woman",
+  "name": "Keisha",
+  "place": "Barbados",
+  "ring": "world",
+  "desc": "Deep brown skin with gentle smile lines, short coily black hair with gray streaks in a cropped style, wearing a plain floral-patterned blouse and navy trousers.",
+  "age": 65
+ },
+ {
+  "slug": "w-belarus-man",
+  "name": "Dmitri",
+  "place": "Belarus",
+  "ring": "world",
+  "desc": "Fair light skin with ruddy cheeks, short grey buzzed hair with a lined face, wearing a dark green zip jacket and grey trousers.",
+  "age": 68
+ },
+ {
+  "slug": "w-belgium-woman",
+  "name": "Sofie",
+  "place": "Belgium",
+  "ring": "world",
+  "desc": "Fair light skin, long straight dark blonde hair worn loose, wearing a rust-colored sweater and blue skinny jeans.",
+  "age": 19
+ },
+ {
+  "slug": "w-belize-man",
+  "name": "Jayden",
+  "place": "Belize",
+  "ring": "world",
+  "desc": "Light brown skin, short black curly hair, wearing a plain light blue t-shirt and khaki shorts.",
+  "age": 10
+ },
+ {
+  "slug": "w-benin-woman",
+  "name": "Aïcha",
+  "place": "Benin",
+  "ring": "world",
+  "desc": "Deep brown skin with soft wrinkles, short black hair with grey strands under a plain headwrap, wearing a teal blouse and long orange patterned skirt.",
+  "age": 61
+ },
+ {
+  "slug": "w-bhutan-man",
+  "name": "Tashi",
+  "place": "Bhutan",
+  "ring": "world",
+  "desc": "Tan light brown skin with broad features, short black hair with grey at the sides, wearing a grey fleece jacket and dark green trousers.",
+  "age": 52
+ },
+ {
+  "slug": "w-bolivia-woman",
+  "name": "Maria",
+  "place": "Bolivia",
+  "ring": "world",
+  "desc": "Medium olive-brown skin with round cheeks, long black hair in two braids, wearing a pink cardigan and long dark blue skirt.",
+  "age": 43
+ },
+ {
+  "slug": "w-bosnia-and-herzegovina-man",
+  "name": "Marko",
+  "place": "Bosnia and Herzegovina",
+  "ring": "world",
+  "desc": "Light olive skin with short beard, short faded dark brown hair, wearing a plain white t-shirt under a denim jacket and black jeans.",
+  "age": 29
+ },
+ {
+  "slug": "w-botswana-woman",
+  "name": "Neo",
+  "place": "Botswana",
+  "ring": "world",
+  "desc": "Medium dark brown skin, short natural black hair in twists, wearing a green blouse and dark blue jeans.",
+  "age": 31
+ },
+ {
+  "slug": "w-brazil-man",
+  "name": "Carlos",
+  "place": "Brazil",
+  "ring": "world",
+  "desc": "Medium brown skin, short black hair with receding hairline, wearing a plain green t-shirt and beige shorts.",
+  "age": 48
+ },
+ {
+  "slug": "w-brunei-woman",
+  "name": "Nur",
+  "place": "Brunei",
+  "ring": "world",
+  "desc": "Light tan skin with smooth complexion, long straight black hair tucked behind ears, wearing a light purple long-sleeve blouse and long black skirt.",
+  "age": 39
+ },
+ {
+  "slug": "w-bulgaria-man",
+  "name": "Georgi",
+  "place": "Bulgaria",
+  "ring": "world",
+  "desc": "Light fair skin, short dark brown hair with light stubble, wearing a dark blue sweatshirt and black jeans.",
+  "age": 25
+ },
+ {
+  "slug": "w-burkina-faso-woman",
+  "name": "Mariam",
+  "place": "Burkina Faso",
+  "ring": "world",
+  "desc": "Deep brown skin, braided black hair pulled back, wearing a bright blue blouse and long yellow skirt.",
+  "age": 18
+ },
+ {
+  "slug": "w-burundi-man",
+  "name": "Eric",
+  "place": "Burundi",
+  "ring": "world",
+  "desc": "Deep brown skin, short black hair with clean shave, wearing a plain light green polo shirt and dark jeans.",
+  "age": 33
+ },
+ {
+  "slug": "w-cabo-verde-woman",
+  "name": "Lúcia",
+  "place": "Cabo Verde",
+  "ring": "world",
+  "desc": "Medium golden-brown skin with laugh lines, short curly dark brown hair, wearing a floral blouse and white capri pants.",
+  "age": 59
+ },
+ {
+  "slug": "w-cambodia-man",
+  "name": "Sok",
+  "place": "Cambodia",
+  "ring": "world",
+  "desc": "Medium tan-brown skin with deep wrinkles, short thin white hair, wearing a plain grey button shirt and loose black trousers.",
+  "age": 90
+ },
+ {
+  "slug": "w-cameroon-woman",
+  "name": "Marie",
+  "place": "Cameroon",
+  "ring": "world",
+  "desc": "Medium-deep brown skin with full cheeks, black braided hair pulled back, wearing a plain green blouse and long dark pants.",
+  "age": 34
+ },
+ {
+  "slug": "w-canada-man",
+  "name": "Liam",
+  "place": "Canada",
+  "ring": "world",
+  "desc": "Light skin with short brown hair and light stubble, wearing a plain navy jacket and khaki pants.",
+  "age": 45
+ },
+ {
+  "slug": "w-central-african-republic-woman",
+  "name": "Grace",
+  "place": "Central African Republic",
+  "ring": "world",
+  "desc": "Deep brown skin with a slender face, short natural black hair, wearing a plain orange top and blue jeans pants.",
+  "age": 19
+ },
+ {
+  "slug": "w-chad-man",
+  "name": "Mahamat",
+  "place": "Chad",
+  "ring": "world",
+  "desc": "Medium brown skin with short curly black hair, wearing a plain white t-shirt and dark shorts.",
+  "age": 16
+ },
+ {
+  "slug": "w-chile-woman",
+  "name": "Valentina",
+  "place": "Chile",
+  "ring": "world",
+  "desc": "Light olive skin with shoulder-length dark brown wavy hair, wearing a plain beige cardigan and black pants.",
+  "age": 55
+ },
+ {
+  "slug": "w-china-man",
+  "name": "Wei",
+  "place": "China",
+  "ring": "world",
+  "desc": "Light tan skin with short greying black hair, wearing a plain dark blue jacket and grey pants.",
+  "age": 68
+ },
+ {
+  "slug": "w-colombia-woman",
+  "name": "Sofia",
+  "place": "Colombia",
+  "ring": "world",
+  "desc": "Medium tan skin with long dark brown straight hair in a ponytail, wearing a plain white top and blue jeans pants.",
+  "age": 14
+ },
+ {
+  "slug": "w-comoros-man",
+  "name": "Youssouf",
+  "place": "Comoros",
+  "ring": "world",
+  "desc": "Deep brown skin with short black hair, wearing a plain light blue shirt and dark pants.",
+  "age": 52
+ },
+ {
+  "slug": "w-congo-woman",
+  "name": "Divine",
+  "place": "Congo",
+  "ring": "world",
+  "desc": "Dark brown skin with short black hair styled close, wearing a plain yellow blouse and dark pants.",
+  "age": 47
+ },
+ {
+  "slug": "w-costa-rica-man",
+  "name": "Jose",
+  "place": "Costa Rica",
+  "ring": "world",
+  "desc": "Medium tan skin with short black hair, wearing a plain white t-shirt and dark shorts.",
+  "age": 33
+ },
+ {
+  "slug": "w-croatia-woman",
+  "name": "Ana",
+  "place": "Croatia",
+  "ring": "world",
+  "desc": "Fair skin with short wavy grey hair, wearing a plain dark red sweater and grey pants.",
+  "age": 73
+ },
+ {
+  "slug": "w-cuba-man",
+  "name": "Luis",
+  "place": "Cuba",
+  "ring": "world",
+  "desc": "Medium brown skin with short greying hair and mustache, wearing a plain light shirt and beige pants.",
+  "age": 60
+ },
+ {
+  "slug": "w-cyprus-woman",
+  "name": "Eleni",
+  "place": "Cyprus",
+  "ring": "world",
+  "desc": "Light olive skin with long dark brown straight hair, wearing a plain black top and blue jeans pants.",
+  "age": 17
+ },
+ {
+  "slug": "w-czechia-man",
+  "name": "Petr",
+  "place": "Czechia",
+  "ring": "world",
+  "desc": "Pale skin with thin white hair and wrinkles, wearing a plain brown sweater and grey pants.",
+  "age": 90
+ },
+ {
+  "slug": "w-c-te-d-ivoire-woman",
+  "name": "Awa",
+  "place": "Côte d'Ivoire",
+  "ring": "world",
+  "desc": "Deep brown skin with long black braids tied back, wearing a plain pink top and blue jeans pants.",
+  "age": 22
+ },
+ {
+  "slug": "w-democratic-republic-of-the-congo-man",
+  "name": "Patrick",
+  "place": "Democratic Republic of the Congo",
+  "ring": "world",
+  "desc": "Dark chocolate brown skin with short faded black hair and a clean shaved face, wearing a plain green polo shirt and dark jeans",
+  "age": 27
+ },
+ {
+  "slug": "w-denmark-woman",
+  "name": "Mette",
+  "place": "Denmark",
+  "ring": "world",
+  "desc": "Fair pale skin with straight shoulder-length blonde hair worn loose, wearing a light gray knit sweater and black slim pants",
+  "age": 42
+ },
+ {
+  "slug": "w-djibouti-man",
+  "name": "Ahmed",
+  "place": "Djibouti",
+  "ring": "world",
+  "desc": "Deep brown skin with short black curly hair and a short mustache, wearing a plain white short-sleeve shirt and gray trousers",
+  "age": 45
+ },
+ {
+  "slug": "w-dominica-woman",
+  "name": "Sherma",
+  "place": "Dominica",
+  "ring": "world",
+  "desc": "Medium brown skin with dark brown curly hair in a shoulder-length ponytail, wearing a coral sleeveless blouse and blue denim shorts",
+  "age": 31
+ },
+ {
+  "slug": "w-dominican-republic-man",
+  "name": "Luis",
+  "place": "Dominican Republic",
+  "ring": "world",
+  "desc": "Medium warm brown skin with short black hair with gray at the temples, wearing a plain light blue button shirt and dark trousers",
+  "age": 52
+ },
+ {
+  "slug": "w-ecuador-woman",
+  "name": "María",
+  "place": "Ecuador",
+  "ring": "world",
+  "desc": "Light olive brown skin with gray-streaked black hair in a low bun, wearing a pink cardigan over a plain top and a long black skirt",
+  "age": 67
+ },
+ {
+  "slug": "w-egypt-man",
+  "name": "Mahmoud",
+  "place": "Egypt",
+  "ring": "world",
+  "desc": "Medium olive brown skin with short graying black hair and a gray mustache, wearing a plain light gray long-sleeve shirt and dark trousers",
+  "age": 61
+ },
+ {
+  "slug": "w-el-salvador-woman",
+  "name": "Karla",
+  "place": "El Salvador",
+  "ring": "world",
+  "desc": "Medium tan skin with long straight dark brown hair in a high ponytail, wearing a plain turquoise t-shirt and blue jeans",
+  "age": 16
+ },
+ {
+  "slug": "w-equatorial-guinea-man",
+  "name": "Teodoro",
+  "place": "Equatorial Guinea",
+  "ring": "world",
+  "desc": "Dark brown skin with short gray cropped hair and a shaved face, wearing a plain beige short-sleeve shirt and brown trousers",
+  "age": 71
+ },
+ {
+  "slug": "w-eritrea-woman",
+  "name": "Selam",
+  "place": "Eritrea",
+  "ring": "world",
+  "desc": "Medium warm brown skin with long black hair in thin braids worn down, wearing a plain light pink blouse and long dark skirt",
+  "age": 24
+ },
+ {
+  "slug": "w-estonia-man",
+  "name": "Peeter",
+  "place": "Estonia",
+  "ring": "world",
+  "desc": "Pale fair skin with short white hair combed back, wearing a plain brown jacket over a gray sweater and dark pants",
+  "age": 75
+ },
+ {
+  "slug": "w-eswatini-woman",
+  "name": "Nomsa",
+  "place": "Eswatini",
+  "ring": "world",
+  "desc": "Rich dark brown skin with short relaxed black hair in a neat bob, wearing a plain mustard blouse and long black skirt",
+  "age": 41
+ },
+ {
+  "slug": "w-ethiopia-man",
+  "name": "Abebe",
+  "place": "Ethiopia",
+  "ring": "world",
+  "desc": "Deep warm brown skin with short graying black hair and a calm lined face, wearing a plain light green shirt and beige trousers",
+  "age": 63
+ },
+ {
+  "slug": "w-fiji-woman",
+  "name": "Mere",
+  "place": "Fiji",
+  "ring": "world",
+  "desc": "Medium warm brown skin with thick dark brown curly hair in a loose bun, wearing a plain sky blue t-shirt and a long floral skirt",
+  "age": 15
+ },
+ {
+  "slug": "w-finland-man",
+  "name": "Ville",
+  "place": "Finland",
+  "ring": "world",
+  "desc": "Light fair skin with short straight sandy blond hair with bangs, wearing a plain dark red sweatshirt and blue jeans",
+  "age": 10
+ },
+ {
+  "slug": "w-france-woman",
+  "name": "Camille",
+  "place": "France",
+  "ring": "world",
+  "desc": "Light fair skin with a narrow face, shoulder-length straight chestnut brown hair worn loose, wearing a beige trench coat, dark blue straight jeans and white sneakers.",
+  "age": 34
+ },
+ {
+  "slug": "w-gabon-man",
+  "name": "Jean",
+  "place": "Gabon",
+  "ring": "world",
+  "desc": "Dark brown skin with a broad face, very short black hair with a faded cut, wearing a green polo shirt, beige chinos and dark brown loafers.",
+  "age": 45
+ },
+ {
+  "slug": "w-gambia-woman",
+  "name": "Fatou",
+  "place": "Gambia",
+  "ring": "world",
+  "desc": "Rich brown skin with a soft oval face, long black braided hair pulled into a high bun, wearing a turquoise t-shirt, long patterned wide skirt in orange and brown and flat sandals.",
+  "age": 19
+ },
+ {
+  "slug": "w-georgia-man",
+  "name": "Giorgi",
+  "place": "Georgia",
+  "ring": "world",
+  "desc": "Light tan skin with a square jaw and short beard, thick short dark brown hair neatly trimmed, wearing a grey zip jacket, dark blue jeans and grey sneakers.",
+  "age": 31
+ },
+ {
+  "slug": "w-germany-woman",
+  "name": "Anna",
+  "place": "Germany",
+  "ring": "world",
+  "desc": "Fair pinkish skin with a round face, short straight blonde-grey hair in a bob, wearing a dark green fleece jacket, black trousers and white walking shoes.",
+  "age": 58
+ },
+ {
+  "slug": "w-ghana-man",
+  "name": "Kwame",
+  "place": "Ghana",
+  "ring": "world",
+  "desc": "Dark brown skin with a youthful round face, short tight black curls cut low, wearing a plain orange t-shirt, black shorts and blue sneakers.",
+  "age": 16
+ },
+ {
+  "slug": "w-greece-woman",
+  "name": "Maria",
+  "place": "Greece",
+  "ring": "world",
+  "desc": "Light olive skin with deep wrinkles, short curly dyed brown hair pinned back, wearing a black cardigan over a white blouse, long dark grey skirt and black flat shoes.",
+  "age": 74
+ },
+ {
+  "slug": "w-grenada-man",
+  "name": "Andre",
+  "place": "Grenada",
+  "ring": "world",
+  "desc": "Dark brown skin with a lined face, short greying black hair cut close, wearing a striped blue and white short-sleeve shirt, khaki shorts and brown sandals.",
+  "age": 60
+ },
+ {
+  "slug": "w-guatemala-woman",
+  "name": "Rosa",
+  "place": "Guatemala",
+  "ring": "world",
+  "desc": "Medium brown skin with a round face, long straight black hair in a single braid down her back, wearing a purple embroidered blouse, long dark blue skirt and black flat shoes.",
+  "age": 50
+ },
+ {
+  "slug": "w-guinea-man",
+  "name": "Mamadou",
+  "place": "Guinea",
+  "ring": "world",
+  "desc": "Very dark brown skin with deep lines, short white hair and a white goatee, wearing a light brown boubou-style tunic top, matching loose trousers and dark sandals.",
+  "age": 70
+ },
+ {
+  "slug": "w-guinea-bissau-woman",
+  "name": "Binta",
+  "place": "Guinea-Bissau",
+  "ring": "world",
+  "desc": "Deep brown skin with full cheeks, black hair wrapped in a colorful head tie with short curls showing, wearing a green short-sleeve top, long multicolor wrap skirt and yellow sandals.",
+  "age": 29
+ },
+ {
+  "slug": "w-guyana-man",
+  "name": "Deon",
+  "place": "Guyana",
+  "ring": "world",
+  "desc": "Medium-dark brown skin with a broad face, short black hair with grey patches, wearing a light yellow button shirt, dark brown trousers and black shoes.",
+  "age": 55
+ },
+ {
+  "slug": "w-haiti-woman",
+  "name": "Widlene",
+  "place": "Haiti",
+  "ring": "world",
+  "desc": "Rich dark brown skin with a slender face, medium-length black relaxed hair pulled back, wearing a light blue blouse, tight black jeans and white sneakers.",
+  "age": 21
+ },
+ {
+  "slug": "w-honduras-man",
+  "name": "Jose",
+  "place": "Honduras",
+  "ring": "world",
+  "desc": "Light brown skin with a youthful face, short straight black hair with a straight fringe, wearing a blue soccer-style shirt, black shorts and white sneakers.",
+  "age": 12
+ },
+ {
+  "slug": "w-hungary-woman",
+  "name": "Katalin",
+  "place": "Hungary",
+  "ring": "world",
+  "desc": "Fair light skin with soft wrinkles, short wavy blonde-grey hair with bangs, wearing a burgundy cardigan, dark grey trousers and black low shoes.",
+  "age": 63
+ },
+ {
+  "slug": "w-iceland-man",
+  "name": "Jon",
+  "place": "Iceland",
+  "ring": "world",
+  "desc": "Fair ruddy skin with weathered cheeks, short gray hair with a receding hairline, wearing a dark green fleece jacket and black outdoor trousers",
+  "age": 67
+ },
+ {
+  "slug": "w-india-woman",
+  "name": "Priya",
+  "place": "India",
+  "ring": "world",
+  "desc": "Warm medium brown skin, long thick black hair in a braid, wearing a turquoise tunic and white leggings",
+  "age": 28
+ },
+ {
+  "slug": "w-indonesia-man",
+  "name": "Budi",
+  "place": "Indonesia",
+  "ring": "world",
+  "desc": "Medium tan skin, short thick black hair with a neat side cut, wearing a plain light blue shirt and beige trousers",
+  "age": 19
+ },
+ {
+  "slug": "w-iran-woman",
+  "name": "Sara",
+  "place": "Iran",
+  "ring": "world",
+  "desc": "Fair olive skin, long straight dark brown hair loose past shoulders, wearing a beige coat and black pants",
+  "age": 22
+ },
+ {
+  "slug": "w-iraq-man",
+  "name": "Ahmed",
+  "place": "Iraq",
+  "ring": "world",
+  "desc": "Medium tan skin, short black hair with a trimmed beard, wearing a white shirt and dark navy trousers",
+  "age": 31
+ },
+ {
+  "slug": "w-ireland-woman",
+  "name": "Aoife",
+  "place": "Ireland",
+  "ring": "world",
+  "desc": "Very fair skin with freckles, long wavy red hair loose, wearing a black puffer jacket and blue jeans",
+  "age": 17
+ },
+ {
+  "slug": "w-israel-man",
+  "name": "Noam",
+  "place": "Israel",
+  "ring": "world",
+  "desc": "Light tan skin, short curly black hair with light stubble, wearing a plain green t-shirt and khaki shorts",
+  "age": 26
+ },
+ {
+  "slug": "w-italy-woman",
+  "name": "Sofia",
+  "place": "Italy",
+  "ring": "world",
+  "desc": "Light olive skin, long wavy dark brown hair, wearing a black blazer and dark blue slim jeans",
+  "age": 38
+ },
+ {
+  "slug": "w-jamaica-man",
+  "name": "Marcus",
+  "place": "Jamaica",
+  "ring": "world",
+  "desc": "Dark brown skin, short black hair with a low fade, wearing a plain red polo shirt and dark jeans",
+  "age": 49
+ },
+ {
+  "slug": "w-japan-woman",
+  "name": "Yoko",
+  "place": "Japan",
+  "ring": "world",
+  "desc": "Fair light skin with age lines, short permed gray-black hair, wearing a beige cardigan and dark brown trousers",
+  "age": 69
+ },
+ {
+  "slug": "w-jordan-man",
+  "name": "Omar",
+  "place": "Jordan",
+  "ring": "world",
+  "desc": "Light brown wrinkled skin, short white hair with a white mustache, wearing a gray jacket and dark brown pants",
+  "age": 90
+ },
+ {
+  "slug": "w-kazakhstan-woman",
+  "name": "Aigerim",
+  "place": "Kazakhstan",
+  "ring": "world",
+  "desc": "Light beige skin with high cheekbones, long straight dark brown hair, wearing a pink sweater and black jeans",
+  "age": 20
+ },
+ {
+  "slug": "w-kenya-man",
+  "name": "Peter",
+  "place": "Kenya",
+  "ring": "world",
+  "desc": "Dark brown skin, very short black hair with a clean shave, wearing a light gray shirt and dark blue jeans",
+  "age": 36
+ },
+ {
+  "slug": "w-kiribati-woman",
+  "name": "Teresia",
+  "place": "Kiribati",
+  "ring": "world",
+  "desc": "Medium golden brown skin, long thick straight black hair loose, wearing a plain blue t-shirt and red skirt",
+  "age": 14
+ },
+ {
+  "slug": "w-kuwait-man",
+  "name": "Fahad",
+  "place": "Kuwait",
+  "ring": "world",
+  "desc": "Medium tan skin, short black hair with a trimmed beard, wearing a plain white shirt and beige trousers",
+  "age": 40
+ },
+ {
+  "slug": "w-kyrgyzstan-woman",
+  "name": "Aigul",
+  "place": "Kyrgyzstan",
+  "ring": "world",
+  "desc": "Light olive skin with dark brown eyes and long straight black hair in a ponytail, wearing a beige knit sweater and dark blue jeans.",
+  "age": 34
+ },
+ {
+  "slug": "w-laos-man",
+  "name": "Kham",
+  "place": "Laos",
+  "ring": "world",
+  "desc": "Medium brown skin with short black hair neatly cut, wearing a plain navy polo shirt and khaki pants.",
+  "age": 45
+ },
+ {
+  "slug": "w-latvia-woman",
+  "name": "Ilze",
+  "place": "Latvia",
+  "ring": "world",
+  "desc": "Fair pale skin with short wavy gray hair, wearing a dark green cardigan and black trousers.",
+  "age": 71
+ },
+ {
+  "slug": "w-lebanon-man",
+  "name": "Karim",
+  "place": "Lebanon",
+  "ring": "world",
+  "desc": "Olive skin with short curly dark brown hair, wearing a plain light blue t-shirt and dark jeans.",
+  "age": 16
+ },
+ {
+  "slug": "w-lesotho-woman",
+  "name": "Lerato",
+  "place": "Lesotho",
+  "ring": "world",
+  "desc": "Deep brown skin with short natural coily hair, wearing a yellow sweater and blue jeans.",
+  "age": 23
+ },
+ {
+  "slug": "w-liberia-man",
+  "name": "Emmanuel",
+  "place": "Liberia",
+  "ring": "world",
+  "desc": "Dark brown skin with short black hair cut low, wearing a plain red t-shirt and khaki shorts.",
+  "age": 12
+ },
+ {
+  "slug": "w-libya-woman",
+  "name": "Salma",
+  "place": "Libya",
+  "ring": "world",
+  "desc": "Light olive skin with long straight dark brown hair, wearing a beige long-sleeve top and black pants.",
+  "age": 29
+ },
+ {
+  "slug": "w-liechtenstein-man",
+  "name": "Stefan",
+  "place": "Liechtenstein",
+  "ring": "world",
+  "desc": "Light fair skin with short white hair combed back, wearing a dark blue jacket and gray pants.",
+  "age": 73
+ },
+ {
+  "slug": "w-lithuania-woman",
+  "name": "Gabija",
+  "place": "Lithuania",
+  "ring": "world",
+  "desc": "Very fair skin with long straight light brown hair, wearing a white sweatshirt and light blue jeans.",
+  "age": 15
+ },
+ {
+  "slug": "w-luxembourg-man",
+  "name": "Luc",
+  "place": "Luxembourg",
+  "ring": "world",
+  "desc": "Light skin with short dark brown hair neatly trimmed, wearing a dark green sweater and beige chinos.",
+  "age": 31
+ },
+ {
+  "slug": "w-madagascar-woman",
+  "name": "Miora",
+  "place": "Madagascar",
+  "ring": "world",
+  "desc": "Medium brown skin with long curly black hair tied up, wearing a plain teal t-shirt and denim skirt.",
+  "age": 26
+ },
+ {
+  "slug": "w-malawi-man",
+  "name": "Peter",
+  "place": "Malawi",
+  "ring": "world",
+  "desc": "Deep brown skin with short black hair, wearing a plain white t-shirt and dark shorts.",
+  "age": 22
+ },
+ {
+  "slug": "w-malaysia-woman",
+  "name": "Mei",
+  "place": "Malaysia",
+  "ring": "world",
+  "desc": "Light tan skin with long straight black hair, wearing a light purple blouse and black pants.",
+  "age": 33
+ },
+ {
+  "slug": "w-maldives-man",
+  "name": "Mohamed",
+  "place": "Maldives",
+  "ring": "world",
+  "desc": "Medium brown weathered skin with short gray hair, wearing a plain white shirt and dark sarong pants.",
+  "age": 69
+ },
+ {
+  "slug": "w-mali-woman",
+  "name": "Awa",
+  "place": "Mali",
+  "ring": "world",
+  "desc": "Deep dark brown skin with braided black hair in a bun, wearing a bright blue top and long orange skirt.",
+  "age": 44
+ },
+ {
+  "slug": "w-malta-man",
+  "name": "Joseph",
+  "place": "Malta",
+  "ring": "world",
+  "desc": "Light tan skin with weathered cheeks, short grey hair with a receding hairline, wearing a pale grey polo shirt and dark navy trousers.",
+  "age": 71
+ },
+ {
+  "slug": "w-marshall-islands-woman",
+  "name": "Lina",
+  "place": "Marshall Islands",
+  "ring": "world",
+  "desc": "Medium brown skin, long thick black straight hair worn loose, wearing a teal t-shirt and black shorts.",
+  "age": 22
+ },
+ {
+  "slug": "w-mauritania-man",
+  "name": "Mohamed",
+  "place": "Mauritania",
+  "ring": "world",
+  "desc": "Dark brown skin with a lined face, short greying black hair, wearing a light blue long-sleeve shirt and loose brown trousers.",
+  "age": 63
+ },
+ {
+  "slug": "w-mauritius-woman",
+  "name": "Priya",
+  "place": "Mauritius",
+  "ring": "world",
+  "desc": "Medium brown skin, long black straight hair in a low ponytail, wearing a yellow short-sleeve top and dark denim capri pants.",
+  "age": 41
+ },
+ {
+  "slug": "w-mexico-man",
+  "name": "Carlos",
+  "place": "Mexico",
+  "ring": "world",
+  "desc": "Medium brown skin with a mustache, short greying black hair under a plain cap, wearing a white button shirt and dark blue jeans.",
+  "age": 60
+ },
+ {
+  "slug": "w-micronesia-woman",
+  "name": "Maria",
+  "place": "Micronesia",
+  "ring": "world",
+  "desc": "Medium brown skin with round cheeks, shoulder-length black straight hair, wearing an orange t-shirt and a long blue skirt.",
+  "age": 37
+ },
+ {
+  "slug": "w-moldova-man",
+  "name": "Ion",
+  "place": "Moldova",
+  "ring": "world",
+  "desc": "Light skin, short dark brown hair with a trimmed beard, wearing a dark green sweater and blue jeans.",
+  "age": 31
+ },
+ {
+  "slug": "w-monaco-woman",
+  "name": "Sophie",
+  "place": "Monaco",
+  "ring": "world",
+  "desc": "Fair skin, long light brown straight hair, wearing a white blouse and dark tailored trousers.",
+  "age": 26
+ },
+ {
+  "slug": "w-mongolia-man",
+  "name": "Batbayar",
+  "place": "Mongolia",
+  "ring": "world",
+  "desc": "Tan skin with a broad face, short black straight hair, wearing a dark grey jacket and blue jeans.",
+  "age": 33
+ },
+ {
+  "slug": "w-montenegro-woman",
+  "name": "Milica",
+  "place": "Montenegro",
+  "ring": "world",
+  "desc": "Fair olive skin, long dark brown straight hair, wearing a black turtleneck and blue jeans.",
+  "age": 43
+ },
+ {
+  "slug": "w-morocco-man",
+  "name": "Youssef",
+  "place": "Morocco",
+  "ring": "world",
+  "desc": "Medium olive skin, short black curly hair with a short beard, wearing a grey hoodie and blue jeans.",
+  "age": 25
+ },
+ {
+  "slug": "w-mozambique-woman",
+  "name": "Ana",
+  "place": "Mozambique",
+  "ring": "world",
+  "desc": "Dark brown skin with a wrinkled face, short grey hair wrapped in a plain cloth, wearing a floral blue blouse and a long brown skirt.",
+  "age": 74
+ },
+ {
+  "slug": "w-myanmar-man",
+  "name": "Min",
+  "place": "Myanmar",
+  "ring": "world",
+  "desc": "Medium tan skin, short black hair with grey at the temples, wearing a white shirt and a long dark sarong-like trouser wrap.",
+  "age": 58
+ },
+ {
+  "slug": "w-namibia-woman",
+  "name": "Maria",
+  "place": "Namibia",
+  "ring": "world",
+  "desc": "Medium brown skin with deep lines, short grey-black hair, wearing a blue dress with a long skirt.",
+  "age": 66
+ },
+ {
+  "slug": "w-nauru-man",
+  "name": "James",
+  "place": "Nauru",
+  "ring": "world",
+  "desc": "Light brown skin with wrinkles, short white hair, wearing a light grey shirt and navy shorts.",
+  "age": 90
+ },
+ {
+  "slug": "w-nepal-woman",
+  "name": "Sunita",
+  "place": "Nepal",
+  "ring": "world",
+  "desc": "Warm light brown skin with long straight black hair in a braid wearing a green knit sweater and dark blue pants.",
+  "age": 34
+ },
+ {
+  "slug": "w-netherlands-man",
+  "name": "Jeroen",
+  "place": "Netherlands",
+  "ring": "world",
+  "desc": "Light fair skin with short thinning brown hair and light stubble wearing a navy sweater and khaki trousers.",
+  "age": 52
+ },
+ {
+  "slug": "w-new-zealand-woman",
+  "name": "Aroha",
+  "place": "New Zealand",
+  "ring": "world",
+  "desc": "Light olive brown skin with long wavy dark brown hair in a ponytail wearing a black fleece top and blue jeans.",
+  "age": 28
+ },
+ {
+  "slug": "w-nicaragua-man",
+  "name": "Carlos",
+  "place": "Nicaragua",
+  "ring": "world",
+  "desc": "Light brown skin with short straight black hair with a fade wearing a plain blue t-shirt and dark jeans.",
+  "age": 16
+ },
+ {
+  "slug": "w-niger-woman",
+  "name": "Amina",
+  "place": "Niger",
+  "ring": "world",
+  "desc": "Deep dark brown skin with short braided black hair pulled back wearing a bright orange blouse and long dark skirt.",
+  "age": 23
+ },
+ {
+  "slug": "w-nigeria-man",
+  "name": "Tunde",
+  "place": "Nigeria",
+  "ring": "world",
+  "desc": "Dark brown skin with very short black hair and a clean shave wearing a mustard shirt and dark blue trousers.",
+  "age": 40
+ },
+ {
+  "slug": "w-north-korea-woman",
+  "name": "Jihye",
+  "place": "North Korea",
+  "ring": "world",
+  "desc": "Pale fair skin with shoulder-length straight black hair tucked behind ears wearing a dark gray padded jacket and black pants.",
+  "age": 38
+ },
+ {
+  "slug": "w-north-macedonia-man",
+  "name": "Stefan",
+  "place": "North Macedonia",
+  "ring": "world",
+  "desc": "Pale wrinkled skin with short white hair and a mustache wearing a brown cardigan and dark gray trousers.",
+  "age": 82
+ },
+ {
+  "slug": "w-norway-woman",
+  "name": "Ingrid",
+  "place": "Norway",
+  "ring": "world",
+  "desc": "Very fair skin with straight blonde hair in a bun wearing a red wool sweater and black pants.",
+  "age": 47
+ },
+ {
+  "slug": "w-oman-man",
+  "name": "Ahmed",
+  "place": "Oman",
+  "ring": "world",
+  "desc": "Medium tan brown skin with short black hair with gray sides wearing a light gray shirt and dark trousers.",
+  "age": 59
+ },
+ {
+  "slug": "w-pakistan-woman",
+  "name": "Ayesha",
+  "place": "Pakistan",
+  "ring": "world",
+  "desc": "Medium light brown skin with long thick black hair in a braid wearing a plain green tunic top and white trousers.",
+  "age": 18
+ },
+ {
+  "slug": "w-palau-man",
+  "name": "Mason",
+  "place": "Palau",
+  "ring": "world",
+  "desc": "Light brown skin with short straight black hair wearing a plain gray t-shirt and blue shorts.",
+  "age": 12
+ },
+ {
+  "slug": "w-palestine-woman",
+  "name": "Lina",
+  "place": "Palestine",
+  "ring": "world",
+  "desc": "Light olive skin with long dark brown hair in a low ponytail wearing a white blouse and dark jeans.",
+  "age": 29
+ },
+ {
+  "slug": "w-panama-man",
+  "name": "José",
+  "place": "Panama",
+  "ring": "world",
+  "desc": "Light brown skin with short curly black hair faded on the sides wearing a white t-shirt and khaki shorts.",
+  "age": 24
+ },
+ {
+  "slug": "w-papua-new-guinea-woman",
+  "name": "Anna",
+  "place": "Papua New Guinea",
+  "ring": "world",
+  "desc": "Deep warm brown skin with short curly gray-streaked black hair tied back wearing a red blouse and long dark skirt.",
+  "age": 70
+ },
+ {
+  "slug": "w-paraguay-man",
+  "name": "Diego",
+  "place": "Paraguay",
+  "ring": "world",
+  "desc": "Tan skin with short straight black hair, wearing a green t-shirt and gray shorts",
+  "age": 12
+ },
+ {
+  "slug": "w-peru-woman",
+  "name": "Rosa",
+  "place": "Peru",
+  "ring": "world",
+  "desc": "Medium brown skin with lined face and long straight graying black hair in a braid, wearing a red cardigan and a dark blue long skirt",
+  "age": 68
+ },
+ {
+  "slug": "w-philippines-man",
+  "name": "Mark",
+  "place": "Philippines",
+  "ring": "world",
+  "desc": "Medium brown skin with short black hair slightly graying at the sides, wearing a blue polo shirt and khaki pants",
+  "age": 45
+ },
+ {
+  "slug": "w-poland-woman",
+  "name": "Anna",
+  "place": "Poland",
+  "ring": "world",
+  "desc": "Fair skin with short wavy blonde hair to the chin, wearing a gray knit sweater and black trousers",
+  "age": 52
+ },
+ {
+  "slug": "w-portugal-man",
+  "name": "Manuel",
+  "place": "Portugal",
+  "ring": "world",
+  "desc": "Tanned olive skin with short graying dark hair combed back, wearing a light blue button shirt and beige trousers",
+  "age": 60
+ },
+ {
+  "slug": "w-qatar-woman",
+  "name": "Noora",
+  "place": "Qatar",
+  "ring": "world",
+  "desc": "Light olive skin with long straight dark brown hair loose, wearing a beige blouse and black wide-leg pants",
+  "age": 38
+ },
+ {
+  "slug": "w-romania-man",
+  "name": "Andrei",
+  "place": "Romania",
+  "ring": "world",
+  "desc": "Light skin with short brown hair fading at the sides, wearing a black sweater and blue jeans",
+  "age": 41
+ },
+ {
+  "slug": "w-russia-woman",
+  "name": "Olga",
+  "place": "Russia",
+  "ring": "world",
+  "desc": "Very fair skin with long straight light brown hair loose, wearing a cream sweater and black jeans",
+  "age": 23
+ },
+ {
+  "slug": "w-rwanda-man",
+  "name": "Eric",
+  "place": "Rwanda",
+  "ring": "world",
+  "desc": "Dark brown skin with very short black hair, wearing a light blue shirt and dark brown trousers",
+  "age": 31
+ },
+ {
+  "slug": "w-saint-kitts-and-nevis-woman",
+  "name": "Shanice",
+  "place": "Saint Kitts and Nevis",
+  "ring": "world",
+  "desc": "Medium brown skin with long braided black hair, wearing a pink t-shirt and blue denim shorts",
+  "age": 15
+ },
+ {
+  "slug": "w-saint-lucia-man",
+  "name": "Kendel",
+  "place": "Saint Lucia",
+  "ring": "world",
+  "desc": "Dark brown skin with short black twists, wearing a red t-shirt and black shorts",
+  "age": 24
+ },
+ {
+  "slug": "w-saint-vincent-and-the-grenadines-woman",
+  "name": "Keisha",
+  "place": "Saint Vincent and the Grenadines",
+  "ring": "world",
+  "desc": "Medium brown skin with long straightened black hair pulled back, wearing an orange top and blue jeans",
+  "age": 36
+ },
+ {
+  "slug": "w-samoa-man",
+  "name": "Tama",
+  "place": "Samoa",
+  "ring": "world",
+  "desc": "Medium brown skin with short wavy black hair, wearing a dark gray t-shirt and black shorts",
+  "age": 33
+ },
+ {
+  "slug": "w-san-marino-woman",
+  "name": "Sara",
+  "place": "San Marino",
+  "ring": "world",
+  "desc": "Light olive skin with shoulder-length wavy brown hair, wearing a black blazer and dark jeans",
+  "age": 43
+ },
+ {
+  "slug": "w-sao-tome-and-principe-man",
+  "name": "Joao",
+  "place": "Sao Tome and Principe",
+  "ring": "world",
+  "desc": "Deep brown skin with short white hair and wrinkled face, wearing a beige shirt and dark brown trousers",
+  "age": 90
+ },
+ {
+  "slug": "w-saudi-arabia-woman",
+  "name": "Noura",
+  "place": "Saudi Arabia",
+  "ring": "world",
+  "desc": "Light tan skin with dark brown eyes, long straight dark brown hair tied back, wearing a cream blouse and dark blue jeans with flat brown shoes.",
+  "age": 34
+ },
+ {
+  "slug": "w-senegal-man",
+  "name": "Moussa",
+  "place": "Senegal",
+  "ring": "world",
+  "desc": "Dark brown skin with a lean weathered face, short gray cropped hair, wearing a light blue loose shirt and dark brown trousers with worn loafers.",
+  "age": 71
+ },
+ {
+  "slug": "w-serbia-woman",
+  "name": "Milica",
+  "place": "Serbia",
+  "ring": "world",
+  "desc": "Fair skin with a round face, shoulder-length straight light brown hair, wearing a burgundy sweater and black pants with ankle boots.",
+  "age": 45
+ },
+ {
+  "slug": "w-seychelles-man",
+  "name": "Jean",
+  "place": "Seychelles",
+  "ring": "world",
+  "desc": "Warm brown skin with a broad face, short graying curly hair, wearing a light green polo shirt and khaki shorts with sandals.",
+  "age": 63
+ },
+ {
+  "slug": "w-sierra-leone-woman",
+  "name": "Isatu",
+  "place": "Sierra Leone",
+  "ring": "world",
+  "desc": "Dark brown skin with a youthful round face, short natural black coily hair, wearing a pink t-shirt and blue jeans with canvas shoes.",
+  "age": 16
+ },
+ {
+  "slug": "w-singapore-man",
+  "name": "Arjun",
+  "place": "Singapore",
+  "ring": "world",
+  "desc": "Medium brown skin with a clean-shaven face, thick short black hair, wearing a gray polo shirt and beige chinos with sneakers.",
+  "age": 27
+ },
+ {
+  "slug": "w-slovakia-woman",
+  "name": "Katarina",
+  "place": "Slovakia",
+  "ring": "world",
+  "desc": "Pale skin with gentle wrinkles, short wavy gray-blonde hair, wearing a brown cardigan over a white top and dark gray trousers with low shoes.",
+  "age": 67
+ },
+ {
+  "slug": "w-slovenia-man",
+  "name": "Luka",
+  "place": "Slovenia",
+  "ring": "world",
+  "desc": "Light skin with light stubble, short thinning brown hair, wearing a charcoal jacket over a gray shirt and dark jeans with hiking shoes.",
+  "age": 49
+ },
+ {
+  "slug": "w-solomon-islands-woman",
+  "name": "Mary",
+  "place": "Solomon Islands",
+  "ring": "world",
+  "desc": "Medium brown skin with a broad smile, thick black wavy hair tied in a ponytail, wearing a purple blouse and long floral skirt with rubber sandals.",
+  "age": 38
+ },
+ {
+  "slug": "w-somalia-man",
+  "name": "Abdi",
+  "place": "Somalia",
+  "ring": "world",
+  "desc": "Deep brown skin with a thin face, short black hair with gray at the sides, wearing a beige shirt and dark gray trousers with sandals.",
+  "age": 55
+ },
+ {
+  "slug": "w-south-africa-woman",
+  "name": "Thandi",
+  "place": "South Africa",
+  "ring": "world",
+  "desc": "Dark brown skin with a full face, short natural black coily hair, wearing a mustard blouse and black pants with low heels.",
+  "age": 43
+ },
+ {
+  "slug": "w-south-korea-man",
+  "name": "Minjun",
+  "place": "South Korea",
+  "ring": "world",
+  "desc": "Light beige skin with deep wrinkles, short gray hair neatly combed, wearing a dark blue padded jacket and gray trousers with dark sneakers.",
+  "age": 75
+ },
+ {
+  "slug": "w-south-sudan-woman",
+  "name": "Achol",
+  "place": "South Sudan",
+  "ring": "world",
+  "desc": "Very dark brown skin with a tall slender build, short black hair with gray streaks pulled back, wearing a green blouse and long brown skirt with sandals.",
+  "age": 60
+ },
+ {
+  "slug": "w-spain-man",
+  "name": "Pablo",
+  "place": "Spain",
+  "ring": "world",
+  "desc": "Light olive skin with stubble, short dark brown wavy hair, wearing a white shirt and dark blue jeans with brown loafers.",
+  "age": 33
+ },
+ {
+  "slug": "w-sri-lanka-woman",
+  "name": "Nadeesha",
+  "place": "Sri Lanka",
+  "ring": "world",
+  "desc": "Warm brown skin with a round face, long thick black hair in a low bun, wearing a light pink blouse and long dark red skirt with sandals.",
+  "age": 47
+ },
+ {
+  "slug": "w-sudan-man",
+  "name": "Mohamed",
+  "place": "Sudan",
+  "ring": "world",
+  "desc": "Dark brown skin with short black hair and light stubble, wearing a light beige short-sleeve shirt and grey trousers.",
+  "age": 52
+ },
+ {
+  "slug": "w-suriname-woman",
+  "name": "Shanti",
+  "place": "Suriname",
+  "ring": "world",
+  "desc": "Medium brown skin with long straight black hair in a low ponytail, wearing a pink floral blouse and dark blue jeans.",
+  "age": 41
+ },
+ {
+  "slug": "w-sweden-man",
+  "name": "Lars",
+  "place": "Sweden",
+  "ring": "world",
+  "desc": "Light fair skin with short straight blond hair and trimmed beard, wearing a plain white t-shirt and blue jeans.",
+  "age": 33
+ },
+ {
+  "slug": "w-switzerland-woman",
+  "name": "Sophie",
+  "place": "Switzerland",
+  "ring": "world",
+  "desc": "Fair skin with long straight light brown hair, wearing a cream sweater and dark straight jeans.",
+  "age": 24
+ },
+ {
+  "slug": "w-syria-man",
+  "name": "Omar",
+  "place": "Syria",
+  "ring": "world",
+  "desc": "Light brown skin with short thick dark hair, wearing a plain blue t-shirt and grey sweatpants.",
+  "age": 12
+ },
+ {
+  "slug": "w-taiwan-woman",
+  "name": "Mei-ling",
+  "place": "Taiwan",
+  "ring": "world",
+  "desc": "Light yellow-toned skin with shoulder-length black hair with grey streaks, wearing a light blue shirt and black cropped pants.",
+  "age": 58
+ },
+ {
+  "slug": "w-tajikistan-man",
+  "name": "Farhod",
+  "place": "Tajikistan",
+  "ring": "world",
+  "desc": "Tanned light brown skin with short greying dark hair, wearing a striped button shirt and dark trousers.",
+  "age": 63
+ },
+ {
+  "slug": "w-tanzania-woman",
+  "name": "Neema",
+  "place": "Tanzania",
+  "ring": "world",
+  "desc": "Rich dark brown skin with short natural coily hair, wearing a yellow blouse and long patterned blue skirt.",
+  "age": 45
+ },
+ {
+  "slug": "w-thailand-man",
+  "name": "Somchai",
+  "place": "Thailand",
+  "ring": "world",
+  "desc": "Medium brown skin with short grey hair and wrinkles, wearing a pale yellow polo shirt and dark grey long pants.",
+  "age": 75
+ },
+ {
+  "slug": "w-timor-leste-woman",
+  "name": "Maria",
+  "place": "Timor-Leste",
+  "ring": "world",
+  "desc": "Medium brown skin with long wavy black hair, wearing a plain light green t-shirt and blue jeans.",
+  "age": 14
+ },
+ {
+  "slug": "w-togo-man",
+  "name": "Kossi",
+  "place": "Togo",
+  "ring": "world",
+  "desc": "Deep brown skin with very short black hair, wearing a plain light grey shirt and dark jeans.",
+  "age": 38
+ },
+ {
+  "slug": "w-tonga-woman",
+  "name": "Sela",
+  "place": "Tonga",
+  "ring": "world",
+  "desc": "Light brown skin with long thick black hair in a bun, wearing a purple blouse and long black skirt.",
+  "age": 26
+ },
+ {
+  "slug": "w-trinidad-and-tobago-man",
+  "name": "Marcus",
+  "place": "Trinidad and Tobago",
+  "ring": "world",
+  "desc": "Dark brown skin with short coiled hair and trimmed goatee, wearing a plain red t-shirt and dark denim shorts.",
+  "age": 44
+ },
+ {
+  "slug": "w-tunisia-woman",
+  "name": "Salma",
+  "place": "Tunisia",
+  "ring": "world",
+  "desc": "Light olive skin with long dark brown straight hair, wearing a white t-shirt and light blue jeans.",
+  "age": 21
+ },
+ {
+  "slug": "w-turkmenistan-man",
+  "name": "Serdar",
+  "place": "Turkmenistan",
+  "ring": "world",
+  "desc": "Tan olive skin with a weathered face, short graying black hair with a mustache, wearing a light blue button shirt and dark gray trousers",
+  "age": 62
+ },
+ {
+  "slug": "w-tuvalu-woman",
+  "name": "Sina",
+  "place": "Tuvalu",
+  "ring": "world",
+  "desc": "Warm brown skin with full cheeks, thick wavy black hair tied back, wearing a plain turquoise t-shirt and navy shorts",
+  "age": 16
+ },
+ {
+  "slug": "w-t-rkiye-man",
+  "name": "Emir",
+  "place": "Türkiye",
+  "ring": "world",
+  "desc": "Light skin with short straight dark brown hair, wearing a plain blue t-shirt and grey shorts.",
+  "age": 10
+ },
+ {
+  "slug": "w-uganda-woman",
+  "name": "Grace",
+  "place": "Uganda",
+  "ring": "world",
+  "desc": "Rich dark brown skin with a bright smile, short natural coily black hair, wearing a yellow blouse and long blue patterned skirt",
+  "age": 28
+ },
+ {
+  "slug": "w-ukraine-man",
+  "name": "Taras",
+  "place": "Ukraine",
+  "ring": "world",
+  "desc": "Light fair skin with sharp features, short straight light brown hair, wearing a dark green sweater and blue jeans",
+  "age": 29
+ },
+ {
+  "slug": "w-united-arab-emirates-woman",
+  "name": "Mariam",
+  "place": "United Arab Emirates",
+  "ring": "world",
+  "desc": "Light brown skin with delicate features, long straight dark brown hair loose, wearing a white blouse and black trousers",
+  "age": 24
+ },
+ {
+  "slug": "w-united-kingdom-man",
+  "name": "Jack",
+  "place": "United Kingdom",
+  "ring": "world",
+  "desc": "Pale fair skin with a slim face, short straight brown hair, wearing a plain gray hoodie and black jeans",
+  "age": 19
+ },
+ {
+  "slug": "w-united-states-woman",
+  "name": "Emily",
+  "place": "United States",
+  "ring": "world",
+  "desc": "Light fair skin with gentle lines, short straight silver hair in a bob, wearing a light blue shirt and khaki pants",
+  "age": 67
+ },
+ {
+  "slug": "w-uruguay-man",
+  "name": "Diego",
+  "place": "Uruguay",
+  "ring": "world",
+  "desc": "Tan olive skin with a rugged face, short graying dark hair, wearing a plain navy polo shirt and beige trousers",
+  "age": 58
+ },
+ {
+  "slug": "w-uzbekistan-woman",
+  "name": "Dilnoza",
+  "place": "Uzbekistan",
+  "ring": "world",
+  "desc": "Light olive skin with high cheekbones, long straight black hair in a ponytail, wearing a purple blouse and black trousers",
+  "age": 48
+ },
+ {
+  "slug": "w-vanuatu-man",
+  "name": "John",
+  "place": "Vanuatu",
+  "ring": "world",
+  "desc": "Dark brown skin with a broad weathered face, short gray-black curly hair, wearing a plain blue t-shirt and brown shorts",
+  "age": 64
+ },
+ {
+  "slug": "w-vatican-city-woman",
+  "name": "Elena",
+  "place": "Vatican City",
+  "ring": "world",
+  "desc": "Fair olive skin with a kind face, shoulder-length straight dark brown hair with gray streaks, wearing a black blazer and gray trousers",
+  "age": 55
+ },
+ {
+  "slug": "w-venezuela-man",
+  "name": "Luis",
+  "place": "Venezuela",
+  "ring": "world",
+  "desc": "Tan brown skin with deep wrinkles, short thin gray hair, wearing a beige short-sleeve shirt and brown trousers",
+  "age": 90
+ },
+ {
+  "slug": "w-vietnam-woman",
+  "name": "Linh",
+  "place": "Vietnam",
+  "ring": "world",
+  "desc": "Light warm beige skin with delicate features, long straight black hair, wearing a pale pink shirt and dark blue jeans",
+  "age": 19
+ },
+ {
+  "slug": "w-yemen-man",
+  "name": "Abdullah",
+  "place": "Yemen",
+  "ring": "world",
+  "desc": "Tan brown skin with a narrow face, short curly black hair with light stubble, wearing a plain white shirt and dark gray trousers",
+  "age": 26
+ },
+ {
+  "slug": "w-zambia-woman",
+  "name": "Chanda",
+  "place": "Zambia",
+  "ring": "world",
+  "desc": "Warm dark brown skin with a round childlike face, short braided black hair, wearing a plain pink t-shirt and denim shorts",
+  "age": 10
+ },
+ {
+  "slug": "w-zimbabwe-man",
+  "name": "Tinashe",
+  "place": "Zimbabwe",
+  "ring": "world",
+  "desc": "Rich dark brown skin with a lean youthful face, short faded black hair with a clean hairline, wearing a plain mustard t-shirt and faded blue jeans with worn white sneakers.",
+  "age": 19
  }
 ]

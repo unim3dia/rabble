@@ -14,6 +14,7 @@ from PIL import Image, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import meta_api  # noqa: E402
+import greenscreen  # noqa: E402
 from sam_parse import parse_output_text, full_frame_mask  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,16 +96,26 @@ def cut_out(img_bytes):
     return rgba.crop(alpha.getbbox())
 
 
+# GREEN=1: draw on flat green and key it out (greenscreen.py) instead of SAM on
+# cream: clean edges with no pale rim, and one call fewer.
+GREEN = os.environ.get("GREEN") == "1"
+GREEN_BACKGROUND = ("Background: perfectly flat, solid pure green (#00FF00) filling the whole frame, "
+                    "no shadow on it, no floor, no gradient. Nothing green on the figure itself.")
+
+
 def main():
     slug, desc = sys.argv[1], sys.argv[2]
     age = sys.argv[3] if len(sys.argv) > 3 and sys.argv[3] else None
     pose = sys.argv[4] if len(sys.argv) > 4 else None
     os.makedirs(RAW, exist_ok=True)
     os.makedirs(OUT, exist_ok=True)
-    blob = meta_api.images_generate(prompt_for(desc, age, pose), f"rabble {slug}")[0]
+    prompt = prompt_for(desc, age, pose)
+    if GREEN:
+        prompt = prompt.replace("on a plain flat pale cream background", "on a plain flat background") + " " + GREEN_BACKGROUND
+    blob = meta_api.images_generate(prompt, f"rabble {slug}")[0]
     with open(os.path.join(RAW, slug + ".png"), "wb") as f:
         f.write(blob)
-    person = cut_out(blob)
+    person = greenscreen.key(blob) if GREEN else cut_out(blob)
     if person is None:
         raise SystemExit(f"{slug}: SAM found no person")
     if person.height > MAX_H:

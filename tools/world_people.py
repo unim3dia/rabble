@@ -106,9 +106,29 @@ def make_one(job):
     print(r.stdout.strip() or f"FAILED {slug}", flush=True)
 
 
+# Quick mode (QUICK=1): one person per country (women and men alternating) in
+# two poses, awake and asleep: enough for a world tower full of new faces fast.
+QUICK = os.environ.get("QUICK") == "1"
+QUICK_POSES = ["curl"]
+
+
+def chosen(people):
+    if not QUICK:
+        return people
+    by_country = {}
+    for p in people:
+        by_country.setdefault(p["country"], {})[p["gender"]] = p
+    out = []
+    for i, (country, pair) in enumerate(sorted(by_country.items())):
+        want = "woman" if i % 2 == 0 else "man"
+        out.append(pair.get(want) or next(iter(pair.values())))
+    return out
+
+
 def make():
-    people = json.load(open(WORLD))
-    jobs = [(p, pose) for p in people for pose in [None, *POSES]
+    people = chosen(json.load(open(WORLD)))
+    poses = QUICK_POSES if QUICK else list(POSES)
+    jobs = [(p, pose) for p in people for pose in [None, *poses]
             if not os.path.exists(os.path.join(ROOT, "app", "people",
                                                p["slug"] + (f"-{pose}" if pose else "") + ".png"))]
     print(f"{len(jobs)} images to make", flush=True)

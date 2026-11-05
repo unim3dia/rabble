@@ -4,6 +4,8 @@
   "name": "Amara",
   "place": "Park Slope",
   "ring": "neighborhood",
+  "age": 27,
+  "bio": "Bakes midnight banana bread for neighbors and hums while it cools.",
   "poses": [
    "curl",
    "drape",
@@ -11,15 +13,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 27,
-  "bio": "Bakes midnight banana bread for neighbors and hums while it cools."
+  ]
  },
  {
   "slug": "theo",
   "name": "Theo",
   "place": "Park Slope",
   "ring": "neighborhood",
+  "age": 12,
+  "bio": "Names constellations from his fire escape and tucks notes under his pillow.",
   "poses": [
    "curl",
    "drape",
@@ -27,15 +29,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 12,
-  "bio": "Names constellations from his fire escape and tucks notes under his pillow."
+  ]
  },
  {
   "slug": "luz",
   "name": "Luz",
   "place": "Red Hook",
   "ring": "neighborhood",
+  "age": 34,
+  "bio": "Fixes old bikes in Red Hook and rings the bell twice when done.",
   "poses": [
    "curl",
    "drape",
@@ -43,15 +45,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 34,
-  "bio": "Fixes old bikes in Red Hook and rings the bell twice when done."
+  ]
  },
  {
   "slug": "hiro",
   "name": "Hiro",
   "place": "Brooklyn Heights",
   "ring": "neighborhood",
+  "age": 45,
+  "bio": "Catalogs library books by smell and doodles tiny owls in margins.",
   "poses": [
    "curl",
    "drape",
@@ -59,15 +61,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 45,
-  "bio": "Catalogs library books by smell and doodles tiny owls in margins."
+  ]
  },
  {
   "slug": "nana-rose",
   "name": "Rose",
   "place": "Park Slope",
   "ring": "neighborhood",
+  "age": 81,
+  "bio": "Knits pink scarves for newborns and remembers every baby's birthday.",
   "poses": [
    "curl",
    "drape",
@@ -75,30 +77,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 81,
-  "bio": "Knits pink scarves for newborns and remembers every baby's birthday."
+  ]
  },
  {
   "slug": "kwame",
   "name": "Kwame",
   "place": "Carroll Gardens",
   "ring": "neighborhood",
+  "age": 38,
+  "bio": "Roasts plantains on Sundays and tells stories that make everyone linger.",
   "poses": [
    "curl",
    "drape",
    "lean",
+   "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 38,
-  "bio": "Roasts plantains on Sundays and tells stories that make everyone linger."
+  ]
  },
  {
   "slug": "maya",
   "name": "Maya",
   "place": "DUMBO",
   "ring": "neighborhood",
+  "age": 23,
+  "bio": "Sketches pigeons in DUMBO and names each one after a flower.",
   "poses": [
    "curl",
    "drape",
@@ -106,15 +109,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 23,
-  "bio": "Sketches pigeons in DUMBO and names each one after a flower."
+  ]
  },
  {
   "slug": "sol",
   "name": "Sol",
   "place": "Gowanus",
   "ring": "neighborhood",
+  "age": 19,
+  "bio": "Dyes hair purple, screen-prints posters, and always shares extra fries.",
   "poses": [
    "curl",
    "drape",
@@ -122,15 +125,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 19,
-  "bio": "Dyes hair purple, screen-prints posters, and always shares extra fries."
+  ]
  },
  {
   "slug": "fatima",
   "name": "Fatima",
   "place": "Astoria",
   "ring": "city",
+  "age": 41,
+  "bio": "Brews cardamom tea for guests and keeps a garden journal daily.",
   "poses": [
    "curl",
    "drape",
@@ -138,15 +141,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 41,
-  "bio": "Brews cardamom tea for guests and keeps a garden journal daily."
+  ]
  },
  {
   "slug": "jun",
   "name": "Jun",
   "place": "Flushing",
   "ring": "city",
+  "age": 29,
+  "bio": "Photographs sleepy pigeons at dawn and naps with camera strap on.",
   "poses": [
    "curl",
    "drape",
@@ -154,29 +157,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 29,
-  "bio": "Photographs sleepy pigeons at dawn and naps with camera strap on."
+  ]
  },
  {
   "slug": "dolores",
   "name": "Dolores",
   "place": "Bronx",
   "ring": "city",
+  "age": 74,
+  "bio": "Embroidered every blouse herself and sings lullabies softly in Spanish.",
   "poses": [
    "curl",
+   "drape",
    "lean",
+   "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 74,
-  "bio": "Embroidered every blouse herself and sings lullabies softly in Spanish."
+  ]
  },
  {
   "slug": "marcus",
   "name": "Marcus",
   "place": "Harlem",
   "ring": "city",
+  "age": 16,
+  "bio": "Practices free throws at sunrise and tutors little kids after school.",
   "poses": [
    "curl",
    "drape",
@@ -184,15 +189,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 16,
-  "bio": "Practices free throws at sunrise and tutors little kids after school."
+  ]
  },
  {
   "slug": "ivy",
   "name": "Ivy",
   "place": "Williamsburg",
   "ring": "city",
+  "age": 31,
+  "bio": "Splashes in her yellow boots and rescues worms after rain.",
   "poses": [
    "curl",
    "drape",
@@ -200,30 +205,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 31,
-  "bio": "Splashes in her yellow boots and rescues worms after rain."
+  ]
  },
  {
   "slug": "arjun",
   "name": "Arjun",
   "place": "Bed-Stuy",
   "ring": "city",
+  "age": 52,
+  "bio": "Grades papers with gold stars and grows tomatoes on his fire escape.",
   "poses": [
    "curl",
    "drape",
+   "lean",
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 52,
-  "bio": "Grades papers with gold stars and grows tomatoes on his fire escape."
+  ]
  },
  {
   "slug": "bea",
   "name": "Bea",
   "place": "Bushwick",
   "ring": "city",
+  "age": 10,
+  "bio": "Reads comics under blankets with a flashlight and giggles at sound effects.",
   "poses": [
    "curl",
    "drape",
@@ -231,15 +237,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 10,
-  "bio": "Reads comics under blankets with a flashlight and giggles at sound effects."
+  ]
  },
  {
   "slug": "tomas",
   "name": "Tomas",
   "place": "Lower East Side",
   "ring": "city",
+  "age": 26,
+  "bio": "Drums on subway railings and saves seats for tired strangers.",
   "poses": [
    "curl",
    "drape",
@@ -247,15 +253,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 26,
-  "bio": "Drums on subway railings and saves seats for tired strangers."
+  ]
  },
  {
   "slug": "grace",
   "name": "Grace",
   "place": "Buffalo",
   "ring": "state",
+  "age": 88,
+  "bio": "Crochets shawls for church friends and remembers hymns by heart.",
   "poses": [
    "curl",
    "drape",
@@ -263,15 +269,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 88,
-  "bio": "Crochets shawls for church friends and remembers hymns by heart."
+  ]
  },
  {
   "slug": "leo",
   "name": "Leo",
   "place": "Ithaca",
   "ring": "state",
+  "age": 22,
+  "bio": "Teaches lake swimming in summer and collects smooth stones for friends.",
   "poses": [
    "curl",
    "drape",
@@ -279,29 +285,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 22,
-  "bio": "Teaches lake swimming in summer and collects smooth stones for friends."
+  ]
  },
  {
   "slug": "mei",
   "name": "Mei",
   "place": "Albany",
   "ring": "state",
+  "age": 63,
+  "bio": "Folds origami cranes while tea steeps and mails them to grandchildren.",
   "poses": [
+   "curl",
    "drape",
+   "lean",
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 63,
-  "bio": "Folds origami cranes while tea steeps and mails them to grandchildren."
+  ]
  },
  {
   "slug": "sam",
   "name": "Sam",
   "place": "Rochester",
   "ring": "state",
+  "age": 57,
+  "bio": "Wakes early to feed chickens and whistles old folk songs happily.",
   "poses": [
    "curl",
    "drape",
@@ -309,30 +317,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 57,
-  "bio": "Wakes early to feed chickens and whistles old folk songs happily."
+  ]
  },
  {
   "slug": "noor",
   "name": "Noor",
   "place": "Hudson",
   "ring": "state",
+  "age": 35,
+  "bio": "Paints Hudson sunsets in watercolor and leaves kind notes in libraries.",
   "poses": [
+   "curl",
    "drape",
    "lean",
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 35,
-  "bio": "Paints Hudson sunsets in watercolor and leaves kind notes in libraries."
+  ]
  },
  {
   "slug": "ezra",
   "name": "Ezra",
   "place": "Saratoga",
   "ring": "state",
+  "age": 44,
+  "bio": "Strums guitar by the lake and teaches chords to shy beginners.",
   "poses": [
    "curl",
    "drape",
@@ -340,15 +349,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 44,
-  "bio": "Strums guitar by the lake and teaches chords to shy beginners."
+  ]
  },
  {
   "slug": "yuki",
   "name": "Yuki",
   "place": "Sapporo",
   "ring": "world",
+  "age": 68,
+  "bio": "Knits red scarves for newcomers and makes perfect snow rabbits.",
   "poses": [
    "curl",
    "drape",
@@ -356,15 +365,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 68,
-  "bio": "Knits red scarves for newcomers and makes perfect snow rabbits."
+  ]
  },
  {
   "slug": "kofi",
   "name": "Kofi",
   "place": "Accra",
   "ring": "world",
+  "age": 49,
+  "bio": "Drums festival rhythms joyfully and teaches kids the clap pattern.",
   "poses": [
    "curl",
    "drape",
@@ -372,44 +381,47 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 49,
-  "bio": "Drums festival rhythms joyfully and teaches kids the clap pattern."
+  ]
  },
  {
   "slug": "ingrid",
   "name": "Ingrid",
   "place": "Oslo",
   "ring": "world",
+  "age": 15,
+  "bio": "Bakes cardamom buns for classmates and braids friendship bracelets at lunch.",
   "poses": [
    "curl",
+   "drape",
    "lean",
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 15,
-  "bio": "Bakes cardamom buns for classmates and braids friendship bracelets at lunch."
+  ]
  },
  {
   "slug": "rafael",
   "name": "Rafael",
   "place": "São Paulo",
   "ring": "world",
+  "age": 33,
+  "bio": "Coaches street soccer on Sundays and cheers loudest for beginners.",
   "poses": [
+   "curl",
+   "drape",
    "lean",
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 33,
-  "bio": "Coaches street soccer on Sundays and cheers loudest for beginners."
+  ]
  },
  {
   "slug": "priya",
   "name": "Priya",
   "place": "Bengaluru",
   "ring": "world",
+  "age": 28,
+  "bio": "Codes apps for farmers and dances while cooking to old songs.",
   "poses": [
    "curl",
    "drape",
@@ -417,15 +429,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 28,
-  "bio": "Codes apps for farmers and dances while cooking to old songs."
+  ]
  },
  {
   "slug": "aziz",
   "name": "Aziz",
   "place": "Marrakesh",
   "ring": "world",
+  "age": 61,
+  "bio": "Brews mint tea slowly and tells desert-star stories to grandchildren.",
   "poses": [
    "curl",
    "drape",
@@ -433,29 +445,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 61,
-  "bio": "Brews mint tea slowly and tells desert-star stories to grandchildren."
+  ]
  },
  {
   "slug": "lena",
   "name": "Lena",
   "place": "Berlin",
   "ring": "world",
+  "age": 24,
+  "bio": "Mends jackets with star patches and bikes through quiet midnight streets.",
   "poses": [
    "curl",
    "drape",
    "lean",
+   "prop",
+   "chin",
    "snuggle"
-  ],
-  "age": 24,
-  "bio": "Mends jackets with star patches and bikes through quiet midnight streets."
+  ]
  },
  {
   "slug": "tama",
   "name": "Tama",
   "place": "Auckland",
   "ring": "world",
+  "age": 40,
+  "bio": "Cooks big rugby-day stews and sings harmonies a little off-key.",
   "poses": [
    "curl",
    "drape",
@@ -463,15 +477,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 40,
-  "bio": "Cooks big rugby-day stews and sings harmonies a little off-key."
+  ]
  },
  {
   "slug": "olu",
   "name": "Olu",
   "place": "Lagos",
   "ring": "world",
+  "age": 13,
+  "bio": "Charts moon phases in yellow pajamas and wishes on each crescent.",
   "poses": [
    "curl",
    "drape",
@@ -479,30 +493,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 13,
-  "bio": "Charts moon phases in yellow pajamas and wishes on each crescent."
+  ]
  },
  {
   "slug": "ana",
   "name": "Ana",
   "place": "Mexico City",
   "ring": "world",
+  "age": 55,
+  "bio": "Grows marigolds on her balcony and clips a fresh flower daily.",
   "poses": [
    "curl",
    "drape",
    "lean",
+   "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 55,
-  "bio": "Grows marigolds on her balcony and clips a fresh flower daily."
+  ]
  },
  {
   "slug": "ada",
   "name": "Ada",
   "place": "Park Slope",
   "ring": "neighborhood",
+  "age": 21,
+  "bio": "Hums sleepy songs curled tight, dreaming of morning hot chocolate.",
   "poses": [
    "curl",
    "drape",
@@ -510,15 +525,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 21,
-  "bio": "Hums sleepy songs curled tight, dreaming of morning hot chocolate."
+  ]
  },
  {
   "slug": "benji",
   "name": "Benji",
   "place": "Prospect Heights",
   "ring": "neighborhood",
+  "age": 11,
+  "bio": "Collects shiny pebbles in his hat and trades them for stories.",
   "poses": [
    "curl",
    "drape",
@@ -526,15 +541,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 11,
-  "bio": "Collects shiny pebbles in his hat and trades them for stories."
+  ]
  },
  {
   "slug": "zola",
   "name": "Zola",
   "place": "Red Hook",
   "ring": "neighborhood",
+  "age": 17,
+  "bio": "Beads bracelets for each friend and squeezes hugs extra tight.",
   "poses": [
    "curl",
    "drape",
@@ -542,28 +557,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 17,
-  "bio": "Beads bracelets for each friend and squeezes hugs extra tight."
+  ]
  },
  {
   "slug": "omar",
   "name": "Omar",
   "place": "Bay Ridge",
   "ring": "neighborhood",
+  "age": 46,
+  "bio": "Waves at every ferry captain and keeps chocolates for late-night chats.",
   "poses": [
    "curl",
+   "drape",
+   "lean",
    "prop",
+   "chin",
    "snuggle"
-  ],
-  "age": 46,
-  "bio": "Waves at every ferry captain and keeps chocolates for late-night chats."
+  ]
  },
  {
   "slug": "kiki",
   "name": "Kiki",
   "place": "Fort Greene",
   "ring": "neighborhood",
+  "age": 30,
+  "bio": "Bakes lemon muffins for neighbors and asks for hugs before hello.",
   "poses": [
    "curl",
    "drape",
@@ -571,15 +589,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 30,
-  "bio": "Bakes lemon muffins for neighbors and asks for hugs before hello."
+  ]
  },
  {
   "slug": "dev",
   "name": "Dev",
   "place": "Sunset Park",
   "ring": "neighborhood",
+  "age": 25,
+  "bio": "Dreams hood-up and cozy, clutching library books about stars.",
   "poses": [
    "curl",
    "drape",
@@ -587,29 +605,31 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 25,
-  "bio": "Dreams hood-up and cozy, clutching library books about stars."
+  ]
  },
  {
   "slug": "ruth",
   "name": "Ruth",
   "place": "Brooklyn Heights",
   "ring": "neighborhood",
+  "age": 79,
+  "bio": "Hugs her pillow tight and recites poems memorized decades ago.",
   "poses": [
    "curl",
    "drape",
+   "lean",
    "prop",
-   "chin"
-  ],
-  "age": 79,
-  "bio": "Hugs her pillow tight and recites poems memorized decades ago."
+   "chin",
+   "snuggle"
+  ]
  },
  {
   "slug": "jojo",
   "name": "Jojo",
   "place": "Crown Heights",
   "ring": "neighborhood",
+  "age": 14,
+  "bio": "Tumbles laughing through pile-ons and invents new secret handshakes daily.",
   "poses": [
    "curl",
    "drape",
@@ -617,15 +637,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 14,
-  "bio": "Tumbles laughing through pile-ons and invents new secret handshakes daily."
+  ]
  },
  {
   "slug": "pia",
   "name": "Pia",
   "place": "Queens",
   "ring": "city",
+  "age": 36,
+  "bio": "Brings extra blankets to movie nights and remembers everyone's favorite snack.",
   "poses": [
    "curl",
    "drape",
@@ -633,15 +653,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 36,
-  "bio": "Brings extra blankets to movie nights and remembers everyone's favorite snack."
+  ]
  },
  {
   "slug": "eli",
   "name": "Eli",
   "place": "Inwood",
   "ring": "city",
+  "age": 58,
+  "bio": "Naps with podcasts half-playing and wakes to share fun facts.",
   "poses": [
    "curl",
    "drape",
@@ -649,15 +669,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 58,
-  "bio": "Naps with podcasts half-playing and wakes to share fun facts."
+  ]
  },
  {
   "slug": "nia",
   "name": "Nia",
   "place": "Bronx",
   "ring": "city",
+  "age": 43,
+  "bio": "Braids hair while humming gospel and keeps cocoa warm for all.",
   "poses": [
    "curl",
    "drape",
@@ -665,15 +685,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 43,
-  "bio": "Braids hair while humming gospel and keeps cocoa warm for all."
+  ]
  },
  {
   "slug": "felix",
   "name": "Felix",
   "place": "Staten Island",
   "ring": "city",
+  "age": 66,
+  "bio": "Laughs with whole belly and collects jokes to tell ferry riders.",
   "poses": [
    "curl",
    "drape",
@@ -681,15 +701,15 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 66,
-  "bio": "Laughs with whole belly and collects jokes to tell ferry riders."
+  ]
  },
  {
   "slug": "hana",
   "name": "Hana",
   "place": "Long Island City",
   "ring": "city",
+  "age": 20,
+  "bio": "Sleeps curled like a cat, dreaming of bakery shifts and sunrise buns.",
   "poses": [
    "curl",
    "drape",
@@ -697,32 +717,1991 @@
    "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 20,
-  "bio": "Sleeps curled like a cat, dreaming of bakery shifts and sunrise buns."
+  ]
  },
  {
   "slug": "drew",
   "name": "Drew",
   "place": "Harlem",
   "ring": "city",
+  "age": 71,
+  "bio": "Opens arms wide for stories and remembers every kid's name.",
   "poses": [
    "curl",
    "drape",
    "lean",
+   "prop",
    "chin",
    "snuggle"
-  ],
-  "age": 71,
-  "bio": "Opens arms wide for stories and remembers every kid's name."
+  ]
  },
  {
   "slug": "you",
   "name": "you",
   "place": "",
   "ring": "you",
-  "poses": [],
   "age": 30,
-  "bio": "Floating joyful in the middle, holding space for everyone's late-night laughter."
+  "bio": "Floating joyful in the middle, holding space for everyone's late-night laughter.",
+  "poses": []
+ },
+ {
+  "slug": "w-afghanistan-woman",
+  "name": "Fatima",
+  "place": "Afghanistan",
+  "ring": "world",
+  "age": 34,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-albania-man",
+  "name": "Arben",
+  "place": "Albania",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-algeria-woman",
+  "name": "Amel",
+  "place": "Algeria",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-andorra-man",
+  "name": "Jordi",
+  "place": "Andorra",
+  "ring": "world",
+  "age": 38,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-angola-woman",
+  "name": "Luisa",
+  "place": "Angola",
+  "ring": "world",
+  "age": 29,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-antigua-and-barbuda-man",
+  "name": "Andre",
+  "place": "Antigua and Barbuda",
+  "ring": "world",
+  "age": 67,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-argentina-woman",
+  "name": "Lucia",
+  "place": "Argentina",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-armenia-man",
+  "name": "Hayk",
+  "place": "Armenia",
+  "ring": "world",
+  "age": 55,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-australia-woman",
+  "name": "Sarah",
+  "place": "Australia",
+  "ring": "world",
+  "age": 36,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-austria-man",
+  "name": "Lukas",
+  "place": "Austria",
+  "ring": "world",
+  "age": 75,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-azerbaijan-woman",
+  "name": "Aysel",
+  "place": "Azerbaijan",
+  "ring": "world",
+  "age": 27,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bahamas-man",
+  "name": "Jamal",
+  "place": "Bahamas",
+  "ring": "world",
+  "age": 59,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bahrain-woman",
+  "name": "Noora",
+  "place": "Bahrain",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bangladesh-man",
+  "name": "Rahim",
+  "place": "Bangladesh",
+  "ring": "world",
+  "age": 71,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-barbados-woman",
+  "name": "Keisha",
+  "place": "Barbados",
+  "ring": "world",
+  "age": 65,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-belarus-man",
+  "name": "Dmitri",
+  "place": "Belarus",
+  "ring": "world",
+  "age": 68,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-belgium-woman",
+  "name": "Sofie",
+  "place": "Belgium",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-belize-man",
+  "name": "Jayden",
+  "place": "Belize",
+  "ring": "world",
+  "age": 10,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-benin-woman",
+  "name": "Aïcha",
+  "place": "Benin",
+  "ring": "world",
+  "age": 61,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bhutan-man",
+  "name": "Tashi",
+  "place": "Bhutan",
+  "ring": "world",
+  "age": 52,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bolivia-woman",
+  "name": "Maria",
+  "place": "Bolivia",
+  "ring": "world",
+  "age": 43,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bosnia-and-herzegovina-man",
+  "name": "Marko",
+  "place": "Bosnia and Herzegovina",
+  "ring": "world",
+  "age": 29,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-botswana-woman",
+  "name": "Neo",
+  "place": "Botswana",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-brazil-man",
+  "name": "Carlos",
+  "place": "Brazil",
+  "ring": "world",
+  "age": 48,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-brunei-woman",
+  "name": "Nur",
+  "place": "Brunei",
+  "ring": "world",
+  "age": 39,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-bulgaria-man",
+  "name": "Georgi",
+  "place": "Bulgaria",
+  "ring": "world",
+  "age": 25,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-burkina-faso-woman",
+  "name": "Mariam",
+  "place": "Burkina Faso",
+  "ring": "world",
+  "age": 18,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-burundi-man",
+  "name": "Eric",
+  "place": "Burundi",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-cabo-verde-woman",
+  "name": "Lúcia",
+  "place": "Cabo Verde",
+  "ring": "world",
+  "age": 59,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-cambodia-man",
+  "name": "Sok",
+  "place": "Cambodia",
+  "ring": "world",
+  "age": 90,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-cameroon-woman",
+  "name": "Marie",
+  "place": "Cameroon",
+  "ring": "world",
+  "age": 34,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-canada-man",
+  "name": "Liam",
+  "place": "Canada",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-central-african-republic-woman",
+  "name": "Grace",
+  "place": "Central African Republic",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-chad-man",
+  "name": "Mahamat",
+  "place": "Chad",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-chile-woman",
+  "name": "Valentina",
+  "place": "Chile",
+  "ring": "world",
+  "age": 55,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-china-man",
+  "name": "Wei",
+  "place": "China",
+  "ring": "world",
+  "age": 68,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-colombia-woman",
+  "name": "Sofia",
+  "place": "Colombia",
+  "ring": "world",
+  "age": 14,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-comoros-man",
+  "name": "Youssouf",
+  "place": "Comoros",
+  "ring": "world",
+  "age": 52,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-congo-woman",
+  "name": "Divine",
+  "place": "Congo",
+  "ring": "world",
+  "age": 47,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-costa-rica-man",
+  "name": "Jose",
+  "place": "Costa Rica",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-croatia-woman",
+  "name": "Ana",
+  "place": "Croatia",
+  "ring": "world",
+  "age": 73,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-cuba-man",
+  "name": "Luis",
+  "place": "Cuba",
+  "ring": "world",
+  "age": 60,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-cyprus-woman",
+  "name": "Eleni",
+  "place": "Cyprus",
+  "ring": "world",
+  "age": 17,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-czechia-man",
+  "name": "Petr",
+  "place": "Czechia",
+  "ring": "world",
+  "age": 90,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-c-te-d-ivoire-woman",
+  "name": "Awa",
+  "place": "Côte d'Ivoire",
+  "ring": "world",
+  "age": 22,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-democratic-republic-of-the-congo-man",
+  "name": "Patrick",
+  "place": "Democratic Republic of the Congo",
+  "ring": "world",
+  "age": 27,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-denmark-woman",
+  "name": "Mette",
+  "place": "Denmark",
+  "ring": "world",
+  "age": 42,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-djibouti-man",
+  "name": "Ahmed",
+  "place": "Djibouti",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-dominica-woman",
+  "name": "Sherma",
+  "place": "Dominica",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-dominican-republic-man",
+  "name": "Luis",
+  "place": "Dominican Republic",
+  "ring": "world",
+  "age": 52,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-ecuador-woman",
+  "name": "María",
+  "place": "Ecuador",
+  "ring": "world",
+  "age": 67,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-egypt-man",
+  "name": "Mahmoud",
+  "place": "Egypt",
+  "ring": "world",
+  "age": 61,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-el-salvador-woman",
+  "name": "Karla",
+  "place": "El Salvador",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-equatorial-guinea-man",
+  "name": "Teodoro",
+  "place": "Equatorial Guinea",
+  "ring": "world",
+  "age": 71,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-eritrea-woman",
+  "name": "Selam",
+  "place": "Eritrea",
+  "ring": "world",
+  "age": 24,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-estonia-man",
+  "name": "Peeter",
+  "place": "Estonia",
+  "ring": "world",
+  "age": 75,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-eswatini-woman",
+  "name": "Nomsa",
+  "place": "Eswatini",
+  "ring": "world",
+  "age": 41,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-ethiopia-man",
+  "name": "Abebe",
+  "place": "Ethiopia",
+  "ring": "world",
+  "age": 63,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-fiji-woman",
+  "name": "Mere",
+  "place": "Fiji",
+  "ring": "world",
+  "age": 15,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-finland-man",
+  "name": "Ville",
+  "place": "Finland",
+  "ring": "world",
+  "age": 10,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-france-woman",
+  "name": "Camille",
+  "place": "France",
+  "ring": "world",
+  "age": 34,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-gabon-man",
+  "name": "Jean",
+  "place": "Gabon",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-gambia-woman",
+  "name": "Fatou",
+  "place": "Gambia",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-georgia-man",
+  "name": "Giorgi",
+  "place": "Georgia",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-germany-woman",
+  "name": "Anna",
+  "place": "Germany",
+  "ring": "world",
+  "age": 58,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-ghana-man",
+  "name": "Kwame",
+  "place": "Ghana",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-greece-woman",
+  "name": "Maria",
+  "place": "Greece",
+  "ring": "world",
+  "age": 74,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-grenada-man",
+  "name": "Andre",
+  "place": "Grenada",
+  "ring": "world",
+  "age": 60,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-guatemala-woman",
+  "name": "Rosa",
+  "place": "Guatemala",
+  "ring": "world",
+  "age": 50,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-guinea-man",
+  "name": "Mamadou",
+  "place": "Guinea",
+  "ring": "world",
+  "age": 70,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-guinea-bissau-woman",
+  "name": "Binta",
+  "place": "Guinea-Bissau",
+  "ring": "world",
+  "age": 29,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-guyana-man",
+  "name": "Deon",
+  "place": "Guyana",
+  "ring": "world",
+  "age": 55,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-haiti-woman",
+  "name": "Widlene",
+  "place": "Haiti",
+  "ring": "world",
+  "age": 21,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-honduras-man",
+  "name": "Jose",
+  "place": "Honduras",
+  "ring": "world",
+  "age": 12,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-hungary-woman",
+  "name": "Katalin",
+  "place": "Hungary",
+  "ring": "world",
+  "age": 63,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-iceland-man",
+  "name": "Jon",
+  "place": "Iceland",
+  "ring": "world",
+  "age": 67,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-india-woman",
+  "name": "Priya",
+  "place": "India",
+  "ring": "world",
+  "age": 28,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-indonesia-man",
+  "name": "Budi",
+  "place": "Indonesia",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-iran-woman",
+  "name": "Sara",
+  "place": "Iran",
+  "ring": "world",
+  "age": 22,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-iraq-man",
+  "name": "Ahmed",
+  "place": "Iraq",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-ireland-woman",
+  "name": "Aoife",
+  "place": "Ireland",
+  "ring": "world",
+  "age": 17,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-israel-man",
+  "name": "Noam",
+  "place": "Israel",
+  "ring": "world",
+  "age": 26,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-italy-woman",
+  "name": "Sofia",
+  "place": "Italy",
+  "ring": "world",
+  "age": 38,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-jamaica-man",
+  "name": "Marcus",
+  "place": "Jamaica",
+  "ring": "world",
+  "age": 49,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-japan-woman",
+  "name": "Yoko",
+  "place": "Japan",
+  "ring": "world",
+  "age": 69,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-jordan-man",
+  "name": "Omar",
+  "place": "Jordan",
+  "ring": "world",
+  "age": 90,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-kazakhstan-woman",
+  "name": "Aigerim",
+  "place": "Kazakhstan",
+  "ring": "world",
+  "age": 20,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-kenya-man",
+  "name": "Peter",
+  "place": "Kenya",
+  "ring": "world",
+  "age": 36,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-kiribati-woman",
+  "name": "Teresia",
+  "place": "Kiribati",
+  "ring": "world",
+  "age": 14,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-kuwait-man",
+  "name": "Fahad",
+  "place": "Kuwait",
+  "ring": "world",
+  "age": 40,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-kyrgyzstan-woman",
+  "name": "Aigul",
+  "place": "Kyrgyzstan",
+  "ring": "world",
+  "age": 34,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-laos-man",
+  "name": "Kham",
+  "place": "Laos",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-latvia-woman",
+  "name": "Ilze",
+  "place": "Latvia",
+  "ring": "world",
+  "age": 71,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-lebanon-man",
+  "name": "Karim",
+  "place": "Lebanon",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-lesotho-woman",
+  "name": "Lerato",
+  "place": "Lesotho",
+  "ring": "world",
+  "age": 23,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-liberia-man",
+  "name": "Emmanuel",
+  "place": "Liberia",
+  "ring": "world",
+  "age": 12,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-libya-woman",
+  "name": "Salma",
+  "place": "Libya",
+  "ring": "world",
+  "age": 29,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-liechtenstein-man",
+  "name": "Stefan",
+  "place": "Liechtenstein",
+  "ring": "world",
+  "age": 73,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-lithuania-woman",
+  "name": "Gabija",
+  "place": "Lithuania",
+  "ring": "world",
+  "age": 15,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-luxembourg-man",
+  "name": "Luc",
+  "place": "Luxembourg",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-madagascar-woman",
+  "name": "Miora",
+  "place": "Madagascar",
+  "ring": "world",
+  "age": 26,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-malawi-man",
+  "name": "Peter",
+  "place": "Malawi",
+  "ring": "world",
+  "age": 22,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-malaysia-woman",
+  "name": "Mei",
+  "place": "Malaysia",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-maldives-man",
+  "name": "Mohamed",
+  "place": "Maldives",
+  "ring": "world",
+  "age": 69,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-mali-woman",
+  "name": "Awa",
+  "place": "Mali",
+  "ring": "world",
+  "age": 44,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-malta-man",
+  "name": "Joseph",
+  "place": "Malta",
+  "ring": "world",
+  "age": 71,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-marshall-islands-woman",
+  "name": "Lina",
+  "place": "Marshall Islands",
+  "ring": "world",
+  "age": 22,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-mauritania-man",
+  "name": "Mohamed",
+  "place": "Mauritania",
+  "ring": "world",
+  "age": 63,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-mauritius-woman",
+  "name": "Priya",
+  "place": "Mauritius",
+  "ring": "world",
+  "age": 41,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-mexico-man",
+  "name": "Carlos",
+  "place": "Mexico",
+  "ring": "world",
+  "age": 60,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-micronesia-woman",
+  "name": "Maria",
+  "place": "Micronesia",
+  "ring": "world",
+  "age": 37,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-moldova-man",
+  "name": "Ion",
+  "place": "Moldova",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-monaco-woman",
+  "name": "Sophie",
+  "place": "Monaco",
+  "ring": "world",
+  "age": 26,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-mongolia-man",
+  "name": "Batbayar",
+  "place": "Mongolia",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-montenegro-woman",
+  "name": "Milica",
+  "place": "Montenegro",
+  "ring": "world",
+  "age": 43,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-morocco-man",
+  "name": "Youssef",
+  "place": "Morocco",
+  "ring": "world",
+  "age": 25,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-mozambique-woman",
+  "name": "Ana",
+  "place": "Mozambique",
+  "ring": "world",
+  "age": 74,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-myanmar-man",
+  "name": "Min",
+  "place": "Myanmar",
+  "ring": "world",
+  "age": 58,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-namibia-woman",
+  "name": "Maria",
+  "place": "Namibia",
+  "ring": "world",
+  "age": 66,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-nauru-man",
+  "name": "James",
+  "place": "Nauru",
+  "ring": "world",
+  "age": 90,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-nepal-woman",
+  "name": "Sunita",
+  "place": "Nepal",
+  "ring": "world",
+  "age": 34,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-netherlands-man",
+  "name": "Jeroen",
+  "place": "Netherlands",
+  "ring": "world",
+  "age": 52,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-new-zealand-woman",
+  "name": "Aroha",
+  "place": "New Zealand",
+  "ring": "world",
+  "age": 28,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-nicaragua-man",
+  "name": "Carlos",
+  "place": "Nicaragua",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-niger-woman",
+  "name": "Amina",
+  "place": "Niger",
+  "ring": "world",
+  "age": 23,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-nigeria-man",
+  "name": "Tunde",
+  "place": "Nigeria",
+  "ring": "world",
+  "age": 40,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-north-korea-woman",
+  "name": "Jihye",
+  "place": "North Korea",
+  "ring": "world",
+  "age": 38,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-north-macedonia-man",
+  "name": "Stefan",
+  "place": "North Macedonia",
+  "ring": "world",
+  "age": 82,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-norway-woman",
+  "name": "Ingrid",
+  "place": "Norway",
+  "ring": "world",
+  "age": 47,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-oman-man",
+  "name": "Ahmed",
+  "place": "Oman",
+  "ring": "world",
+  "age": 59,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-pakistan-woman",
+  "name": "Ayesha",
+  "place": "Pakistan",
+  "ring": "world",
+  "age": 18,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-palau-man",
+  "name": "Mason",
+  "place": "Palau",
+  "ring": "world",
+  "age": 12,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-palestine-woman",
+  "name": "Lina",
+  "place": "Palestine",
+  "ring": "world",
+  "age": 29,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-panama-man",
+  "name": "José",
+  "place": "Panama",
+  "ring": "world",
+  "age": 24,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-papua-new-guinea-woman",
+  "name": "Anna",
+  "place": "Papua New Guinea",
+  "ring": "world",
+  "age": 70,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-paraguay-man",
+  "name": "Diego",
+  "place": "Paraguay",
+  "ring": "world",
+  "age": 12,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-peru-woman",
+  "name": "Rosa",
+  "place": "Peru",
+  "ring": "world",
+  "age": 68,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-philippines-man",
+  "name": "Mark",
+  "place": "Philippines",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-poland-woman",
+  "name": "Anna",
+  "place": "Poland",
+  "ring": "world",
+  "age": 52,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-portugal-man",
+  "name": "Manuel",
+  "place": "Portugal",
+  "ring": "world",
+  "age": 60,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-qatar-woman",
+  "name": "Noora",
+  "place": "Qatar",
+  "ring": "world",
+  "age": 38,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-romania-man",
+  "name": "Andrei",
+  "place": "Romania",
+  "ring": "world",
+  "age": 41,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-russia-woman",
+  "name": "Olga",
+  "place": "Russia",
+  "ring": "world",
+  "age": 23,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-rwanda-man",
+  "name": "Eric",
+  "place": "Rwanda",
+  "ring": "world",
+  "age": 31,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-saint-kitts-and-nevis-woman",
+  "name": "Shanice",
+  "place": "Saint Kitts and Nevis",
+  "ring": "world",
+  "age": 15,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-saint-lucia-man",
+  "name": "Kendel",
+  "place": "Saint Lucia",
+  "ring": "world",
+  "age": 24,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-saint-vincent-and-the-grenadines-woman",
+  "name": "Keisha",
+  "place": "Saint Vincent and the Grenadines",
+  "ring": "world",
+  "age": 36,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-samoa-man",
+  "name": "Tama",
+  "place": "Samoa",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-san-marino-woman",
+  "name": "Sara",
+  "place": "San Marino",
+  "ring": "world",
+  "age": 43,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-sao-tome-and-principe-man",
+  "name": "Joao",
+  "place": "Sao Tome and Principe",
+  "ring": "world",
+  "age": 90,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-saudi-arabia-woman",
+  "name": "Noura",
+  "place": "Saudi Arabia",
+  "ring": "world",
+  "age": 34,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-senegal-man",
+  "name": "Moussa",
+  "place": "Senegal",
+  "ring": "world",
+  "age": 71,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-serbia-woman",
+  "name": "Milica",
+  "place": "Serbia",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-seychelles-man",
+  "name": "Jean",
+  "place": "Seychelles",
+  "ring": "world",
+  "age": 63,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-sierra-leone-woman",
+  "name": "Isatu",
+  "place": "Sierra Leone",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-singapore-man",
+  "name": "Arjun",
+  "place": "Singapore",
+  "ring": "world",
+  "age": 27,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-slovakia-woman",
+  "name": "Katarina",
+  "place": "Slovakia",
+  "ring": "world",
+  "age": 67,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-slovenia-man",
+  "name": "Luka",
+  "place": "Slovenia",
+  "ring": "world",
+  "age": 49,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-solomon-islands-woman",
+  "name": "Mary",
+  "place": "Solomon Islands",
+  "ring": "world",
+  "age": 38,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-somalia-man",
+  "name": "Abdi",
+  "place": "Somalia",
+  "ring": "world",
+  "age": 55,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-south-africa-woman",
+  "name": "Thandi",
+  "place": "South Africa",
+  "ring": "world",
+  "age": 43,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-south-korea-man",
+  "name": "Minjun",
+  "place": "South Korea",
+  "ring": "world",
+  "age": 75,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-south-sudan-woman",
+  "name": "Achol",
+  "place": "South Sudan",
+  "ring": "world",
+  "age": 60,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-spain-man",
+  "name": "Pablo",
+  "place": "Spain",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-sri-lanka-woman",
+  "name": "Nadeesha",
+  "place": "Sri Lanka",
+  "ring": "world",
+  "age": 47,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-sudan-man",
+  "name": "Mohamed",
+  "place": "Sudan",
+  "ring": "world",
+  "age": 52,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-suriname-woman",
+  "name": "Shanti",
+  "place": "Suriname",
+  "ring": "world",
+  "age": 41,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-sweden-man",
+  "name": "Lars",
+  "place": "Sweden",
+  "ring": "world",
+  "age": 33,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-switzerland-woman",
+  "name": "Sophie",
+  "place": "Switzerland",
+  "ring": "world",
+  "age": 24,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-syria-man",
+  "name": "Omar",
+  "place": "Syria",
+  "ring": "world",
+  "age": 12,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-taiwan-woman",
+  "name": "Mei-ling",
+  "place": "Taiwan",
+  "ring": "world",
+  "age": 58,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-tajikistan-man",
+  "name": "Farhod",
+  "place": "Tajikistan",
+  "ring": "world",
+  "age": 63,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-tanzania-woman",
+  "name": "Neema",
+  "place": "Tanzania",
+  "ring": "world",
+  "age": 45,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-thailand-man",
+  "name": "Somchai",
+  "place": "Thailand",
+  "ring": "world",
+  "age": 75,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-timor-leste-woman",
+  "name": "Maria",
+  "place": "Timor-Leste",
+  "ring": "world",
+  "age": 14,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-togo-man",
+  "name": "Kossi",
+  "place": "Togo",
+  "ring": "world",
+  "age": 38,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-tonga-woman",
+  "name": "Sela",
+  "place": "Tonga",
+  "ring": "world",
+  "age": 26,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-trinidad-and-tobago-man",
+  "name": "Marcus",
+  "place": "Trinidad and Tobago",
+  "ring": "world",
+  "age": 44,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-tunisia-woman",
+  "name": "Salma",
+  "place": "Tunisia",
+  "ring": "world",
+  "age": 21,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-turkmenistan-man",
+  "name": "Serdar",
+  "place": "Turkmenistan",
+  "ring": "world",
+  "age": 62,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-tuvalu-woman",
+  "name": "Sina",
+  "place": "Tuvalu",
+  "ring": "world",
+  "age": 16,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-t-rkiye-man",
+  "name": "Emir",
+  "place": "Türkiye",
+  "ring": "world",
+  "age": 10,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-uganda-woman",
+  "name": "Grace",
+  "place": "Uganda",
+  "ring": "world",
+  "age": 28,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-ukraine-man",
+  "name": "Taras",
+  "place": "Ukraine",
+  "ring": "world",
+  "age": 29,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-united-arab-emirates-woman",
+  "name": "Mariam",
+  "place": "United Arab Emirates",
+  "ring": "world",
+  "age": 24,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-united-kingdom-man",
+  "name": "Jack",
+  "place": "United Kingdom",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-united-states-woman",
+  "name": "Emily",
+  "place": "United States",
+  "ring": "world",
+  "age": 67,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-uruguay-man",
+  "name": "Diego",
+  "place": "Uruguay",
+  "ring": "world",
+  "age": 58,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-uzbekistan-woman",
+  "name": "Dilnoza",
+  "place": "Uzbekistan",
+  "ring": "world",
+  "age": 48,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-vanuatu-man",
+  "name": "John",
+  "place": "Vanuatu",
+  "ring": "world",
+  "age": 64,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-vatican-city-woman",
+  "name": "Elena",
+  "place": "Vatican City",
+  "ring": "world",
+  "age": 55,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-venezuela-man",
+  "name": "Luis",
+  "place": "Venezuela",
+  "ring": "world",
+  "age": 90,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-vietnam-woman",
+  "name": "Linh",
+  "place": "Vietnam",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-yemen-man",
+  "name": "Abdullah",
+  "place": "Yemen",
+  "ring": "world",
+  "age": 26,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-zambia-woman",
+  "name": "Chanda",
+  "place": "Zambia",
+  "ring": "world",
+  "age": 10,
+  "poses": [
+   "curl"
+  ]
+ },
+ {
+  "slug": "w-zimbabwe-man",
+  "name": "Tinashe",
+  "place": "Zimbabwe",
+  "ring": "world",
+  "age": 19,
+  "poses": [
+   "curl"
+  ]
  }
 ]

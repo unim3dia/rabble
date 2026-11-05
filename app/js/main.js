@@ -82,6 +82,22 @@ async function loadInto(table, slug, names) {
   }));
 }
 
+// The world's people, loaded a few at a time; each joins the roster once it's in.
+const WORLD_LOAD_AT_ONCE = 8;
+async function loadWorld() {
+  if (app.worldLoading || !app.worldRoster?.length) return;
+  app.worldLoading = true;
+  const queue = [...app.worldRoster];
+  const next = async () => {
+    for (let p = queue.shift(); p; p = queue.shift()) {
+      app.poses.set(p.slug, {});
+      await loadInto(app.poses.get(p.slug), p.slug, ["open", ...p.poses]);
+      if (app.poses.get(p.slug).open) app.roster.push(p);
+    }
+  };
+  await Promise.all(Array.from({ length: WORLD_LOAD_AT_ONCE }, next));
+}
+
 // Everything that isn't needed for the first picture, a few at a time.
 async function loadRest(roster) {
   for (const p of roster) {
@@ -158,6 +174,7 @@ function nextRing() {
   if (app.dropping) return;
   const ring = RINGS[(rank(app.ring) + 1) % RINGS.length];
   app.ring = ring;
+  if (rank(ring) >= rank("state")) loadWorld();   // the world's people, ready for the world ring
   ui.setRing(ring);
   room.setRing(ring);
   cam.ringScaleTarget = CAMERA.ringScale[ring];
@@ -862,7 +879,11 @@ function setupButtons() {
 }
 
 async function boot() {
-  const roster = await fetch("people.json").then((r) => r.json());
+  const everyone = await fetch("people.json").then((r) => r.json());
+  // The people from every country only join in the world ring: they load later
+  // (from the state ring on), so the first visit stays light.
+  app.worldRoster = everyone.filter((p) => p.ring === "world");
+  const roster = everyone.filter((p) => p.ring !== "world");
   // First picture fast: each person's open pose plus one awake pose. The
   // other poses stream in afterwards; the pile only uses poses it has.
   for (const p of roster) app.poses.set(p.slug, {});
