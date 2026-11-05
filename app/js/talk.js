@@ -168,7 +168,8 @@ export function playLines({ lines, speakers, cards, sfx }) {
   const timers = lines.map((line, i) => setTimeout(() => {
     const who = speakers[i];
     if (!who) return;
-    shown.push(cards.show(who, line.text, { ms: total - at(i) }).el);
+    const cls = `vinyl${line.persona ? ` p-${line.persona}` : ""}`;   // each character has their sticker color
+    shown.push(cards.show(who, line.text, { cls, ms: total - at(i) }).el);
     sfx.express(line.tone);
   }, at(i)));
   return { ms: total, cancel: () => stop(timers, shown) };

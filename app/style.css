@@ -318,8 +318,8 @@ body.in-pile .corner { opacity: 1; pointer-events: auto; }
 .orbit-dial {
   position: fixed;
   left: max(env(safe-area-inset-left), 16px);
-  right: calc(max(env(safe-area-inset-right), 16px) + 3 * 44px + 2 * 10px + 14px);
-  bottom: max(env(safe-area-inset-bottom), 18px);
+  right: max(env(safe-area-inset-right), 16px);
+  bottom: calc(max(env(safe-area-inset-bottom), 18px) + 44px + 12px);   /* just above the bottom row */
   height: 44px;
   z-index: 5;
   border-radius: 22px;
@@ -363,29 +363,6 @@ body.in-pile .corner { opacity: 1; pointer-events: auto; }
 .corner-btn:hover { background: rgba(46, 33, 27, 0.75); }
 .corner-btn:active { transform: scale(0.9); }
 /* Two soft bars that turn into an x when the menu is open. */
-.corner-btn span {
-  position: absolute;
-  left: 13px; right: 13px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--cream);
-  transition: transform var(--dur) var(--ease-squish);
-}
-.corner-btn span:first-child { top: 18px; }
-.corner-btn span:last-child { top: 24px; }
-.corner-btn[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
-.corner-btn[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
-.corner-menu {
-  display: grid;
-  justify-items: end;
-  gap: 8px;
-  animation: menu-in 260ms var(--ease-out);
-}
-.corner-menu[hidden] { display: none; }
-.corner-menu .chip { padding: 9px 15px; font-size: var(--text-ui); }
-.corner-menu .roll { background: rgba(255, 122, 92, 0.85); color: #fff; }
-@keyframes menu-in { from { opacity: 0; transform: translateY(8px) scale(0.96); } }
-
 /* ---------- your Rabble person ---------- */
 .sheet.mine { text-align: center; }
 .sheet.mine img {
@@ -446,7 +423,15 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 
 /* ---------- saying something ---------- */
 .corner-row { display: flex; gap: 10px; }
-.say-btn svg { position: absolute; inset: 11px; width: 22px; height: 22px; fill: var(--cream); }
+/* The bottom row's icons: soft line drawings in cream. */
+.corner-btn svg {
+  position: absolute; inset: 11px; width: 22px; height: 22px;
+  fill: none; stroke: var(--cream); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.sound-btn .off { display: none; }
+.sound-btn[aria-pressed="false"] .on { display: none; }
+.sound-btn[aria-pressed="false"] .off { display: inline; }
+.sound-btn[aria-pressed="false"] { opacity: 0.75; }
 /* A square card like the ring button, right above its button, never wider than half the screen. */
 .say-card {
   --side: min(50vw, 230px);
@@ -590,6 +575,9 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 .card.question .card-inner { background: var(--cream); font-size: 0.9rem; }
 .card.question { box-shadow: 0 0 26px 4px var(--coral-glow), 0 10px 30px rgba(20, 10, 5, 0.16); }
 .card.note .card-inner { background: var(--cream); font-family: var(--font-ui); font-weight: 600; }
+/* A thread: something the room found, kept. Golden, a little larger, glowing. */
+.card.thread { box-shadow: 0 0 26px 6px rgba(255, 210, 140, 0.45); }
+.card.thread .card-inner { background: #fff1d6; color: #5a3410; font-style: italic; }
 .card.small .card-inner { font-size: 0.72rem; padding: 4px 9px 5px; }
 /* Answering someone: the one thing on a card you can press. */
 .card.has-action { pointer-events: auto; }
@@ -683,5 +671,54 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 .making-row .join.small { width: auto; animation: none; }
 @media (prefers-reduced-motion: reduce) { .drift-letter { animation-duration: 30s; } }
 .blob-stage[hidden], .making img[hidden] { display: none; }
-.find-btn svg { position: absolute; inset: 11px; width: 22px; height: 22px; fill: var(--cream); }
 .chip[hidden] { display: none; }
+
+/* ---------- stickers: every message is a real-looking sticker ----------
+   Materials drawn by Muse Image (app/stickers/): matte paper for your own words
+   and notes, glossy colored vinyl for the room's conversation (each character
+   their own color), holographic chrome for a found thread. A white die-cut
+   edge, a little tilt, and a real shadow, as if stuck on by hand. */
+.card:not(.question):not(.thread) { box-shadow: none; }
+.card-inner {
+  border: 3px solid #fffdf8;
+  border-radius: 16px;
+  transform: rotate(var(--tilt, 0deg));
+  background: #fffaf2 url(stickers/paper.webp) center / cover;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--cocoa);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 6px 14px rgba(15, 8, 4, 0.38);
+}
+.card.yours .card-inner, .card.note .card-inner, .card.question .card-inner, .card.you-tag .card-inner {
+  background: #fffaf2 url(stickers/paper.webp) center / cover;
+}
+.card.vinyl .card-inner, .card.companion .card-inner {
+  --sticker: #ffd9c7; --sticker-ink: #5a2a12;
+  background: url(stickers/vinyl.webp) center / cover, var(--sticker);
+  background-blend-mode: overlay;
+  color: var(--sticker-ink);
+  font-style: normal;
+}
+.card.p-guide .card-inner { --sticker: #f7c6a3; --sticker-ink: #5a2a12; }
+.card.p-curator .card-inner { --sticker: #a7dcf2; --sticker-ink: #0c3c52; }
+.card.p-storyteller .card-inner { --sticker: #f6d77e; --sticker-ink: #5a4205; }
+.card.p-skeptic .card-inner { --sticker: #cfc8e6; --sticker-ink: #2f2a45; }
+.card.p-wonderer .card-inner { --sticker: #bfe9b4; --sticker-ink: #1f4a17; }
+.card.thread .card-inner {
+  background: url(stickers/chrome.webp) center / cover;
+  border-color: #f4f4ff;
+  color: #2a1f3d;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Leaving: a kind check, then a thank-you. */
+.sheet.leave { text-align: center; }
+.sheet.leave h2 { margin: 4px 0 6px; font-family: var(--font-display); font-size: 1.35rem; }
+.sheet.leave p { margin: 0 0 16px; }
+.sheet.leave .sheet-row { justify-content: center; }
+.leave-thanks { animation: say-in 500ms var(--ease-out); }
+.leave-thanks[hidden], .leave-ask[hidden] { display: none; }
+
+/* No double-tap zoom on phones: quick taps are for bopping people. (Pinch still zooms the pile.) */
+html, body, button, .corner, .say-card { touch-action: manipulation; }

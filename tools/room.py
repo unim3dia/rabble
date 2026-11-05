@@ -26,12 +26,13 @@ import threading
 import time
 
 import chat
+import journey
 
 MAX_PLAYERS = 60           # beyond this, people can still watch the pile
 KEEP_EVENTS = 300
 POLL_WAIT_S = 25           # how long a long-poll waits for something to happen
 QUIET_AFTER_S = 45         # no poll for this long: the phone is gone
-CHAT_GAP_S = (35, 70)      # quiet between the pile's conversations: room for people
+CHAT_GAP_S = (12, 25)      # a breath between the Journey's exchanges
 ALONE_S = 5                # a companion answers after this
 SAYS_KEPT = 50
 LINE_S, READ_S = 3.6, 7    # how long a conversation takes to play (matches the app)
@@ -178,7 +179,7 @@ def _companion_answers(sid, not_before=0):
             _emit("missed", only=said["id"], to=said["id"], sid=sid)
         return
     try:
-        line = chat.companion(said["text"], question(), random.choice(["kid", "teen", "grown-up", "elder"]), history)
+        line = chat.companion(said["text"], question(), random.choice(["grown-up", "elder"]), history)   # grown-ups only
     except Exception as e:  # API failure; no key material in the message
         sys.stderr.write(f"rabble: companion failed: {type(e).__name__}\n")
         with _lock:
@@ -241,17 +242,14 @@ def _conversations():
         if idle:
             continue
         try:
-            item = chat.ready_opener()
-        except Exception as e:  # API failure; no key material in the message
-            sys.stderr.write(f"rabble: pile chat failed: {type(e).__name__}\n")
-            time.sleep(10)
+            item = journey.next_exchange()     # the next step of tonight's Journey
+        except Exception as e:  # API failure or the hourly cap; no key material in the message
+            sys.stderr.write(f"rabble: journey failed: {type(e).__name__}\n")
+            time.sleep(20)
             continue
         with _lock:
-            if time.time() < _busy_until:     # someone spoke while we waited: keep it for later
-                chat._stock.insert(0, item)
-                continue
-            _busy_until = time.time() + len(item["lines"]) * LINE_S + READ_S + random.uniform(*CHAT_GAP_S)
-            _emit("chat", lines=item["lines"])
+            _busy_until = max(_busy_until, time.time()) + len(item["lines"]) * LINE_S + READ_S + random.uniform(*CHAT_GAP_S)
+            _emit("chat", lines=item["lines"], thread=item["thread"], theme=item["theme"])
 
 
 def start():

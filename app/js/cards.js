@@ -1,8 +1,10 @@
-// Speech cards: what people say in the pile, shown as small framed cards (like
-// the ring button) whose words fade in one at a time. A card floats above its
+// Speech cards: what people say in the pile, shown as stickers (paper, glossy
+// vinyl, or holographic chrome for the moments that matter) whose words fade
+// in one at a time. A card floats above its
 // speaker, never covers your face, and never lands on another card.
 
 const MAX_CARDS = 3;
+const MAX_TILT_DEG = 4;
 const READ_FIRST_MS = 2500;
 
 export function createCards(overlay) {
@@ -42,6 +44,7 @@ export function createCards(overlay) {
       el.classList.add("has-action");
       el.append(row);
     }
+    el.style.setProperty("--tilt", `${(Math.random() * 2 - 1) * MAX_TILT_DEG}deg`);   // stuck on by hand
     el._person = person;
     // Its own little place in the air: a slight offset and a slow float.
     el._drift = { x: (Math.random() - 0.5) * 36, y: Math.random() * 22, phase: Math.random() * Math.PI * 2 };

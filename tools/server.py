@@ -231,8 +231,6 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    threading.Thread(target=chat._fill, daemon=True).start()  # have conversations ready
-    chat._filling = True
     room.start()                                             # the shared pile's own talk
     print(f"Rabble on http://{HOST}:{PORT}", flush=True)
     ThreadingHTTPServer((HOST, PORT), Handler).serve_forever()

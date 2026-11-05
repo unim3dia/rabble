@@ -18,6 +18,7 @@ import { sendSqueeze } from "./squeeze.js";
 import { createWelcome } from "./welcome.js";
 import { react } from "./gestures.js";
 import { createOrbitDial } from "./orbit.js";
+const MIN_AGE = 20;
 import { connectPile } from "./shared.js";
 import { connectOffline } from "./offline.js";
 import { createRoom } from "./room.js";
@@ -42,6 +43,7 @@ const pick = (list) => list[Math.floor(Math.random() * list.length)];
 const app = {
   ring: "neighborhood",
   roster: [],
+  cast: {},                       // the Journey's characters → who plays them in the pile
   poses: new Map(),      // slug -> { open, curl, drape, lean, prop, chin, snuggle } images
   you: null,
   youPoses: null,
@@ -322,14 +324,6 @@ function leaveNow() {
   onGone(you);
 }
 
-function rollYouOut() {
-  if (!app.you || app.you.rolling) return;
-  app.you.buoyancy = 1;
-  rollOut(app.you);
-  sfx.tumble();
-  app.closeUpUntil = 0;
-}
-
 // ---------- the orbit dial: circle whoever is in the middle of your close-up ----------
 const ORBIT_ZOOM = 1.3;           // zoomed in at least this much, the dial shows
 
@@ -368,9 +362,13 @@ function onTap(x, y) {
   if (onYourLight(x, y)) return talkBox.toggleAt({ x: app.you.sx, y: youLightY() });
   const p = personAt(x, y);
   if (!p || p.rolling) return;
-  if (p.isYou) return closeUp();              // tap yourself: a close-up
+  if (p.isYou) {                              // tap yourself: you bop too (the compass takes you close)
+    sfx.note("you");
+    p.squish = Math.max(p.squish, 0.15);
+    return;
+  }
   sfx.note(p.info.slug);                  // everyone holds a note: tap around to make music
-  if (!p.base) p.squish = Math.max(p.squish, 0.12);
+  p.squish = Math.max(p.squish, 0.14);    // everyone bops, the frozen base too (it squishes in place)
 }
 
 // Press on yourself and drag: you're carried under your finger and squeeze
@@ -560,12 +558,40 @@ function stepTalk(t) {
   }
 }
 
-function chatLines(lines) {
+// The Journey's characters keep their faces: each one is played by the same
+// person in the pile for as long as that person is still around and nearby.
+function castPersonas(lines, pool) {
+  const taken = new Set(Object.values(app.cast).filter((p) => pool.includes(p)));
+  return lines.map((line) => {
+    if (!line.persona) return castLines([line], pool.filter((p) => !taken.has(p)))[0];
+    const held = app.cast[line.persona];
+    if (held && pool.includes(held)) return held;
+    const free = pool.filter((p) => !taken.has(p));
+    const who = castLines([line], free)[0];
+    if (who) { app.cast[line.persona] = who; taken.add(who); }
+    return who;
+  });
+}
+
+const THREAD_MS = 9000;          // a thread stays a while: it's kept, not just said
+
+function chatLines(lines, thread) {
   return {
     kind: "chat",
     play() {
       const anchor = app.you || { sx: renderer.w / 2, sy: renderer.h * 0.55 };
-      return playLines({ lines, speakers: castLines(lines, nearTo(anchor)), cards, sfx });
+      const speakers = castPersonas(lines, nearTo(anchor));
+      const run = playLines({ lines, speakers, cards, sfx });
+      if (!thread) return run;
+      // A thread is found: it glows over the Guide (or whoever spoke last), like a stitch added.
+      const by = speakers[lines.findIndex((l) => l.persona === "guide")] || speakers.filter(Boolean).pop();
+      const at = Math.max(0, run.ms - 2500);
+      const timer = setTimeout(() => {
+        if (!by || !world.people.includes(by)) return;
+        cards.show(by, thread, { cls: "thread", ms: THREAD_MS });
+        sfx.chime();
+      }, at);
+      return { ms: at + THREAD_MS, cancel: () => { clearTimeout(timer); run.cancel(); } };
     },
   };
 }
@@ -632,7 +658,7 @@ async function hasServer() {
 async function connectShared() {
   if (!(await hasServer())) {
     app.pile = connectOffline({
-      onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); },
+      onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines, e.thread)); },
       onReply,
       onQuestion,
     });
@@ -644,7 +670,7 @@ async function connectShared() {
     onReply,
     onMissed,
     onQuestion,
-    onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines)); },
+    onChat(e) { if (e.lines?.length) queueTalk(chatLines(e.lines, e.thread)); },
   });
 }
 
@@ -832,9 +858,8 @@ function setupButtons() {
   $("#ring").addEventListener("click", () => $("#ring").classList.add("tried"), { once: true });
   ui = createUi({
     onRing: nextRing,
-    onRoll: rollYouOut,
     onLeave: leaveNow,
-    onMenu: () => sfx.click(),
+    onFind() { sfx.unlock(); closeUp(); },
     onSound() {
       sfx.on = !sfx.on;
       ui.setSound(sfx.on);
@@ -844,7 +869,6 @@ function setupButtons() {
   ui.setRing(app.ring);
   ui.setSound(sfx.on);
   window.addEventListener("resize", () => { renderer.resize(); reframe(1500); });
-  $("#find-btn").addEventListener("click", () => { sfx.unlock(); closeUp(); });
   setupSelfie();
   talkBox = setupTalk({
     getYou: () => app.you,
@@ -879,7 +903,8 @@ function setupButtons() {
 }
 
 async function boot() {
-  const everyone = await fetch("people.json").then((r) => r.json());
+  // Grown-ups only: nobody under MIN_AGE is in the pile.
+  const everyone = (await fetch("people.json").then((r) => r.json())).filter((p) => (p.age ?? 40) >= MIN_AGE);
   // The people from every country only join in the world ring: they load later
   // (from the state ring on), so the first visit stays light.
   app.worldRoster = everyone.filter((p) => p.ring === "world");

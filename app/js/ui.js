@@ -62,60 +62,61 @@ export function pileLetters(card, rows, { animateFrom = 0 } = {}) {
   setSize(lo);
 }
 
-export function createUi({ onRing, onRoll, onLeave, onSound, onMenu }) {
-  const menu = $("#corner-menu");
-  const cornerBtn = $("#corner-btn");
+// The start screen's ring and sound buttons, and in the pile the bottom row:
+// find yourself, say something (see talk.js), sound, widen the ring, and the
+// door: a kind check, a thank-you, then back to the start.
+const THANKS_MS = 2200;
+
+export function createUi({ onRing, onLeave, onSound, onFind }) {
   const mine = $("#mine");
+  const leave = $("#leave");
   let mineImg = null;
   let ring = null;
   // Measure again once the display font has loaded (it changes letter widths).
   document.fonts?.ready.then(() => ring && pileLetters($("#ring-letters"), RING_ROWS[ring]));
 
-  const closeMenu = () => {
-    menu.hidden = true;
-    cornerBtn.setAttribute("aria-expanded", "false");
-  };
-
-  cornerBtn.addEventListener("click", () => {
-    onMenu?.();
-    menu.hidden = !menu.hidden;
-    cornerBtn.setAttribute("aria-expanded", String(!menu.hidden));
-  });
   $("#ring").addEventListener("click", onRing);   // (plays the chance sound in onRing)
-  $("#m-ring").addEventListener("click", onRing);
-  $("#m-roll").addEventListener("click", () => { closeMenu(); onRoll(); });
-  $("#m-leave").addEventListener("click", () => { closeMenu(); onLeave(); });
-  for (const id of ["#sound", "#m-sound"]) $(id).addEventListener("click", onSound);
+  $("#world-btn").addEventListener("click", onRing);
+  $("#find-btn").addEventListener("click", onFind);
+  for (const id of ["#sound", "#sound-btn"]) $(id).addEventListener("click", onSound);
 
-  const showMine = () => {
+  $("#leave-btn").addEventListener("click", () => {
+    $(".leave-ask").hidden = false;
+    $(".leave-thanks").hidden = true;
+    leave.showModal();
+  });
+  $("#leave-stay").addEventListener("click", () => leave.close());
+  $("#leave-go").addEventListener("click", () => {
+    $(".leave-ask").hidden = true;
+    $(".leave-thanks").hidden = false;
+    setTimeout(() => { leave.close(); onLeave(); }, THANKS_MS);
+  });
+
+  $("#mine-open").addEventListener("click", () => {
     if (!mineImg) return;
     $("#mine-img").src = mineImg.src;
-    closeMenu();
     mine.showModal();
-  };
-  $("#mine-open").addEventListener("click", showMine);
-  $("#m-mine").addEventListener("click", showMine);
+  });
   $("#mine-close").addEventListener("click", () => mine.close());
 
   return {
     enterPile() { document.body.classList.add("in-pile"); },
-    leavePile() { document.body.classList.remove("in-pile"); closeMenu(); },
+    leavePile() { document.body.classList.remove("in-pile"); },
     setRing(next) {
       ring = next;
       pileLetters($("#ring-letters"), RING_ROWS[ring]);
       $("#ring").setAttribute("aria-label", `${RING_NAMES[ring]}. Tap to widen who's in the pile.`);
-      $("#m-ring").textContent = `${RING_NAMES[ring]} ›`;
+      $("#world-btn").setAttribute("aria-label", `${RING_NAMES[ring]}. Tap to widen the ring.`);
     },
     setMine(img) {
       mineImg = img;
       $("#mine-open").hidden = !img;
-      $("#m-mine").hidden = !img;
     },
     setSound(on) {
-      for (const id of ["#sound", "#m-sound"]) {
-        $(id).setAttribute("aria-pressed", String(on));
-        $(id).textContent = on ? "Sound on" : "Sound off";
-      }
+      $("#sound").setAttribute("aria-pressed", String(on));
+      $("#sound").textContent = on ? "Sound on" : "Sound off";
+      $("#sound-btn").setAttribute("aria-pressed", String(on));
+      $("#sound-btn").setAttribute("aria-label", on ? "Sound on" : "Sound off");
     },
   };
 }

@@ -1,8 +1,8 @@
 // The first minute in the pile. You're caught; someone beside you says "There
 // you are. We made room."; your light says "You" for a moment; then a person
 // next to you asks today's question. Tap the question (or "Answer") to say
-// something, or choose "Just sitting": the people around you settle and doze,
-// and the pile leaves you in peace.
+// something, or choose "Just sitting": the people around you settle and doze
+// while the room's conversation carries on softly around you.
 import { doze } from "./poses.js";
 
 const GREET_AFTER_MS = 700;
@@ -11,7 +11,7 @@ const TAG_AFTER_MS = 1500;
 const TAG_MS = 3200;
 const ASK_AFTER_MS = 4600;
 const QUESTION_MS = 60000;        // the question waits for you, as long as a minute
-const SITTING_QUIET_MS = 90000;   // just sitting: the pile's chatter rests this long
+const ROOM_FOR_ANSWER_MS = 15000;  // after the question, the Journey waits this long before carrying on
 const SETTLE_COUNT = 6;
 
 // neighbours(): the people nearest you, nearest first. hush(ms): quiet the
@@ -22,7 +22,7 @@ export function createWelcome({ app, cards, sfx, neighbours, hush, openAnswer })
 
   function begin() {
     asker = neighbours()[0] || null;
-    hush(ASK_AFTER_MS + QUESTION_MS);
+    hush(ASK_AFTER_MS + ROOM_FOR_ANSWER_MS);
     setTimeout(() => {
       if (!asker) return;
       cards.show(asker, "There you are. We made room.", { cls: "companion", ms: GREET_MS });
@@ -54,8 +54,7 @@ export function createWelcome({ app, cards, sfx, neighbours, hush, openAnswer })
   }
 
   function sit() {
-    done();
-    hush(SITTING_QUIET_MS);
+    done();                       // the room keeps talking softly; the people beside you doze
     neighbours().slice(0, SETTLE_COUNT).forEach((p, i) => setTimeout(() => doze(p), 300 + i * 400));
     setTimeout(() => {
       if (asker) cards.show(asker, "Stay as long as you like.", { cls: "companion small", ms: 5000 });

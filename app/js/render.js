@@ -279,6 +279,9 @@ export function draw(r, world, cam, scene, t) {
     return diff;
   });
   order.forEach((p, i) => { p.order = i; });
+  // You're always visible: drawn after everyone else, so the pile never hides you.
+  const you = order.findIndex((p) => p.isYou);
+  if (you >= 0) order.push(order.splice(you, 1)[0]);
   const per = Math.ceil(order.length / LOOK.hazeBands);
   order.forEach((p, i) => {
     drawPerson(ctx, p, cam, r.shadow, t);
@@ -288,7 +291,6 @@ export function draw(r, world, cam, scene, t) {
   ctx.globalAlpha = 1;
   light(ctx, r, cam, world, scene.light);
   drawDust(ctx, r.dust, "front", w, h, t, cam.yaw, still);
-  const you = order.find((p) => p.isYou);
   drawRealMarkers(ctx, world, t);
-  drawYouMarker(ctx, you, t, w, h);
+  drawYouMarker(ctx, order.find((p) => p.isYou), t, w, h);
 }
