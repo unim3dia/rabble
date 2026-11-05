@@ -267,8 +267,9 @@ function settleSleep(world) {
     if (p.leaving) continue;
     const moved = Math.abs(p.pos.x - p.prev.x) + Math.abs(p.pos.y - p.prev.y) + Math.abs(p.pos.z - p.prev.z);
     // The bottom of the pile is its foundation: once held up, it's set at once,
-    // and stays set (only leaving or being carried frees it).
-    const free = p.rolling || p.pinned || p.falling;
+    // and stays set (only leaving, being carried, or a hop frees it for a moment).
+    if (p.loose > 0) p.loose--;
+    const free = p.rolling || p.pinned || p.falling || p.loose > 0;
     p.base = !free && p.supported && (p.base || p.pos.y < world.top * PHYS.baseFrac);
     if (p.base && !p.asleep) {
       p.asleep = true;

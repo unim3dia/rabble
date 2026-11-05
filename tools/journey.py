@@ -71,24 +71,32 @@ Threads already found (call back to them when it fits): {threads}
 The last lines:
 {recent}
 
+The chapter's question: {question}
+
 Write the NEXT short exchange: {count} lines, each by a different character (the Guide
-need not speak every time). Continue straight on from the last lines: answer what was
-just said, move toward the goal. Mix it up: a real detail from the Curator (use web
+need not speak every time). Someone reading along must be able to follow it like a
+story: every line clearly answers or builds on the line right before it (pick up its
+words or idea), and the exchange as a whole moves the chapter's question toward the goal.
+{recap} Mix it up: a real detail from the Curator (use web
 search for something true and current when it helps), a personal memory, a pushback, a
 simple question. Short, natural spoken lines, at most 16 words each, the way friends
 talk late at night. Plain, warm, a little funny, never preachy or cheesy. No emoji, no
 hashtags, no names of real private people.
 
 Rules: kind and PG; no partisan politics, no religion; "helpful" means gentle everyday
-wisdom, never medical advice; real facts only (if unsure, stay general).
+wisdom, never medical advice or health claims, and never name doctors, experts, brands
+or products; real facts only (if unsure, stay general).
 
 A "thread" is rare and precious: only when this exchange truly lands a new piece of the
 goal (about one exchange in three or four, never two in a row), add one short line (at
 most 12 words) that will be kept. Otherwise "thread": "". Last exchange had a thread: {had_thread}.
 Also return an updated two-sentence "summary" of the whole journey so far.
 
+If this exchange OPENS a chapter, also return "question": the chapter's question in at
+most 10 words (otherwise repeat the current one).
+
 Return ONLY JSON: {{"lines": [{{"persona": "guide|curator|storyteller|skeptic|wonderer",
-"text": "..."}}], "thread": "...", "summary": "..."}}"""
+"text": "..."}}], "thread": "...", "summary": "...", "question": "..."}}"""
 
 _lock = threading.Lock()
 _state = {"day": None, "theme": None, "goal": None, "exchange": 0, "summary": "It's just beginning.",
@@ -104,9 +112,11 @@ def _today():
     return _state
 
 
-def theme():
+def now():
+    """Where the Journey is: tonight's theme and goal, and the chapter's question."""
     with _lock:
-        return _today()["theme"]
+        s = _today()
+        return {"theme": s["theme"], "goal": s["goal"], "question": s.get("question", "")}
 
 
 def _call(prompt):
@@ -145,7 +155,10 @@ def next_exchange():
             theme=s["theme"], goal=s["goal"], chapter=chapter, chapter_note=note,
             summary=s["summary"], threads="; ".join(s["threads"]) or "none yet",
             recent="\n".join(s["recent"]) or "(nothing yet: this is the very first exchange)",
-            count=3 if opening else 4, had_thread="yes" if s.get("last_thread") else "no")
+            count=3 if opening else 4, had_thread="yes" if s.get("last_thread") else "no",
+            question="(this exchange sets it)" if opening else s.get("question") or "(not set yet)",
+            recap=("This exchange ends with the Guide briefly recapping what the room has found so far."
+                   if s["exchange"] % CHAPTER_EXCHANGES == CHAPTER_EXCHANGES - 1 else ""))
     data = _call(prompt)
     lines = []
     for item in data.get("lines", [])[:5]:
@@ -165,8 +178,11 @@ def next_exchange():
         if thread:
             s["threads"] = (s["threads"] + [thread])[-MAX_THREADS:]
         s["last_thread"] = bool(thread)
+        if data.get("question"):
+            s["question"] = " ".join(str(data["question"]).split())[:90]
         if data.get("summary"):
             s["summary"] = " ".join(str(data["summary"]).split())[:600]
         sys.stderr.write(f"rabble: journey chapter {s['exchange'] // CHAPTER_EXCHANGES + 1}, "
                          f"exchange {s['exchange']}{' + thread' if thread else ''}\n")
-        return {"lines": lines, "thread": thread, "theme": s["theme"]}
+        return {"lines": lines, "thread": thread, "theme": s["theme"], "goal": s["goal"],
+                "question": s.get("question", "")}

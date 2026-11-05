@@ -84,11 +84,6 @@ def add_figure(png):
     return fid
 
 
-def figure(fid):
-    with _lock:
-        return _figures.get(fid)
-
-
 def join(figure_id):
     with _lock:
         if len(_players) >= MAX_PLAYERS:
@@ -207,7 +202,7 @@ def events(since, viewer, token=None):
         if since < 0 or since > _seq or (_events and since < _events[0]["seq"] - 1):
             # New here, too far behind, or from before a server restart:
             # who's in the pile, from now on.
-            return {"seq": _seq, "players": [], "events": [], "question": question()}
+            return {"seq": _seq, "players": [], "events": [], "question": question(), "journey": journey.now()}
         while _seq <= since and time.time() < deadline:
             _lock.wait(timeout=max(0.1, deadline - time.time()))
         me = p["id"] if p else None
@@ -249,7 +244,8 @@ def _conversations():
             continue
         with _lock:
             _busy_until = max(_busy_until, time.time()) + len(item["lines"]) * LINE_S + READ_S + random.uniform(*CHAT_GAP_S)
-            _emit("chat", lines=item["lines"], thread=item["thread"], theme=item["theme"])
+            _emit("chat", lines=item["lines"], thread=item["thread"], journey={
+                "theme": item["theme"], "goal": item["goal"], "question": item["question"]})
 
 
 def start():

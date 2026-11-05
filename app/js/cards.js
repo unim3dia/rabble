@@ -4,7 +4,21 @@
 // speaker, never covers your face, and never lands on another card.
 
 const MAX_CARDS = 3;
-const MAX_TILT_DEG = 4;
+const MAX_TILT_DEG = 7;
+const RIP_PX = 3.5;               // how far the ripped edge bites into the sticker
+
+// A ripped, slightly warped sticker edge: a polygon around the box whose points
+// wander inward by a few pixels. Every sticker gets its own.
+function rippedEdge() {
+  const pts = [];
+  const bite = () => (Math.random() * RIP_PX).toFixed(1);
+  const along = (n, f) => { for (let i = 0; i < n; i++) pts.push(f(i / n)); };
+  along(9, (t) => `${(t * 100).toFixed(1)}% ${bite()}px`);
+  along(4, (t) => `calc(100% - ${bite()}px) ${(t * 100).toFixed(1)}%`);
+  along(9, (t) => `${(100 - t * 100).toFixed(1)}% calc(100% - ${bite()}px)`);
+  along(4, (t) => `${bite()}px ${(100 - t * 100).toFixed(1)}%`);
+  return `polygon(${pts.join(", ")})`;
+}
 const READ_FIRST_MS = 2500;
 
 export function createCards(overlay) {
@@ -44,7 +58,9 @@ export function createCards(overlay) {
       el.classList.add("has-action");
       el.append(row);
     }
-    el.style.setProperty("--tilt", `${(Math.random() * 2 - 1) * MAX_TILT_DEG}deg`);   // stuck on by hand
+    el.style.setProperty("--tilt", `${(Math.random() * 2 - 1) * MAX_TILT_DEG}deg`);   // slapped on by hand
+    el.style.setProperty("--rip", rippedEdge());
+    el.style.setProperty("--sway", `${(5 + Math.random() * 3).toFixed(1)}s`);   // each floats at its own pace
     el._person = person;
     // Its own little place in the air: a slight offset and a slow float.
     el._drift = { x: (Math.random() - 0.5) * 36, y: Math.random() * 22, phase: Math.random() * Math.PI * 2 };
@@ -73,6 +89,7 @@ export function createCards(overlay) {
 }
 
 const GAP = 6;
+const GLIDE = 0.08;      // per frame, how quickly a sticker eases toward its spot
 const ROOM = 8;          // px between the cards and the top of the pile
 
 // Cards float in the air above the pile, never over it: each one as close
@@ -114,8 +131,13 @@ export function placeCards(overlay, { w, ceiling, floor, zoom = 1 }) {
     box = box || { x: home, y: ceiling, w: bw, h: bh };
     placed.push(box);
     const t = performance.now() / 1000;
-    box.x += Math.sin(t * 0.35 + drift.phase) * 3;
-    box.y += Math.sin(t * 0.5 + drift.phase * 1.3) * 2.5;
+    // Glide, don't jump: when a sticker must make room, it eases over to its new spot.
+    const at = el._at || { x: box.x, y: box.y };
+    at.x += (box.x - at.x) * GLIDE;
+    at.y += (box.y - at.y) * GLIDE;
+    el._at = at;
+    box.x = at.x + Math.sin(t * 0.35 + drift.phase) * 4;
+    box.y = at.y + Math.sin(t * 0.5 + drift.phase * 1.3) * 3.5;
     // Scaled from its bottom middle, so move it to keep the scaled box in place.
     el.style.transform = `translate3d(${box.x + (bw - cw) / 2}px, ${box.y + bh - ch}px, 0) scale(${zoom})`;
     // The line from the card down to just above the speaker's head.

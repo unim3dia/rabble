@@ -1,13 +1,16 @@
 // Touch and mouse on the pile: tap someone; press on your own person and drag
-// to move them; drag anywhere else sideways to turn the pile and up/down to look
+// to move them; press and hold anyone else, then drag, to pick them up and
+// place them (sculpting the pile); drag anywhere else sideways to turn the pile and up/down to look
 // from higher or lower; pinch (or scroll) to zoom toward your fingers, and once
 // zoomed in, drag to move around.
 import { CAMERA, ZOOM } from "./config.js";
 import { clampPitch, zoomAt } from "./camera.js";
 
 const DRAG_START_PX = 6;
+const HOLD_MS = 350;               // press and hold this long on someone to pick them up
+const HOLD_SLOP_PX = 12;           // a finger may wobble this much while holding
 
-export function setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou }) {
+export function setupControls(canvas, cam, { onTap, grabYou, grabOther, moveYou, dropYou }) {
   const pointers = new Map();
   let drag = null;
   let pinch = null;
@@ -35,6 +38,16 @@ export function setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou })
       const rect = canvas.getBoundingClientRect();
       const holding = grabYou(e.clientX - rect.left, e.clientY - rect.top);
       drag = { x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY, moved: false, holding };
+      if (!holding && grabOther) {
+        const mine = drag;
+        mine.timer = setTimeout(() => {
+          if (drag !== mine || mine.moved || pointers.size !== 1) return;
+          if (grabOther(mine.x0 - rect.left, mine.y0 - rect.top)) {
+            mine.holding = mine.lifted = true;          // picked up: now a drag moves them
+            navigator.vibrate?.(12);
+          }
+        }, HOLD_MS);
+      }
     }
   });
 
@@ -50,7 +63,8 @@ export function setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou })
       return;
     }
     if (!drag) return;
-    if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) > DRAG_START_PX) drag.moved = true;
+    const slop = drag.timer && !drag.lifted ? HOLD_SLOP_PX : DRAG_START_PX;
+    if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) > slop) drag.moved = true;
     if (drag.moved && drag.holding) {
       const rect = canvas.getBoundingClientRect();
       moveYou(e.clientX - rect.left, e.clientY - rect.top);
@@ -76,7 +90,8 @@ export function setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou })
   });
 
   const end = (e) => {
-    const wasTap = drag && !drag.moved && !pinch && pointers.size === 1;
+    if (drag) clearTimeout(drag.timer);
+    const wasTap = drag && !drag.moved && !drag.lifted && !pinch && pointers.size === 1;
     if (drag && drag.holding) dropYou();
     pointers.delete(e.pointerId);
     if (wasTap && e.type === "pointerup") {

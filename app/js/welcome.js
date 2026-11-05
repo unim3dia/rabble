@@ -11,7 +11,7 @@ const TAG_AFTER_MS = 1500;
 const TAG_MS = 3200;
 const ASK_AFTER_MS = 4600;
 const QUESTION_MS = 60000;        // the question waits for you, as long as a minute
-const ROOM_FOR_ANSWER_MS = 15000;  // after the question, the Journey waits this long before carrying on
+const ROOM_FOR_ANSWER_MS = 6000;   // after the question, the Journey waits this long before carrying on
 const SETTLE_COUNT = 6;
 
 // neighbours(): the people nearest you, nearest first. hush(ms): quiet the

@@ -5,14 +5,13 @@ GET  /api/events?since=N&v=VIEWER  what happened in the pile since N (long-poll)
 POST /api/join     {"figure": id or null} -> {"id", "token"}
 POST /api/leave    {"token"}
 POST /api/say      {"text", "token"} -> {"sid", "text"}: checked, then everyone sees it as written
-GET  /api/figure/ID  a selfie figure, so others in the pile can see you
 POST /api/selfie  body: {"image": "data:image/jpeg;base64,..."}
   1. Muse Image redraws the photo as a Rabble person, exactly as they are,
      on a flat green background.
   2. greenscreen.py keys out the green (clean, soft edges; no SAM rim).
   -> {"image": "data:image/png;base64,...", "figure": id}
-Photos stay in memory only; nothing is written to disk or logged. The made
-figure is kept in memory while you're in the pile, so others can see you.
+Photos stay in memory only; nothing is written to disk or logged, and the made
+figure is never served to anyone else (each visitor's pile is their own).
 The Meta key stays server-side (see config.py).
 
 Run: python tools/server.py  (http://127.0.0.1:8130)
@@ -176,22 +175,10 @@ class Handler(SimpleHTTPRequestHandler):
         token = self.headers.get("X-Rabble-Token")
         return self._json(200, room.events(since, viewer, token))
 
-    def _figure(self, fid):
-        png = room.figure(fid)
-        if not png:
-            return self._json(404, {"error": "not here"})
-        self.send_response(200)
-        self.send_header("Content-Type", "image/png")
-        self.send_header("Content-Length", str(len(png)))
-        self.end_headers()
-        self.wfile.write(png)
-
     def do_GET(self):
         url = urlparse(self.path)
         if url.path == "/api/events":
             return self._events(url.query)
-        if url.path.startswith("/api/figure/"):
-            return self._figure(url.path.rsplit("/", 1)[1])
         if url.path == "/api/whispers":
             return self._json(200, whispers.current())
         return super().do_GET()

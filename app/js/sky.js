@@ -12,13 +12,14 @@ const SKY = {
   cloudSpeed: 0.006,          // screen widths per second
   cloudAlpha: [0.16, 0.28],
   flockEveryS: [14, 26],
-  flockSize: [3, 6],
+  flockSize: [4, 4],          // two white birds and two black
   birdSpeed: [0.05, 0.08],    // screen widths per second
   birdSize: [5, 8],           // px, wing tip to wing tip / 2
   eagleEveryS: [30, 50],
   eagleSpeed: 0.03,
   eagleSize: 17,
-  ink: "rgba(28, 20, 36, 0.55)",
+  ink: "rgba(28, 20, 36, 0.6)",
+  white: "rgba(255, 250, 240, 0.85)",
   fadeZoom: 1.6,              // fully gone at this much zoom
 };
 
@@ -67,7 +68,7 @@ function launch(sky, now) {
     sky.birds.push({
       x: fromLeft ? -0.05 - i * 0.03 : 1.05 + i * 0.03, dir: fromLeft ? 1 : -1,
       y: y + rand(-0.12, 0.12), speed: speed * rand(0.92, 1.08),
-      size: rand(...SKY.birdSize), flap: rand(0, TAU), flapRate: rand(9, 12), glide: 0,
+      size: rand(...SKY.birdSize), flap: rand(0, TAU), flapRate: rand(9, 12), glide: 0, white: i % 2 === 0,
     });
   }
   sky.nextFlock = now + rand(...SKY.flockEveryS) * 1000;
@@ -127,6 +128,7 @@ export function drawSky(ctx, sky, w, h, t, zoom, still) {
     b.x += b.dir * b.speed * dt;
     b.flap += b.flapRate * dt;
     const y = b.y * band + Math.sin(t * 0.0009 + b.flap * 0.05) * (b.eagle ? 6 : 3);
+    ctx.strokeStyle = ctx.fillStyle = b.white ? SKY.white : SKY.ink;
     drawBird(ctx, b, b.x * w, y, t);
   }
   ctx.restore();

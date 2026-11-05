@@ -116,17 +116,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* The ring button: a framed square beside the wordmark, a translucent white
    card inside, and the word's letters heaped in a little pile. */
 .title-row {
-  display: grid;              /* the title with the ring button to its right; who's awake below */
-  grid-template-columns: auto auto;
-  justify-content: center;
+  display: flex;              /* the title, with who's awake below it */
+  flex-direction: column;
   align-items: center;
-  column-gap: 12px;
-  row-gap: 8px;
+  gap: 8px;
   margin: 4px 0 6px;
 }
-.title-row .wordmark { margin: 0; grid-column: 1; grid-row: 1; }
-.title-row .ring-pile { grid-column: 2; grid-row: 1; }
-.title-row .awake { grid-column: 1 / -1; grid-row: 2; }
+.title-row .wordmark { margin: 0; }
 .ring-pile {
   --size: 76px;
   width: var(--size);
@@ -573,10 +569,10 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 .card.companion .card-inner { background: rgba(255, 250, 242, 0.5); color: color-mix(in srgb, var(--cocoa) 85%, transparent); font-style: italic; }
 /* Today's question, asked over you when you land. */
 .card.question .card-inner { background: var(--cream); font-size: 0.9rem; }
-.card.question { box-shadow: 0 0 26px 4px var(--coral-glow), 0 10px 30px rgba(20, 10, 5, 0.16); }
+.card.question { box-shadow: none; }
 .card.note .card-inner { background: var(--cream); font-family: var(--font-ui); font-weight: 600; }
 /* A thread: something the room found, kept. Golden, a little larger, glowing. */
-.card.thread { box-shadow: 0 0 26px 6px rgba(255, 210, 140, 0.45); }
+.card.thread { box-shadow: none; }
 .card.thread .card-inner { background: #fff1d6; color: #5a3410; font-style: italic; }
 .card.small .card-inner { font-size: 0.72rem; padding: 4px 9px 5px; }
 /* Answering someone: the one thing on a card you can press. */
@@ -673,52 +669,76 @@ body:has(#making:not([hidden])) .making-scrim { display: block; }
 .blob-stage[hidden], .making img[hidden] { display: none; }
 .chip[hidden] { display: none; }
 
-/* ---------- stickers: every message is a real-looking sticker ----------
-   Materials drawn by Muse Image (app/stickers/): matte paper for your own words
-   and notes, glossy colored vinyl for the room's conversation (each character
-   their own color), holographic chrome for a found thread. A white die-cut
-   edge, a little tilt, and a real shadow, as if stuck on by hand. */
-.card:not(.question):not(.thread) { box-shadow: none; }
+/* ---------- stickers: every message is slapped on like a real sticker ----------
+   Bright, bubbly, glossy (in the spirit of 90s sticker books): neon rainbow vinyl
+   for the room's conversation (each character their own gradient, with a
+   sparkle), cream paper with a peeling corner for your own words, holographic
+   chrome for a found thread. Each one has its own ripped, warped edge (cards.js),
+   a tilt, and lands with a slap. Materials by Muse Image (app/stickers/). */
+.card { box-shadow: none; }   /* the sticker's own shadow (filter) follows its ripped shape */
+.card { filter: drop-shadow(0 5px 7px rgba(15, 8, 4, 0.42)); }
 .card-inner {
+  position: relative;
   border: 3px solid #fffdf8;
-  border-radius: 16px;
+  border-radius: 12px;
+  clip-path: var(--rip, none);
   transform: rotate(var(--tilt, 0deg));
+  animation: slap 520ms cubic-bezier(0.2, 1.4, 0.4, 1) backwards,
+             sway var(--sway, 6s) ease-in-out 520ms infinite alternate;
   background: #fffaf2 url(stickers/paper.webp) center / cover;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   color: var(--cocoa);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 6px 14px rgba(15, 8, 4, 0.38);
+  font-weight: 700;
 }
+/* After the slap: a slow sway, tilting level and a little past, the other way. */
+@keyframes sway {
+  from { transform: rotate(var(--tilt, 0deg)) translateY(0); }
+  to { transform: rotate(calc(var(--tilt, 0deg) * -0.5)) translateY(-3px); }
+}
+@keyframes slap {
+  0% { transform: scale(1.45) rotate(calc(var(--tilt, 0deg) + 9deg)); opacity: 0; }
+  55% { transform: scale(0.93) rotate(calc(var(--tilt, 0deg) - 1deg)); opacity: 1; }
+  100% { transform: scale(1) rotate(var(--tilt, 0deg)); }
+}
+/* Paper: your words, notes, the question. A corner just starting to peel. */
 .card.yours .card-inner, .card.note .card-inner, .card.question .card-inner, .card.you-tag .card-inner {
-  background: #fffaf2 url(stickers/paper.webp) center / cover;
+  background:
+    linear-gradient(225deg, rgba(0, 0, 0, 0.16) 0 7px, #f3ead9 7px 13px, transparent 13px),
+    #fffaf2 url(stickers/paper.webp) center / cover;
 }
+/* Neon vinyl: the room's conversation and its replies to you. */
 .card.vinyl .card-inner, .card.companion .card-inner {
-  --sticker: #ffd9c7; --sticker-ink: #5a2a12;
-  background: url(stickers/vinyl.webp) center / cover, var(--sticker);
-  background-blend-mode: overlay;
-  color: var(--sticker-ink);
+  --a: #ff5fb4; --b: #ffb347;
+  background: url(stickers/vinyl.webp) center / cover, linear-gradient(120deg, var(--a), var(--b));
+  background-blend-mode: soft-light;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(60, 10, 70, 0.55), 0 0 6px rgba(60, 10, 70, 0.35);
   font-style: normal;
+  padding-right: 22px;
 }
-.card.p-guide .card-inner { --sticker: #f7c6a3; --sticker-ink: #5a2a12; }
-.card.p-curator .card-inner { --sticker: #a7dcf2; --sticker-ink: #0c3c52; }
-.card.p-storyteller .card-inner { --sticker: #f6d77e; --sticker-ink: #5a4205; }
-.card.p-skeptic .card-inner { --sticker: #cfc8e6; --sticker-ink: #2f2a45; }
-.card.p-wonderer .card-inner { --sticker: #bfe9b4; --sticker-ink: #1f4a17; }
+.card.vinyl .card-inner::after, .card.companion .card-inner::after {
+  content: "✦";
+  position: absolute;
+  right: 6px; top: 3px;
+  font-size: 0.75rem;
+  color: #fff;
+  text-shadow: 0 0 6px #fff;
+}
+.card.p-guide .card-inner { --a: #ff5fb4; --b: #ffb347; }
+.card.p-curator .card-inner { --a: #22d3ee; --b: #a855f7; }
+.card.p-storyteller .card-inner { --a: #fde047; --b: #fb7185; }
+.card.p-skeptic .card-inner { --a: #8b5cf6; --b: #3b82f6; }
+.card.p-wonderer .card-inner { --a: #a3e635; --b: #22d3ee; }
+.card.companion .card-inner { --a: #f472b6; --b: #c084fc; }
+/* Holographic chrome: a thread the room found. */
 .card.thread .card-inner {
   background: url(stickers/chrome.webp) center / cover;
   border-color: #f4f4ff;
   color: #2a1f3d;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
 }
+@media (prefers-reduced-motion: reduce) { .card-inner { animation: none; } }
 
-/* Leaving: a kind check, then a thank-you. */
-.sheet.leave { text-align: center; }
-.sheet.leave h2 { margin: 4px 0 6px; font-family: var(--font-display); font-size: 1.35rem; }
-.sheet.leave p { margin: 0 0 16px; }
-.sheet.leave .sheet-row { justify-content: center; }
-.leave-thanks { animation: say-in 500ms var(--ease-out); }
-.leave-thanks[hidden], .leave-ask[hidden] { display: none; }
-
-/* No double-tap zoom on phones: quick taps are for bopping people. (Pinch still zooms the pile.) */
-html, body, button, .corner, .say-card { touch-action: manipulation; }

@@ -174,6 +174,25 @@ function drawPerson(ctx, p, cam, shadow, t) {
   ctx.restore();
 }
 
+// You stay in among the crowd, but at rest your face is always seen: if anyone
+// drawn in front of you covers your face, you're drawn just after them (not on
+// top of everyone). While you're carrying yourself, you can slip behind people.
+function keepYourFaceSeen(order) {
+  const at = order.findIndex((p) => p.isYou);
+  if (at < 0 || order[at].carried || order[at].falling) return;
+  const you = order[at];
+  const feet = (p) => p.sy + p.r * p.k * 0.85;
+  const faceX = you.sx, faceY = feet(you) - you.size * 0.72;
+  let last = at;
+  for (let i = at + 1; i < order.length; i++) {
+    const p = order[i];
+    if (p.falling || p.rolling) continue;
+    const covers = Math.abs(p.sx - faceX) < p.size * 0.42 && faceY > feet(p) - p.size * 1.05 && faceY < feet(p);
+    if (covers) last = i;
+  }
+  if (last > at) order.splice(last, 0, order.splice(at, 1)[0]);
+}
+
 // Tint everything drawn so far (and only that) with a layer of air or light.
 function wash(ctx, w, h, style) {
   ctx.save();
@@ -279,9 +298,7 @@ export function draw(r, world, cam, scene, t) {
     return diff;
   });
   order.forEach((p, i) => { p.order = i; });
-  // You're always visible: drawn after everyone else, so the pile never hides you.
-  const you = order.findIndex((p) => p.isYou);
-  if (you >= 0) order.push(order.splice(you, 1)[0]);
+  keepYourFaceSeen(order);
   const per = Math.ceil(order.length / LOOK.hazeBands);
   order.forEach((p, i) => {
     drawPerson(ctx, p, cam, r.shadow, t);

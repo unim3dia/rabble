@@ -2,7 +2,7 @@
 import {
   RINGS, CROWD, PHYS, SIZE, CAMERA, BREATH, SQUISH, TILT, FLOW, CLOSEUP, POSE,
 } from "./config.js";
-import { createWorld, addBody, removeBody, step, presettle, conePositions, nudge, wakeNear } from "./physics3d.js";
+import { createWorld, addBody, removeBody, step, presettle, conePositions, nudge, wakeNear, wake } from "./physics3d.js";
 import { createCamera, updateCamera, unproject, cameraDepth } from "./camera.js";
 import { createRenderer, draw } from "./render.js";
 import { createTilt } from "./tilt.js";
@@ -368,21 +368,52 @@ function onTap(x, y) {
     return;
   }
   sfx.note(p.info.slug);                  // everyone holds a note: tap around to make music
-  p.squish = Math.max(p.squish, 0.14);    // everyone bops, the frozen base too (it squishes in place)
+  p.squish = Math.max(p.squish, 0.14);    // everyone bops, the frozen base too
+  hop(p);                                 // and hops a little: tap again and again to move them
 }
 
 // Press on yourself and drag: you're carried under your finger and squeeze
 // into a new spot; the people around you make room.
-function grabYou(x, y) {
-  const you = app.you;
-  if (!you || you.rolling || app.dropping || personAt(x, y) !== you) return false;
-  app.carry = { z2: cameraDepth(cam, you.pos.x, you.pos.y, you.pos.z) };
+// A little hop: loose from the set base for a moment, up and a bit to one side.
+// Tapping someone again and again walks them around the pile; they settle where they land.
+const HOP_UP = 3.2, HOP_SIDE = 1.5;
+const HOP_LOOSE_STEPS = 90;       // about a second and a half loose: time to hop and land
+function hop(p) {
+  if (p.rolling || p.falling) return;
+  p.base = false;
+  p.loose = HOP_LOOSE_STEPS;
+  wake(p, true);
+  // Sideways mostly toward the middle of the pile, so people shift around in it, not off it.
+  const d = Math.hypot(p.pos.x, p.pos.z) || 1;
+  const k = HOP_SIDE * (0.4 + Math.random() * 0.6);
+  nudge(p, (-p.pos.x / d) * k + (Math.random() - 0.5) * 0.6, HOP_UP, (-p.pos.z / d) * k + (Math.random() - 0.5) * 0.6);
+}
+
+// Press and hold someone (not you) to pick them up and place them somewhere else.
+function grabOther(x, y) {
+  const p = personAt(x, y);
+  if (!p || p.isYou || p.rolling || p.falling || app.dropping) return false;
+  p.base = false;
+  wake(p, true);
+  app.carry = { person: p, z2: cameraDepth(cam, p.pos.x, p.pos.y, p.pos.z) };
+  p.carried = true;
+  p.squish = 0.3;
+  sfx.boop();
   return true;
 }
 
-function moveYou(x, y) {
+function grabYou(x, y) {
   const you = app.you;
-  if (!you || !app.carry) return;
+  if (!you || you.rolling || app.dropping || personAt(x, y) !== you) return false;
+  app.carry = { person: you, z2: cameraDepth(cam, you.pos.x, you.pos.y, you.pos.z) };
+  you.carried = true;               // while carried you can slip behind people (render.js)
+  return true;
+}
+
+// Whoever is carried (you, or someone you picked up) follows your finger.
+function moveYou(x, y) {
+  const you = app.carry?.person;
+  if (!you || !world.people.includes(you)) return;
   if (!you.pinned) {
     you.pinned = true;
     you.squish = 0.3;
@@ -398,12 +429,13 @@ function moveYou(x, y) {
 }
 
 function dropYou() {
-  const you = app.you;
+  const you = app.carry?.person;
   app.carry = null;
+  if (you) you.carried = false;
   if (!you || !you.pinned) return;
   you.pinned = false;
   you.squish = 0.35;
-  app.youSettleUntil = performance.now() + 1500;
+  if (you.isYou) app.youSettleUntil = performance.now() + 1500;
   sfx.thump();
 }
 
@@ -846,7 +878,7 @@ function pileTopOnScreen() {
 }
 
 function setupButtons() {
-  setupControls(canvas, cam, { onTap, grabYou, moveYou, dropYou });
+  setupControls(canvas, cam, { onTap, grabYou, grabOther, moveYou, dropYou });
   orbit = createOrbitDial({
     el: $("#orbit"), cam,
     // Close up, in the pile, and not while you're typing.
